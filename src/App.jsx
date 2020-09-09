@@ -6,7 +6,7 @@
  * @student-code: 68DCHT20091
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
-'use strict';
+
 import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import axios from 'axios';
@@ -34,4 +34,4 @@ function App() {
   );
 }
 
-export default App;
+export default React.memo(App);
