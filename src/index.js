@@ -1,7 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App.jsx';
 import * as serviceWorker from './serviceWorker';
 
 // UI ANT DESIGN
@@ -17,6 +15,10 @@ import rootSaga from "./sagas/";
 
 // Reducers
 import allReducers from './reducers';
+
+// Components
+import './index.css';
+import App from './App.jsx';
 
 // Middleware
 const sagaMiddleware = createSagaMiddleware();

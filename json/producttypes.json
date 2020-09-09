@@ -1,0 +1,11 @@
+{"_id":{"$oid":"5ea3016c0eb5675468faac8d"},"status":true,"created_at":{"$date":"2020-04-24T15:09:21.898Z"},"name":"Quần dài","__v":0}
+{"_id":{"$oid":"5ea301c759a05648f471b540"},"status":true,"created_at":{"$date":"2020-04-24T15:11:45.193Z"},"name":"Quần dài","__v":0}
+{"_id":{"$oid":"5ea3032afcb956367c52ef27"},"status":true,"created_at":{"$date":"2020-04-24T15:17:51.173Z"},"name":"Áo cộc","__v":0}
+{"_id":{"$oid":"5eb022e5a548ab37fcc89f8b"},"status":true,"created_at":{"$date":"2020-05-04T09:44:03.046Z"},"name":"Jupe","__v":0}
+{"_id":{"$oid":"5eb02319a548ab37fcc89f8c"},"status":true,"created_at":{"$date":"2020-05-04T09:44:03.046Z"},"name":"Áo sơ mi nữ","__v":0}
+{"_id":{"$oid":"5eb02326a548ab37fcc89f8d"},"status":true,"created_at":{"$date":"2020-05-04T09:44:03.046Z"},"name":"Đầm","__v":0}
+{"_id":{"$oid":"5eb02344a548ab37fcc89f8e"},"status":true,"created_at":{"$date":"2020-05-04T09:44:03.046Z"},"name":"Quần lửng nữ","__v":0}
+{"_id":{"$oid":"5eb0236fa548ab37fcc89f8f"},"status":true,"created_at":{"$date":"2020-05-04T09:44:03.046Z"},"name":"JUMPSUIT","__v":0}
+{"_id":{"$oid":"5eb0238da548ab37fcc89f90"},"status":true,"created_at":{"$date":"2020-05-04T09:44:03.046Z"},"name":"Quần dài nữ","__v":0}
+{"_id":{"$oid":"5eb02399a548ab37fcc89f91"},"status":true,"created_at":{"$date":"2020-05-04T09:44:03.046Z"},"name":"Quần sooc nữ","__v":0}
+{"_id":{"$oid":"5eb023b1a548ab37fcc89f92"},"status":true,"created_at":{"$date":"2020-05-04T09:44:03.046Z"},"name":"Quần jean nữ","__v":0}
