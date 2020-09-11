@@ -32,15 +32,15 @@ function App() {
                         <Menu theme={'dark'} style={{backgroundColor: '#2e5b98'}} mode="horizontal" defaultSelectedKeys={['2']}>
                             <Menu.Item key="1"><Link to={"/demo"}>DEMO</Link></Menu.Item>
                             <Menu.Item key="2"><Link to={"/"}>Khách Hàng</Link></Menu.Item>
-                            <Menu.Item key="3"><Link to={'admin'}>Quản Trị</Link></Menu.Item>
+                            <Menu.Item key="3"><Link to={'/admin'}>Quản Trị</Link></Menu.Item>
                         </Menu>
                     </Header>
                     <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
                         <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
                             <Switch>
                                 <Route exact path="/demo" component={TodoApp}/>
-                                <Route path="/" component={User} />
                                 <Route path="/admin" component={Admin}/>
+                                <Route path="/" component={User} />
                             </Switch>
                         </div>
                     </Content>
