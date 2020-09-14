@@ -8,10 +8,13 @@
  */
 
 import React from 'react';
+import {Button} from 'antd';
 
 function User() {
     return(
-        <div style={{color: 'red'}}>Đang phát triển User</div>
+        <div style={{color: 'red'}}>
+             <Button type="dashed">Dashed Button</Button>
+        </div>
     );
 }
 
