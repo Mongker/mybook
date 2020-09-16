@@ -1,11 +1,25 @@
 .logo {
     height: 32px;
     margin: 16px;
-  }
-  
-  .site-layout .site-layout-background {
-    background: #fff;
-  }
-    [data-theme="dark"] .site-layout .site-layout-background {
-      background: #141414;
-    }
+}
+
+.site-layout {
+    border-left: 14px solid #bbbbbb;
+    border-right: 14px solid #bbbbbb;
+}
+
+.site-layout .site-layout-background {
+    background: #85bfff;
+}
+
+[data-theme="dark"] .site-layout .site-layout-background {
+    background: #141414;
+}
+
+.header-content {
+    font-size: 32px;
+}
+
+.content {
+    padding-top: 5px;
+}

@@ -7,22 +7,27 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
- import React from 'react';
- import PropTypes from 'prop-types';
- 
- function HeaderAdmin(props) {
-     const {title} = props;
-     return(
-         <div><h1>{title}</h1></div>
-     );
- }
- 
- HeaderAdmin.propTypes = {
-     title: PropTypes.string,
- };
- 
- HeaderAdmin.defaultProps = {
-     title: 'Trang Chủ'
- }
- 
- export default HeaderAdmin;
+import React from 'react';
+import PropTypes from 'prop-types';
+import {Row, Col} from 'antd';
+
+// import {BarsOutlined} from "@ant-design/icons";
+
+function HeaderAdmin(props) {
+    const {title} = props;
+    return (
+        <Row className={'header-content'}>
+            <Col span={6} style={{paddingLeft: '10px'}}><h1>{title}</h1></Col>
+        </Row>
+    );
+}
+
+HeaderAdmin.propTypes = {
+    title: PropTypes.string,
+};
+
+HeaderAdmin.defaultProps = {
+    title: 'Trang Chủ'
+}
+
+export default HeaderAdmin;

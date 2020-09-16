@@ -14,7 +14,7 @@ import { Layout } from "antd";
 import MenuAmin from "./menu/index.jsx";
 import HeaderAdmin from "./header/index.jsx";
 import FooterAdmin from "./footer/index.jsx";
-import ContentAdmin from "./content/index.jsx";
+import ContentAdmin from "./content/Content.View.jsx";
 
 // styles
 import "./styles/index.css";

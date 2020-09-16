@@ -7,7 +7,7 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import '../../../App.css';
 
@@ -16,16 +16,20 @@ function TodoApp() {
     console.log(data);
     console.log(data.length);
     useEffect(() => {
-        axios.get("http://localhost:2121/todo").then(res => res.data).then((result) => {
+        axios.post("http://localhost:1999/api/catalog", {
+            "name": "Mong",
+            "description": "oki"
+        }).then(res => res.data).then((result) => {
             setData(result);
         }).catch(err => console.log(err))
     }, []);
 
     return (
         <div className="App">
-            {data.length > 0 && data.map(item => (
-                <div>Todo: {item.todo}</div>
-            ))}
+            <h1>Mong đẹp trai</h1>
+            {/*{data.length > 0 && data.map(item => (*/}
+            {/*    <div>Todo: {item.todo}</div>*/}
+            {/*))}*/}
         </div>
     );
 }
