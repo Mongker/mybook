@@ -26,15 +26,15 @@ import {
 // const
 const { SubMenu } = Menu;
 const KEY_MENU = {
-    HOME: "HOME",
-    CATALOG: "CATALOG",
-    PRODUCT: "PRODUCT",
+    HOME: "Trang Chủ",
+    CATALOG: "Danh Mục",
+    PRODUCT: "Sản Phẩm",
     SLIDER: "SLIDER",
-    TRANSACTION: "TRANSACTION",
-    ODER: "ODER",
-    ANDMIN: "ANDMIN",
-    USER: "USER",
-    SETTING: "SETTING",
+    TRANSACTION: "Đơn Đặt Hàng",
+    ODER: "Hóa Đơn Bán",
+    ANDMIN: "Nhân Viên",
+    USER: "Khách Hàng",
+    SETTING: "Cài Đặt",
 };
 function LogoAdmin(){
     return (
@@ -48,10 +48,14 @@ function LogoAdmin(){
 };
 
 function MenuAmin(props) {
-  const { collapsed } = props;
+  const { collapsed, setTitleHeader } = props;
+  const handleClick = e => {
+    console.log('click ', e);
+    setTitleHeader(e.key)
+  };
   return (
     <React.Fragment>
-      <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+      <Menu theme="dark" defaultSelectedKeys={[KEY_MENU.HOME]} mode="inline" onClick={handleClick}>
         {!collapsed && (<LogoAdmin />)}
         <Menu.Item key={KEY_MENU.HOME} icon={<HomeOutlined />}>
           Trang Chủ
@@ -89,10 +93,12 @@ function MenuAmin(props) {
 
 MenuAmin.propTypes = {
   collapsed: PropTypes.bool,
+  setTitleHeader: PropTypes.func
 };
 
 MenuAmin.defaultProps = {
   collapsed: false,
+  setTitleHeader: () => null
 };
 
 export default React.memo(MenuAmin);

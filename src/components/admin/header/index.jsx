@@ -8,16 +8,21 @@
  */
 
  import React from 'react';
-//  import PropTypes from 'prop-types';
+ import PropTypes from 'prop-types';
  
- function HeaderAdmin() {
+ function HeaderAdmin(props) {
+     const {title} = props;
      return(
-         <div>Header</div>
+         <div><h1>{title}</h1></div>
      );
  }
  
- HeaderAdmin.propTypes = {};
+ HeaderAdmin.propTypes = {
+     title: PropTypes.string,
+ };
  
- HeaderAdmin.defaultProps = {}
+ HeaderAdmin.defaultProps = {
+     title: 'Trang Chủ'
+ }
  
  export default HeaderAdmin;
