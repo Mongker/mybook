@@ -23,6 +23,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "dev": "react-scripts start",
     "port": "export PORT=1919 || set PORT=1919",
     "build": "react-scripts build",
     "test": "react-scripts test",

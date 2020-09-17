@@ -6,63 +6,54 @@
  * @student-code: 68DCHT20091
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
-import React, {useState} from "react";
-import {Helmet} from "react-helmet";
-import {Layout} from "antd";
+import React, { useState } from "react";
+import { Helmet } from "react-helmet";
+import { Layout } from "antd";
+import { Switch, Route, useRouteMatch } from "react-router-dom";
 
 // components
 import MenuAmin from "./menu/index.jsx";
-import HeaderAdmin from "./header/index.jsx";
-import FooterAdmin from "./footer/index.jsx";
-import ContentAdmin from "./content/Content.View.jsx";
+import SliderAdmin from "./content/slider/Slider.View.jsx";
+import HomeAdmin from "./content/home/Home.View.jsx";
 
 // styles
 import "./styles/index.css";
 
 // const
-const {Header, Content, Footer, Sider} = Layout;
+const { Sider } = Layout;
 
 function Admin() {
-    const [collapsed, setCollapsed] = useState(false);
-    const [titleHeader, setTitleHeader] = useState("ADCBook");
+  const [collapsed, setCollapsed] = useState(false);
+  const [titleHeader, setTitleHeader] = useState("ADCBook");
+  let match = useRouteMatch();
+  debugger; // MongLV
 
-    function onCollapse(collapsed) {
-        setCollapsed(collapsed);
-    }
+  function onCollapse(collapsed) {
+    setCollapsed(collapsed);
+  }
 
-    return (
-        <Layout style={{minHeight: "100vh"}}>
-            <Helmet title={`Quản trị: ${titleHeader}`}/>
-            <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
-                <MenuAmin collapsed={collapsed} setTitleHeader={setTitleHeader}/>
-            </Sider>
-
-            <Layout className="site-layout">
-                <Header className="site-layout-background" style={{padding: 0}}>
-                    <HeaderAdmin title={titleHeader}/>
-                </Header>
-                <Content style={{margin: "0 16px"}}>
-                    <ContentAdmin title={titleHeader}/>
-                </Content>
-                {/*<Footer style={{ textAlign: "center" }}>*/}
-                {/*<FooterAdmin />*/}
-                {/*</Footer>*/}
-            </Layout>
-            {/*TODO by MongLV chuẩn hóa lại theo kiểu router*/}
-            {/*<Switch>*/}
-            {/*    <Route path={'/admin/products'}*/}
-            {/*           render={(props) => <ProductContainer {...props}/>}/>*/}
-            {/*    <Route path={'/admin/users'}*/}
-            {/*           render={(props) => <UsersContainer {...props} user={user}/>}/>*/}
-            {/*    <Route path={'/admin/orders'}*/}
-            {/*           render={(props) => <OrdersContainer {...props} user={user}/>}/>*/}
-            {/*    <Route path={'/admin/administrations'}*/}
-            {/*           render={(props) => <GrantRightsContainer {...props} user={user}/>}/>*/}
-            {/*    <Route path={'/admin/categories'}*/}
-            {/*           render={(props) => <CategoryContainer {...props} user={user}/>}/>*/}
-            {/*</Switch>*/}
-        </Layout>
-    );
+  return (
+    <Route>
+      <Layout style={{ minHeight: "100vh" }}>
+        <Helmet title={`Quản trị: ${titleHeader}`} />
+        <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
+          <MenuAmin collapsed={collapsed} setTitleHeader={setTitleHeader} />
+        </Sider>
+        <Switch>
+          <Route
+            exact
+            path={`${match.url}/home`}
+            render={() => <HomeAdmin titleHeader={titleHeader} />}
+          />
+          <Route
+            exact
+            path={`${match.url}/slider`}
+            render={() => <SliderAdmin titleHeader={titleHeader} />}
+          />
+        </Switch>
+      </Layout>
+    </Route>
+  );
 }
 
 export default React.memo(Admin);
