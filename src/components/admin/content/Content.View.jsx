@@ -7,20 +7,36 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-import React from 'react';
+import React, {useEffect} from 'react';
 // import {Row, Col, Card} from 'antd';
-//  import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import EditableTable from './table/Table.View.jsx'
 
-function ContentAdmin() {
+// util
+import {KEY_MENU} from '../../util/keyMenu'
+
+function ContentAdmin(props) {
+    const {title} = props;
+    let CheckRender;
+
+    useEffect(() => {
+    }, [title]);
+
+    // Xử lý check giao title để đưa ra màn hình phù hợp yêu cầu của Menu
+    if (title === KEY_MENU.SLIDER) CheckRender=(<EditableTable/>);
+    else CheckRender=(<>Đang phát triển</>);
+
     return (
         <div className={'content'}>
-            <EditableTable />
+            {CheckRender}
         </div>
     );
 }
 
-ContentAdmin.propTypes = {};
+
+ContentAdmin.propTypes = {
+    title: PropTypes.string,
+};
 
 ContentAdmin.defaultProps = {};
 
