@@ -13,7 +13,7 @@ import { Switch, Route, useRouteMatch } from "react-router-dom";
 
 // components
 import MenuAmin from "./menu/index.jsx";
-import SliderAdmin from "./content/slider/Slider.View.jsx";
+import SliderContainer from "./content/slider/SliderContainer";
 import HomeAdmin from "./content/home/Home.View.jsx";
 
 // styles
@@ -26,7 +26,6 @@ function Admin() {
   const [collapsed, setCollapsed] = useState(false);
   const [titleHeader, setTitleHeader] = useState("ADCBook");
   let match = useRouteMatch();
-  debugger; // MongLV
 
   function onCollapse(collapsed) {
     setCollapsed(collapsed);
@@ -48,7 +47,7 @@ function Admin() {
           <Route
             exact
             path={`${match.url}/slider`}
-            render={() => <SliderAdmin titleHeader={titleHeader} />}
+            render={() => <SliderContainer titleHeader={titleHeader} />}
           />
         </Switch>
       </Layout>

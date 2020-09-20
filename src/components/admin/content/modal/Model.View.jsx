@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 
 function ModelView(props) {
     const {handShowCancel, handleOk, visible} = props;
+    debugger;
     return(
         <>
             <Modal

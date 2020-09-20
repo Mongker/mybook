@@ -7,9 +7,7 @@ import { EditableRow, EditableCell } from "./EditTable.jsx";
 
 // const
 const { Search } = Input;
-const height =
-  (window.innerHeight - (window.innerHeight / 100) * 25).toString() + "px";
-console.log(height);
+const height = (window.innerHeight - (window.innerHeight * 0.25)).toString() + "px";
 
 class EditableTable extends React.Component {
   constructor(props) {

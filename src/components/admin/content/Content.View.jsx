@@ -10,32 +10,38 @@
 import React, { useEffect } from "react";
 // import {Row, Col, Card} from 'antd';
 import PropTypes from "prop-types";
-import EditableTable from "./table/Table.View.jsx";
+
+// components
+// import EditableTable from "./table/Table.View.jsx";
+import TableSlider from "./slider/Table/TableSlider";
 
 // util
 import { KEY_MENU } from "../../util/keyMenu";
-
+// const 
+let CheckRender;
 function ContentAdmin(props) {
-  const { title } = props;
-  let CheckRender;
-  debugger; // MongLV
-
+  const { title, list } = props;
   useEffect(() => {}, [title]);
 
-  // Xử lý check giao title để đưa ra màn hình phù hợp yêu cầu của Menu
-  if (title === KEY_MENU.SLIDER)
-    CheckRender = (
-        <EditableTable />
-    );
-  else CheckRender = <>Đang phát triển</>;
+  switch (title) {
+    case KEY_MENU.SLIDER:
+      // CheckRender = <EditableTable />
+      CheckRender = <TableSlider list={list} />;
+      break;
+    case KEY_MENU.ADMIN:
+      CheckRender = <div>Đang phát triển nhé</div>;
+      break;
+    default:
+      CheckRender = <div>Đang phát triển</div>;
+      break;
+  }
 
   return <div className={"content"}>{CheckRender}</div>;
 }
 
 ContentAdmin.propTypes = {
   title: PropTypes.string,
+  list: PropTypes.array
 };
 
-ContentAdmin.defaultProps = {};
-
-export default ContentAdmin;
+export default React.memo(ContentAdmin);

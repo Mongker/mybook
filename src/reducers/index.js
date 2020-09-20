@@ -8,6 +8,8 @@
  */
 
 import { combineReducers } from "redux";
-
-const allReducers = combineReducers({});
+import Slider from "./admin/slider/sliderReducers";
+const allReducers = combineReducers({
+    Slider
+});
 export default allReducers;

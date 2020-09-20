@@ -80,7 +80,7 @@ function MenuAmin(props) {
         <Menu.Item key={KEY_MENU.USER} icon={<TeamOutlined />}>
           Khách hàng
         </Menu.Item>
-        <Menu.Item key={KEY_MENU.ANDMIN} icon={<TeamOutlined />}>
+        <Menu.Item key={KEY_MENU.ADMIN} icon={<TeamOutlined />}>
           Nhân viên
         </Menu.Item>
         <Menu.Item key={KEY_MENU.SLIDER} icon={<PictureOutlined />}>
