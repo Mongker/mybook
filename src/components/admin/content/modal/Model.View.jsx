@@ -12,8 +12,7 @@ import {Modal} from "antd";
 import PropTypes from 'prop-types';
 
 function ModelView(props) {
-    const {handShowCancel, handleOk, visible} = props;
-    debugger;
+    const {handShowCancel, handleOk, visible, ContentModal, title} = props;
     return(
         <>
             <Modal
@@ -23,10 +22,10 @@ function ModelView(props) {
                 onCancel={handShowCancel}
                 // footer={null}
                 closeIcon
+                title={title}
+                centered
             >
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
+                <ContentModal />
             </Modal>
         </>
     );
@@ -34,7 +33,8 @@ function ModelView(props) {
 
 ModelView.propTypes = {
     handleOk: PropTypes.func,
-    handShowCancel: PropTypes.func
+    handShowCancel: PropTypes.func,
+    ContentModal: PropTypes.func
 };
 
 ModelView.defaultProps = {

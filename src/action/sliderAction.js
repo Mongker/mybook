@@ -17,3 +17,11 @@
          timestamp: Date.now()
      }
  };
+
+ export const postSlider = (payload) => {
+    return {
+        type: SLIDER.CALL_POST_SLIDER,
+        payload,
+        timestamp: Date.now()
+    }
+};

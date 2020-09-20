@@ -7,13 +7,16 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-import React, {useState} from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Button, Input, Row, Col, Image } from "antd";
 import { EditTwoTone, DeleteTwoTone } from "@ant-design/icons";
 
 // components
 import ModelView from "../../modal/Model.View";
+import ContentModalContainer from "./ContentModal/ContentModalContainer";
+
+// const
 const { Search } = Input;
 const height =
   (window.innerHeight - window.innerHeight * 0.25).toString() + "px";
@@ -21,13 +24,14 @@ const height =
 function TableSlider(props) {
   const [visible, setVisible] = useState(false);
   const { list } = props;
+  debugger; // MongLV
 
   const showModalCancel = () => {
     setVisible(!visible);
   };
 
   const handleOk = (event) => {
-    this.showModalCancel();
+    showModalCancel();
   };
 
   return (
@@ -42,7 +46,9 @@ function TableSlider(props) {
           />
         </Col>
         <Col span={2}>
-          <Button type="primary" onClick={showModalCancel}>Thêm</Button>
+          <Button type="primary" onClick={showModalCancel}>
+            Thêm
+          </Button>
         </Col>
       </Row>
 
@@ -64,20 +70,20 @@ function TableSlider(props) {
           Hành động
         </Col>
       </Row>
-      {list.length > 0
-        ? list.map((item, index) => (
+      {Object.keys(list).length > 0
+        ? Object.keys(list).map((item, index) => (
             <Row className={"table-tr"} key={index}>
               <Col className={"table-row"} span={4}>
-                {item.name}
+                {list[item].name}
               </Col>
               <Col className={"table-row"} span={5}>
-                <Image width={200} height={67.06} src={item.image_link} />
+                <Image width={200} height={67.06} src={list[item].image_link} />
               </Col>
               <Col className={"table-row"} span={10}>
-                {item.image_link}
+                {list[item].image_link}
               </Col>
               <Col className={"table-row"} span={2}>
-                {item.index}
+                {list[item].index}
               </Col>
               <Col className={"table-row"} span={3}>
                 <Row>
@@ -99,6 +105,8 @@ function TableSlider(props) {
         handShowCancel={showModalCancel}
         handleOk={handleOk}
         visible={visible}
+        ContentModal={ContentModalContainer}
+        title={'Thêm Slider'}
       />
     </div>
   );

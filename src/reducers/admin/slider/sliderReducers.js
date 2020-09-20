@@ -10,7 +10,7 @@
  // action types
  import {SLIDER} from '../../../action/actionTypes.js';
 
- const Slider = (state = [], action) => {
+ const Slider = (state = {}, action) => {
     switch (action.type) {
         case SLIDER.GET_LIST:
           return action.sliders;
