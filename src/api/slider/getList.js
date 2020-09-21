@@ -8,9 +8,10 @@
  */
 
 import axios from 'axios';
+import {HTTP} from '../config';
 
 export function getListSlider_API() {
-	return axios.get('http://localhost:1999/api/slider')
+	return axios.get(`${HTTP.local}slider`)
 	.then(res => res.data)
 	.catch(error => console.log(error));
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { Table, Button, Popconfirm, Input, Row, Col, Image } from "antd";
 
 // component
-import ModelView from "../modal/Model.View";
+import ModelView from "../modal/ModelView";
 import { EditableRow, EditableCell } from "./EditTable.jsx";
 
 // const

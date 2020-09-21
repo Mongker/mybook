@@ -7,25 +7,35 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-import React from 'react';
-import {Modal} from "antd";
+import React, {useState} from 'react';
+import {Modal, message} from "antd";
 import PropTypes from 'prop-types';
 
+// const
+const dataDefault = {};
 function ModelView(props) {
-    const {handShowCancel, handleOk, visible, ContentModal, title} = props;
+    const [data, setData] = useState(dataDefault);
+    const {handShowCancel, handleOk, visible, ContentModal, title, postSlider} = props;
+    const onChangeOK = () => {
+        const {name, image_link, index} = data;
+        if(name && image_link && index) {
+            postSlider(data);
+            handleOk()
+        } else message.warning('Cần điền đầy đủ thông tin Tên, Link và vị trí');
+    };
     return(
         <>
             <Modal
                 visible={visible}
                 closable
-                onOk={handleOk}
+                onOk={onChangeOK}
                 onCancel={handShowCancel}
                 // footer={null}
                 closeIcon
                 title={title}
                 centered
             >
-                <ContentModal />
+                <ContentModal data={data} setData={setData} />
             </Modal>
         </>
     );
@@ -42,4 +52,4 @@ ModelView.defaultProps = {
     handShowCancel: () => null,
 };
 
-export default ModelView;
+export default React.memo(ModelView);

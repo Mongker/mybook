@@ -13,11 +13,11 @@ import PropTypes from "prop-types";
 
 // components
 // import EditableTable from "./table/Table.View.jsx";
-import TableSlider from "./slider/Table/TableSlider";
+import TableSliderContainer from "./slider/Table/TableSliderContainer";
 
 // util
 import { KEY_MENU } from "../../util/keyMenu";
-// const 
+// const
 let CheckRender;
 function ContentAdmin(props) {
   const { title, list } = props;
@@ -26,7 +26,7 @@ function ContentAdmin(props) {
   switch (title) {
     case KEY_MENU.SLIDER:
       // CheckRender = <EditableTable />
-      CheckRender = <TableSlider list={list} />;
+      CheckRender = <TableSliderContainer list={list} />;
       break;
     case KEY_MENU.ADMIN:
       CheckRender = <div>Đang phát triển nhé</div>;

@@ -7,18 +7,19 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
- // action types
- import {SLIDER} from '../../../action/actionTypes.js';
+// action types
+import {SLIDER} from '../../../action/actionTypes.js';
 
- const Slider = (state = {}, action) => {
+const Slider = (state = {}, action) => {
+    debugger;
     switch (action.type) {
         case SLIDER.GET_LIST:
-          return action.sliders;
+            return action.sliders;
         case '1':
-          return state;
+            return state;
         default:
-          return state;
-      }
- }
+            return state;
+    }
+}
 
- export default Slider;
+export default Slider;
