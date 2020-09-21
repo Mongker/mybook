@@ -15,13 +15,19 @@ import PropTypes from 'prop-types';
 const dataDefault = {};
 function ModelView(props) {
     const [data, setData] = useState(dataDefault);
-    const {handShowCancel, handleOk, visible, ContentModal, title, postSlider} = props;
+    const {handShowCancel, handleOk, visible, ContentModal, title, postSlider, dataEdit} = props;
     const onChangeOK = () => {
         const {name, image_link, index} = data;
+        debugger;
         if(name && image_link && index) {
             postSlider(data);
-            handleOk()
+            handleOk();
+            setData(dataDefault);
         } else message.warning('Cần điền đầy đủ thông tin Tên, Link và vị trí');
+    };
+    const onShowCancel = () => {
+        handShowCancel();
+        setData(dataDefault);
     };
     return(
         <>
@@ -29,13 +35,13 @@ function ModelView(props) {
                 visible={visible}
                 closable
                 onOk={onChangeOK}
-                onCancel={handShowCancel}
+                onCancel={onShowCancel}
                 // footer={null}
                 closeIcon
                 title={title}
                 centered
             >
-                <ContentModal data={data} setData={setData} />
+                <ContentModal data={data} setData={setData} dataEdit={dataEdit} />
             </Modal>
         </>
     );
@@ -44,12 +50,14 @@ function ModelView(props) {
 ModelView.propTypes = {
     handleOk: PropTypes.func,
     handShowCancel: PropTypes.func,
-    ContentModal: PropTypes.func
+    ContentModal: PropTypes.func,
+    dataEdit: PropTypes.object
 };
 
 ModelView.defaultProps = {
     handleOk: () => null,
     handShowCancel: () => null,
+    dataEdit: {},
 };
 
 export default React.memo(ModelView);

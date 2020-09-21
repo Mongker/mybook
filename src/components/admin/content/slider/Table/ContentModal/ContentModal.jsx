@@ -29,17 +29,20 @@ const styleRow = {
 };
 
 function ContentModal(props) {
-    const {slider, data, setData} = props;
+    const {data, setData, dataEdit} = props;
+    const {image_link, name , index = 0} = dataEdit;
+    console.log(index)
+    debugger;
     const children = [];
     for (let i = 1; i <= 5; i++) {
         children.push(
-            <Option key={i}>{i}</Option>
+            <Option key={i.toString()}>{i.toString()}</Option>
         );
     }
 
     function handleChange(value) {
         if(setData != null) {
-            const valueInt = parseInt(value.key);
+            const valueInt = parseInt(value);
             data['index'] = valueInt;
             setData(data);
         }
@@ -64,7 +67,7 @@ function ContentModal(props) {
                     Tên:
                 </Col>
                 <Col span={21}>
-                    <Input onChange={(e) => handleText(e, TYPE_TEXT.NAME)}/>
+                    <Input defaultValue={name} onChange={(e) => handleText(e, TYPE_TEXT.NAME)}/>
                 </Col>
             </Row>
             <Row style={styleRow}>
@@ -72,7 +75,7 @@ function ContentModal(props) {
                     Link:
                 </Col>
                 <Col span={21}>
-                    <Input onChange={(e) => handleText(e, TYPE_TEXT.LINK)}/>
+                    <Input defaultValue={image_link} onChange={(e) => handleText(e, TYPE_TEXT.LINK)}/>
                 </Col>
             </Row>
             <Row style={styleRow}>
@@ -81,8 +84,8 @@ function ContentModal(props) {
                 </Col>
                 <Col span={21}>
                     <Select
-                        labelInValue
-                        defaultValue={{value: "0"}}
+                        // labelInValue
+                        defaultValue={index}
                         // style={{ width: "30px" }}
                         onChange={handleChange}
                     >
@@ -98,6 +101,7 @@ ContentModal.propTypes = {
     // object
     slider: PropTypes.object,
     data: PropTypes.object,
+    dataEdit: PropTypes.object,
 
     // func
     setData: PropTypes.func,
@@ -106,6 +110,7 @@ ContentModal.propTypes = {
 ContentModal.defaultProps = {
     data: {},
     slider: {},
+    dataEdit: {},
     setData: () => null
 };
 

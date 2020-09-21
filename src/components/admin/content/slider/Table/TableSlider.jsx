@@ -23,18 +23,28 @@ const height =
 
 function TableSlider(props) {
     const [visible, setVisible] = useState(false);
+    const [title, setTitle] = useState('');
+    const [dataEdit, setDataEdit] = useState({});
     const {list, deleteSlider} = props;
 
-    const showModalCancel = () => {
+    // let content = <ContentModalContainer />;
+
+    const showModalCancel = (type, item = {}) => {
+        debugger;
+        if(type === "ADD") setTitle('Thêm Slider');
+        else if(type === "EDIT"){
+            setTitle(`Edit Slider: ${item['name']}`);
+            setDataEdit(item);
+        }
         setVisible(!visible);
     };
 
     const handleOk = (data) => {
         setVisible(!visible);
+        setTitle('');
     };
 
     const onDelete = (id) => {
-        debugger;
         deleteSlider(id);
     };
 
@@ -50,7 +60,7 @@ function TableSlider(props) {
                     />
                 </Col>
                 <Col span={2}>
-                    <Button type="primary" onClick={showModalCancel}>
+                    <Button type="primary" onClick={() => showModalCancel('ADD')}>
                         Thêm
                     </Button>
                 </Col>
@@ -92,7 +102,7 @@ function TableSlider(props) {
                         <Col className={"table-row"} span={3}>
                             <Row>
                                 <Col flex={1}>
-                                    <EditTwoTone className={"icon-slider"} />
+                                    <EditTwoTone className={"icon-slider"} onClick={() => showModalCancel('EDIT', list[item])} />
                                 </Col>
                                 <Col flex={1}>
                                     <Popconfirm
@@ -118,7 +128,8 @@ function TableSlider(props) {
                 handleOk={handleOk}
                 visible={visible}
                 ContentModal={ContentModalContainer}
-                title={'Thêm Slider'}
+                title={title}
+                dataEdit={dataEdit}
             />
         </div>
     );

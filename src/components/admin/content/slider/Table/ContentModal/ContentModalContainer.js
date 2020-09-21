@@ -8,31 +8,28 @@
  */
 
 // Redux
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 
 // components
 import ContentModal from "./ContentModal";
 
-// action 
+// action
 import * as actionSlider from "../../../../../../action/sliderAction";
 
 
 const mapStateToProps = (state) => {
-  const slider = state.Slider;
-  return {
-    slider,
-  };
+    return {};
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-      post: (data, component) => dispatch(actionSlider.postSlider(data, component))
-  };
+    return {
+        post: (data, component) => dispatch(actionSlider.postSlider(data, component))
+    };
 };
 
 const ContentModalContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(ContentModal);
 
 export default ContentModalContainer;
