@@ -41,7 +41,7 @@ function ContentAdmin(props) {
 
 ContentAdmin.propTypes = {
   title: PropTypes.string,
-  list: PropTypes.array
+  list: PropTypes.object,
 };
 
 export default React.memo(ContentAdmin);

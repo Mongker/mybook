@@ -9,7 +9,7 @@
 
 import React from 'react';
 import {Col, Input, Modal, Row, Select} from "antd";
-// import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 function ModalEdit(props) {
     const {visible,
@@ -71,5 +71,22 @@ function ModalEdit(props) {
         </Modal>
     );
 }
+ModalEdit.propsTypes = {
+    visible: PropTypes.bool,
 
+    children: PropTypes.array,
+
+    // func
+    handleChangeSelect: PropTypes.func,
+    handleText: PropTypes.func,
+    cancelModal: PropTypes.func,
+    handleOk: PropTypes.func,
+    // object
+    styleRow: PropTypes.object,
+    styleCol: PropTypes.object,
+    TYPE_TEXT: PropTypes.object,
+
+    // string
+    title: PropTypes.string,
+};
 export default React.memo(ModalEdit);

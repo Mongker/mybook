@@ -7,7 +7,7 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import {Button, Input, Row, Col, Image, Popconfirm, Select} from "antd";
 import {EditTwoTone, DeleteTwoTone, QuestionCircleOutlined} from "@ant-design/icons";
@@ -18,7 +18,7 @@ import ModalEdit from "./ModalEdit";
 
 // const
 const {Search} = Input;
-const {Option}= Select;
+const {Option} = Select;
 const height =
     (window.innerHeight - window.innerHeight * 0.25).toString() + "px";
 
@@ -38,18 +38,22 @@ const styleRow = {
 
 function TableSlider(props) {
     const {list, deleteSlider, postSlider, putSlider} = props;
+    const [listArray, setListArray] = useState(Object.keys(list));
     const [visible, setVisible] = useState(false);
     const [visible2, setVisible2] = useState(false);
     const [title, setTitle] = useState('');
     const [data, setData] = useState({});
+
+    useEffect(() => {
+        setListArray(Object.keys(list))
+    }, [list]);
 
     const showModalCancel = (type, itemData = {}, id) => {
         if (type === "ADD") {
             setTitle('Thêm Slider');
             setData({});
             setVisible2(true);
-        }
-        else {
+        } else {
             setTitle(`Edit Slider: ${itemData['name']}`);
             itemData['id'] = id;
             const newData = {...itemData};
@@ -65,14 +69,14 @@ function TableSlider(props) {
     };
 
     const handleOk = () => {
-        if(title === 'Thêm Slider') {
+        if (title === 'Thêm Slider') {
             const newData = {...data};
             postSlider(newData);
             setVisible2(false);
         } else {
             // CODE
             const newData = {...data};
-            putSlider(newData['id'],newData);
+            putSlider(newData['id'], newData);
             setVisible(false);
         }
         setTitle('');
@@ -81,6 +85,8 @@ function TableSlider(props) {
 
     const onDelete = (id) => {
         deleteSlider(id);
+        delete list[id];
+        setListArray(Object.keys({...list}));
     };
 
     const children = [];
@@ -88,6 +94,12 @@ function TableSlider(props) {
         children.push(
             <Option key={i.toString()}>{i.toString()}</Option>
         );
+    }
+
+    function handleSearch(value) {
+        console.log(value);
+        const newList = Object.keys(list).filter((item) => (list[item].name.toLowerCase().indexOf(value.toLowerCase()) !== -1));
+        setListArray([...newList]);
     }
 
     function handleText(e, type) {
@@ -98,6 +110,8 @@ function TableSlider(props) {
             data['image_link'] = (text.length > 0) ? text : 'https://via.placeholder.com/880x380';
         }
         setData({...data});
+        e.preventDefault();
+        e.stopPropagation();
     }
 
     function handleChangeSelect(value) {
@@ -105,18 +119,20 @@ function TableSlider(props) {
         data['index'] = valueInt;
         setData({...data});
     }
+
     let nameDefault = data.name ? data.name : '';
     let imgDefault = data.image_link ? data.image_link : '';
     let indexDefault = data.index ? data.index : '';
+    debugger;
     return (
         <div>
             <Row style={{paddingBottom: "5px"}}>
                 <Col span={12} offset={10}>
                     <Search
                         placeholder="Tìm kiếm"
-                        onSearch={(value) => console.log(value)}
                         style={{width: "97%"}}
                         enterButton
+                        onSearch={(value) => handleSearch(value)}
                     />
                 </Col>
                 <Col span={2}>
@@ -144,9 +160,9 @@ function TableSlider(props) {
                     Hành động
                 </Col>
             </Row>
-            {Object.keys(list).length > 0
-                ? Object.keys(list).map((item, index) => (
-                    <Row className={"table-tr"} key={list[item]._id}>
+            {listArray.length > 0
+                ? listArray.map((item, index) => (
+                    <Row className={"table-tr"} key={index}>
                         <Col className={"table-row"} span={4}>
                             {list[item].name}
                         </Col>
@@ -170,7 +186,7 @@ function TableSlider(props) {
                                         title="Bạn muốn xóa slider này？"
                                         okText="Yes"
                                         cancelText="No"
-                                        onConfirm={() => onDelete(list[item]._id)}
+                                        onConfirm={() => onDelete(item)}
                                         icon={<QuestionCircleOutlined style={{color: 'red'}}/>}
                                     >
                                         <DeleteTwoTone

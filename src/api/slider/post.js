@@ -16,9 +16,16 @@ import {message} from "antd";
 export function postSlider(data, successCallback) {
     try {
         return axios.post(`${HTTP.local}slider`, data)
-            .then(res => res.data).then(message.success('Thêm Thành công'))
-            .catch(error => console.log(error));
+            .then(res => res.data).then((result) => {
+                console.log(result);
+                if (result.message === 'SUCCESS') {
+                    message.success('Thêm thành công')
+                } else {
+                    message.error('Lỗi truyền');
+                }
+            })
+            .catch(error => message.error('Lỗi: '+ error));
     } catch (e) {
-        console.log('postSlider: ' + e );
+        message.error(e);
     }
 }

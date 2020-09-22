@@ -19,11 +19,18 @@ import {HTTP} from "../config";
 import {message} from "antd";
 
 export function putSlider(id, data) {
+    debugger;
     try {
         return axios.put(`${HTTP.local}slider/${id}`, data)
-            .then(res => res.data).then(message.success('Cập nhật thành công'))
-            .catch(error => console.log(error));
+            .then(res => res.data).then((result) => {
+                if (result.message === 'SUCCESS') {
+                    message.success('Cập nhật thành công')
+                } else {
+                    message.error('Lỗi rồi !');
+                }
+            })
+            .catch(error => message.error(error));
     } catch (e) {
-        console.log('postSlider: ' + e );
+        message.error(e);
     }
 }

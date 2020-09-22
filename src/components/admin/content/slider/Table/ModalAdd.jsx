@@ -7,13 +7,14 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Col, Input, Modal, Row, Select} from "antd";
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 function ModalAdd(props) {
-    const {visible, handleChangeSelect, handleText, cancelModal, handleOk, styleRow, styleCol , title, children, TYPE_TEXT} = props;
-    return(
+    const {visible, handleChangeSelect, handleText, cancelModal, handleOk, styleRow, styleCol, title, children, TYPE_TEXT} = props;
+    // TODO by MongV: xử dụng From để bao các input lại để reset text
+    return (
         <Modal
             visible={visible}
             closable
@@ -30,7 +31,7 @@ function ModalAdd(props) {
                         Tên:
                     </Col>
                     <Col span={21}>
-                        <Input defaultValue={''} onChange={(e) => handleText(e, TYPE_TEXT.NAME)}/>
+                        <Input onChange={(e) => handleText(e, TYPE_TEXT.NAME)}/>
                     </Col>
                 </Row>
                 <Row style={styleRow}>
@@ -38,7 +39,7 @@ function ModalAdd(props) {
                         Link:
                     </Col>
                     <Col span={21}>
-                        <Input defaultValue={''} onChange={(e) => handleText(e, TYPE_TEXT.LINK)}/>
+                        <Input onChange={(e) => handleText(e, TYPE_TEXT.LINK)}/>
                     </Col>
                 </Row>
                 <Row style={styleRow}>
@@ -60,4 +61,22 @@ function ModalAdd(props) {
     );
 }
 
+ModalAdd.propsTypes = {
+    visible: PropTypes.bool,
+
+    children: PropTypes.array,
+
+    // func
+    handleChangeSelect: PropTypes.func,
+    handleText: PropTypes.func,
+    cancelModal: PropTypes.func,
+    handleOk: PropTypes.func,
+    // object
+    styleRow: PropTypes.object,
+    styleCol: PropTypes.object,
+    TYPE_TEXT: PropTypes.object,
+
+    // string
+    title: PropTypes.string,
+};
 export default React.memo(ModalAdd);

@@ -21,9 +21,15 @@ import {message} from "antd";
 export function deleteSlider(id) {
     try {
         return axios.delete(`${HTTP.local}slider/${id}`)
-            .then(res => res.data).then(message.success('Xóa Thành công'))
-            .catch(error => console.log(error));
+            .then(res => res.data).then((result) => {
+                if (result.message === 'SUCCESS') {
+                    message.success('Xóa thành công')
+                } else {
+                    message.error('Lỗi rồi !');
+                }
+            })
+            .catch(error => message.error(error));
     } catch (e) {
-        console.log('postSlider: ' + e );
+        console.log('postSlider: ' + e);
     }
 }
