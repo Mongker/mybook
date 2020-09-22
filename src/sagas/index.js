@@ -8,7 +8,7 @@
  */
 
 import { all } from "redux-saga/effects";
-import {watcherCallListSlider, watcherCallPost, watcherCallDelete, watcherCallUpdate} from "./admin/sliderSage";
+import {watcherCallListSlider, watcherCallPost, watcherCallDelete, watcherCallUpdate} from "./admin/sliderSaga";
 
 // saga
 export default function* rootSaga() {

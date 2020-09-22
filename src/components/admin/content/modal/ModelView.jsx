@@ -18,16 +18,18 @@ function ModelView(props) {
     const {handShowCancel, handleOk, visible, ContentModal, title, postSlider, dataEdit} = props;
     const onChangeOK = () => {
         const {name, image_link, index} = data;
-        debugger;
         if(name && image_link && index) {
             postSlider(data);
             handleOk();
-            setData(dataDefault);
-        } else message.warning('Cần điền đầy đủ thông tin Tên, Link và vị trí');
+            setData({});
+        } else {
+            message.warning('Cần điền đầy đủ thông tin Tên, Link và vị trí');
+            setData({})
+        }
     };
     const onShowCancel = () => {
         handShowCancel();
-        setData(dataDefault);
+        setData({});
     };
     return(
         <>

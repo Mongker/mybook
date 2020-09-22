@@ -20,7 +20,7 @@ import {message} from "antd";
 
 export function putSlider(id, data) {
     try {
-        return axios.post(`${HTTP.local}slider/${id}`, data)
+        return axios.put(`${HTTP.local}slider/${id}`, data)
             .then(res => res.data).then(message.success('Cập nhật thành công'))
             .catch(error => console.log(error));
     } catch (e) {

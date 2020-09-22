@@ -29,8 +29,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteSlider: (id) => dispatch(SliderAction.callDeleteSlider(id))
-  };
+    deleteSlider: (id) => dispatch(SliderAction.callDeleteSlider(id)),
+    putSlider: (id, data) => dispatch(SliderAction.updateSliderAction({id, data})),
+    postSlider: (data) => dispatch(SliderAction.postSlider({data}))
+  }
 };
 
 const TableSliderContainer = connect(

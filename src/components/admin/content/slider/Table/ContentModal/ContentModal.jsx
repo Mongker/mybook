@@ -7,7 +7,7 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-import React from "react";
+import React, {useState} from "react";
 import PropTypes from 'prop-types';
 import {Col, Row, Input, Select} from "antd";
 
@@ -30,9 +30,9 @@ const styleRow = {
 
 function ContentModal(props) {
     const {data, setData, dataEdit} = props;
-    const {image_link, name , index = 0} = dataEdit;
-    console.log(index)
-    debugger;
+    const [objectData, setObjectData] = useState({...data});
+    const {image_link, name, index = 0} = dataEdit;
+
     const children = [];
     for (let i = 1; i <= 5; i++) {
         children.push(
@@ -41,22 +41,25 @@ function ContentModal(props) {
     }
 
     function handleChange(value) {
-        if(setData != null) {
-            const valueInt = parseInt(value);
-            data['index'] = valueInt;
-            setData(data);
-        }
+        const valueInt = parseInt(value);
+        objectData['index'] = valueInt;
+        setData(data);
+        resetStateObject();
     }
 
     function handleText(e, type) {
         const text = e.target.value;
-        if(setData != null) {
-            if (type === TYPE_TEXT.NAME) {
-                data['name'] = text;
-            } else {
-                data['image_link'] = (text.length > 0) ? text : 'https://via.placeholder.com/880x380';
-            }
-            setData(data);
+        if (type === TYPE_TEXT.NAME) {
+            objectData['name'] = text;
+        } else {
+            objectData['image_link'] = (text.length > 0) ? text : 'https://via.placeholder.com/880x380';
+        }
+        setData(objectData);
+    }
+
+    function resetStateObject() {
+        if (objectData['name'].length > 0 && objectData['image_link'].length && objectData['name'].length) {
+            setObjectData({});
         }
     }
 

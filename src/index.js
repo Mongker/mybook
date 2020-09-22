@@ -24,7 +24,8 @@ import App from './App.jsx';
 
 // Middleware
 const sagaMiddleware = createSagaMiddleware();
-let store = createStore(allReducers, compose(applyMiddleware(sagaMiddleware), composeWithDevTools()));
+let store = createStore(allReducers, composeWithDevTools(applyMiddleware(sagaMiddleware)));
+// let store = createStore(allReducers, compose(applyMiddleware(sagaMiddleware), composeWithDevTools()));
 sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(

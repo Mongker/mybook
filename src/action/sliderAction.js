@@ -19,7 +19,6 @@ export const getListSlider = (payload) => {
 };
 
 export const postSlider = (payload) => {
-    debugger;
     return {
         type: SLIDER.CALL_POST_SLIDER,
         payload,
@@ -28,7 +27,6 @@ export const postSlider = (payload) => {
 };
 
 export const callDeleteSlider= (payload) => {
-    debugger;
     return {
         type: SLIDER.CALL_DELETE,
         payload,
@@ -36,9 +34,17 @@ export const callDeleteSlider= (payload) => {
     }
 };
 
-export const deleteSlider= (payload) => {
+export const deleteSliderAction= (payload) => {
     return {
         type: SLIDER.DELETE,
+        payload,
+        timestamp: Date.now()
+    }
+};
+
+export const updateSliderAction= (payload) => {
+    return {
+        type: SLIDER.CALL_PUT,
         payload,
         timestamp: Date.now()
     }

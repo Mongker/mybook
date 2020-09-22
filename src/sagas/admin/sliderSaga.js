@@ -9,17 +9,18 @@
 
 // action types
 import {SLIDER} from "../../action/actionTypes";
-import {call, put, take} from "redux-saga/effects";
+import {call, put, take, select} from "redux-saga/effects";
 
 // api
 import {getListSlider_API} from "../../api/slider/getList";
 import {postSlider} from "../../api/slider/post";
 import {deleteSlider} from "../../api/slider/delete";
+import {putSlider} from "../../api/slider/put";
 
 // -------------------------------------- watcher Action --------------------------------------/
 export function* watcherCallListSlider() {
     while (true) {
-        const fetchResult = yield take(SLIDER.CALL_GET_LIST);
+        yield take(SLIDER.CALL_GET_LIST);
         yield call(doCallListSlider);
     }
 }
@@ -29,7 +30,7 @@ export function* watcherCallPost() {
         const takeAction = yield take(SLIDER.CALL_POST_SLIDER);
         const {payload} = takeAction;
         const {data} = payload;
-        postSlider(data);
+        yield postSlider(data);
         yield call(doCallListSlider);
     }
 }
@@ -39,19 +40,32 @@ export function* watcherCallDelete() {
         const takeAction = yield take(SLIDER.CALL_DELETE);
         const {payload} = takeAction;
         yield deleteSlider(payload);
+        yield call(doDeleteSlider, payload);
     }
 }
 
 export function* watcherCallUpdate() {
     while (true) {
-        const takeAction = yield take(SLIDER.CALL_DELETE);
-        debugger; // MongLV
+        debugger;
+        const takeAction = yield take(SLIDER.CALL_PUT);
+        debugger;
+        const {payload} = takeAction;
+        const {id, data} = payload;
+        yield putSlider(id, data);
+        yield call(doCallListSlider);
     }
 }
 
 // -------------------------------------- do Saga ---------------------------------------/
 export function* doCallListSlider() {
-    const sliders = yield getListSlider_API();
     debugger;
+    const sliders = yield getListSlider_API();
     yield put({type: SLIDER.GET_LIST, sliders});
+}
+
+export function* doDeleteSlider(id) {
+    const {Slider} = yield select();
+    delete Slider[id];
+    const slider = {...Slider};
+    yield put({type: SLIDER.DELETE, slider})
 }

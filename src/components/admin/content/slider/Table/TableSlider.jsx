@@ -9,45 +9,98 @@
 
 import React, {useState} from "react";
 import PropTypes from "prop-types";
-import {Button, Input, Row, Col, Image, Popconfirm} from "antd";
+import {Button, Input, Row, Col, Image, Popconfirm, Modal, Select} from "antd";
 import {EditTwoTone, DeleteTwoTone, QuestionCircleOutlined} from "@ant-design/icons";
-
-// components
-import ModalContainer from "../../modal/ModalContainer";
-import ContentModalContainer from "./ContentModal/ContentModalContainer";
 
 // const
 const {Search} = Input;
+const {Option}= Select;
 const height =
     (window.innerHeight - window.innerHeight * 0.25).toString() + "px";
 
+const TYPE_TEXT = {
+    NAME: 'name',
+    LINK: 'link'
+};
+
+const styleCol = {
+    fontWeight: "bold",
+    paddingLeft: "5px",
+};
+
+const styleRow = {
+    padding: "10px",
+};
+
 function TableSlider(props) {
+    const {list, deleteSlider, postSlider, putSlider} = props;
     const [visible, setVisible] = useState(false);
     const [title, setTitle] = useState('');
-    const [dataEdit, setDataEdit] = useState({});
-    const {list, deleteSlider} = props;
+    const [data, setData] = useState({});
 
-    // let content = <ContentModalContainer />;
-
-    const showModalCancel = (type, item = {}) => {
-        debugger;
-        if(type === "ADD") setTitle('Thêm Slider');
-        else if(type === "EDIT"){
-            setTitle(`Edit Slider: ${item['name']}`);
-            setDataEdit(item);
+    const showModalCancel = (type, itemData = {}, id) => {
+        if (type === "ADD") {
+            setTitle('Thêm Slider');
+            setData({});
+        }
+        else {
+            setTitle(`Edit Slider: ${itemData['name']}`);
+            itemData['id'] = id;
+            const newData = {...itemData};
+            setData(newData)
         }
         setVisible(!visible);
     };
 
-    const handleOk = (data) => {
+    const cancelModal = () => {
+        setVisible(!visible);
+        setData({});
+    };
+
+    const handleOk = () => {
+        if(title === 'Thêm Slider') {
+            const newData = {...data};
+            postSlider(newData);
+        } else {
+            // CODE
+            const newData = {...data};
+            putSlider(newData['id'],newData);
+        }
         setVisible(!visible);
         setTitle('');
+        setData({});
     };
 
     const onDelete = (id) => {
         deleteSlider(id);
     };
 
+    const children = [];
+    for (let i = 1; i <= 5; i++) {
+        children.push(
+            <Option key={i.toString()}>{i.toString()}</Option>
+        );
+    }
+
+    function handleText(e, type) {
+        const text = e.target.value;
+        if (type === TYPE_TEXT.NAME) {
+            (text.length > 0) && (data['name'] = text);
+        } else {
+            data['image_link'] = (text.length > 0) ? text : 'https://via.placeholder.com/880x380';
+        }
+        setData({...data});
+    }
+
+    function handleChangeSelect(value) {
+        const valueInt = parseInt(value);
+        data['index'] = valueInt;
+        setData({...data});
+    }
+    const nameDefault = data.name ? data.name : '';
+    const imgDefault = data.image_link ? data.image_link : '';
+    const indexDefault = data.index ? data.index : '';
+    debugger;
     return (
         <div>
             <Row style={{paddingBottom: "5px"}}>
@@ -102,7 +155,8 @@ function TableSlider(props) {
                         <Col className={"table-row"} span={3}>
                             <Row>
                                 <Col flex={1}>
-                                    <EditTwoTone className={"icon-slider"} onClick={() => showModalCancel('EDIT', list[item])} />
+                                    <EditTwoTone className={"icon-slider"}
+                                                 onClick={() => showModalCancel('EDIT', list[item], item)}/>
                                 </Col>
                                 <Col flex={1}>
                                     <Popconfirm
@@ -123,14 +177,49 @@ function TableSlider(props) {
                     </Row>
                 ))
                 : null}
-            <ModalContainer
-                handShowCancel={showModalCancel}
-                handleOk={handleOk}
+            <Modal
                 visible={visible}
-                ContentModal={ContentModalContainer}
+                closable
+                onOk={handleOk}
+                onCancel={cancelModal}
+                // footer={null}
+                closeIcon
                 title={title}
-                dataEdit={dataEdit}
-            />
+                centered
+            >
+                <div>
+                    <Row style={styleRow}>
+                        <Col span={3} style={styleCol}>
+                            Tên:
+                        </Col>
+                        <Col span={21}>
+                            <Input defaultValue={nameDefault} onChange={(e) => handleText(e, TYPE_TEXT.NAME)}/>
+                        </Col>
+                    </Row>
+                    <Row style={styleRow}>
+                        <Col span={3} style={styleCol}>
+                            Link:
+                        </Col>
+                        <Col span={21}>
+                            <Input defaultValue={imgDefault} onChange={(e) => handleText(e, TYPE_TEXT.LINK)}/>
+                        </Col>
+                    </Row>
+                    <Row style={styleRow}>
+                        <Col span={3} style={styleCol}>
+                            Vị trí:
+                        </Col>
+                        <Col span={21}>
+                            <Select
+                                value={indexDefault}
+                                // style={{ width: "30px" }}
+                                onChange={handleChangeSelect}
+                            >
+                                {children}
+                            </Select>
+                        </Col>
+                    </Row>
+                </div>
+            </Modal>
         </div>
     );
 }
@@ -138,11 +227,15 @@ function TableSlider(props) {
 TableSlider.propTypes = {
     list: PropTypes.object,
     deleteSlider: PropTypes.func,
+    postSlider: PropTypes.func,
+    putSlider: PropTypes.func,
 };
 
-TableSlider.defaultProps ={
+TableSlider.defaultProps = {
     list: {},
     deleteSlider: () => null,
+    postSlider: () => null,
+    putSlider: () => null,
 };
 
 export default TableSlider;

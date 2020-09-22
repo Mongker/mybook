@@ -20,7 +20,6 @@ function TodoApp() {
             "name": "Mong",
             "description": "oki"
         }).then(res => res.data).then((result) => {
-            setData(result);
         }).catch(err => console.log(err))
     }, []);
 
