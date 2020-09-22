@@ -9,8 +9,12 @@
 
 import React, {useState} from "react";
 import PropTypes from "prop-types";
-import {Button, Input, Row, Col, Image, Popconfirm, Modal, Select} from "antd";
+import {Button, Input, Row, Col, Image, Popconfirm, Select} from "antd";
 import {EditTwoTone, DeleteTwoTone, QuestionCircleOutlined} from "@ant-design/icons";
+
+// component
+import ModalAdd from "./ModalAdd";
+import ModalEdit from "./ModalEdit";
 
 // const
 const {Search} = Input;
@@ -35,6 +39,7 @@ const styleRow = {
 function TableSlider(props) {
     const {list, deleteSlider, postSlider, putSlider} = props;
     const [visible, setVisible] = useState(false);
+    const [visible2, setVisible2] = useState(false);
     const [title, setTitle] = useState('');
     const [data, setData] = useState({});
 
@@ -42,18 +47,20 @@ function TableSlider(props) {
         if (type === "ADD") {
             setTitle('Thêm Slider');
             setData({});
+            setVisible2(true);
         }
         else {
             setTitle(`Edit Slider: ${itemData['name']}`);
             itemData['id'] = id;
             const newData = {...itemData};
             setData(newData)
+            setVisible(true);
         }
-        setVisible(!visible);
     };
 
     const cancelModal = () => {
-        setVisible(!visible);
+        setVisible(false);
+        setVisible2(false);
         setData({});
     };
 
@@ -61,12 +68,13 @@ function TableSlider(props) {
         if(title === 'Thêm Slider') {
             const newData = {...data};
             postSlider(newData);
+            setVisible2(false);
         } else {
             // CODE
             const newData = {...data};
             putSlider(newData['id'],newData);
+            setVisible(false);
         }
-        setVisible(!visible);
         setTitle('');
         setData({});
     };
@@ -97,10 +105,9 @@ function TableSlider(props) {
         data['index'] = valueInt;
         setData({...data});
     }
-    const nameDefault = data.name ? data.name : '';
-    const imgDefault = data.image_link ? data.image_link : '';
-    const indexDefault = data.index ? data.index : '';
-    debugger;
+    let nameDefault = data.name ? data.name : '';
+    let imgDefault = data.image_link ? data.image_link : '';
+    let indexDefault = data.index ? data.index : '';
     return (
         <div>
             <Row style={{paddingBottom: "5px"}}>
@@ -177,49 +184,33 @@ function TableSlider(props) {
                     </Row>
                 ))
                 : null}
-            <Modal
-                visible={visible}
-                closable
-                onOk={handleOk}
-                onCancel={cancelModal}
-                // footer={null}
-                closeIcon
+            <ModalAdd
+                visible={visible2}
+                handleOk={handleOk}
+                cancelModal={cancelModal}
                 title={title}
-                centered
-            >
-                <div>
-                    <Row style={styleRow}>
-                        <Col span={3} style={styleCol}>
-                            Tên:
-                        </Col>
-                        <Col span={21}>
-                            <Input defaultValue={nameDefault} onChange={(e) => handleText(e, TYPE_TEXT.NAME)}/>
-                        </Col>
-                    </Row>
-                    <Row style={styleRow}>
-                        <Col span={3} style={styleCol}>
-                            Link:
-                        </Col>
-                        <Col span={21}>
-                            <Input defaultValue={imgDefault} onChange={(e) => handleText(e, TYPE_TEXT.LINK)}/>
-                        </Col>
-                    </Row>
-                    <Row style={styleRow}>
-                        <Col span={3} style={styleCol}>
-                            Vị trí:
-                        </Col>
-                        <Col span={21}>
-                            <Select
-                                value={indexDefault}
-                                // style={{ width: "30px" }}
-                                onChange={handleChangeSelect}
-                            >
-                                {children}
-                            </Select>
-                        </Col>
-                    </Row>
-                </div>
-            </Modal>
+                styleRow={styleRow}
+                styleCol={styleCol}
+                handleText={handleText}
+                handleChangeSelect={handleChangeSelect}
+                children={children}
+                TYPE_TEXT={TYPE_TEXT}
+            />
+            <ModalEdit
+                visible={visible}
+                handleOk={handleOk}
+                cancelModal={cancelModal}
+                title={title}
+                styleRow={styleRow}
+                styleCol={styleCol}
+                handleText={handleText}
+                handleChangeSelect={handleChangeSelect}
+                children={children}
+                TYPE_TEXT={TYPE_TEXT}
+                nameDefault={nameDefault}
+                imgDefault={imgDefault}
+                indexDefault={indexDefault}
+            />
         </div>
     );
 }
