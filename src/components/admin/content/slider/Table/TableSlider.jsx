@@ -9,7 +9,7 @@
 
 import React, {useEffect, useState} from "react";
 import PropTypes from "prop-types";
-import {Button, Input, Row, Col, Image, Popconfirm, Select} from "antd";
+import {Button, Input, Row, Col, Image, Popconfirm, Select, Spin} from "antd";
 import {EditTwoTone, DeleteTwoTone, QuestionCircleOutlined} from "@ant-design/icons";
 
 // component
@@ -19,7 +19,7 @@ import ModalEdit from "./ModalEdit";
 // const
 const {Search} = Input;
 const {Option} = Select;
-const height =
+const heightWindow =
     (window.innerHeight - window.innerHeight * 0.25).toString() + "px";
 
 const TYPE_TEXT = {
@@ -123,6 +123,8 @@ function TableSlider(props) {
     let nameDefault = data.name ? data.name : '';
     let imgDefault = data.image_link ? data.image_link : '';
     let indexDefault = data.index ? data.index : '';
+
+    const lengthArray = listArray.length;
     debugger;
     return (
         <div>
@@ -160,46 +162,48 @@ function TableSlider(props) {
                     Hành động
                 </Col>
             </Row>
-            {listArray.length > 0
-                ? listArray.map((item, index) => (
-                    <Row className={"table-tr"} key={index}>
-                        <Col className={"table-row"} span={4}>
-                            {list[item].name}
-                        </Col>
-                        <Col className={"table-row"} span={5}>
-                            <Image width={200} height={67.06} src={list[item].image_link}/>
-                        </Col>
-                        <Col className={"table-row"} span={10}>
-                            {list[item].image_link}
-                        </Col>
-                        <Col className={"table-row"} span={2}>
-                            {list[item].index}
-                        </Col>
-                        <Col className={"table-row"} span={3}>
-                            <Row>
-                                <Col flex={1}>
-                                    <EditTwoTone className={"icon-slider"}
-                                                 onClick={() => showModalCancel('EDIT', list[item], item)}/>
-                                </Col>
-                                <Col flex={1}>
-                                    <Popconfirm
-                                        title="Bạn muốn xóa slider này？"
-                                        okText="Yes"
-                                        cancelText="No"
-                                        onConfirm={() => onDelete(item)}
-                                        icon={<QuestionCircleOutlined style={{color: 'red'}}/>}
-                                    >
-                                        <DeleteTwoTone
-                                            className={"icon-slider"}
-                                            twoToneColor={"red"}
-                                        />
-                                    </Popconfirm>
-                                </Col>
-                            </Row>
-                        </Col>
-                    </Row>
-                ))
-                : null}
+            <div style={{overflow: 'auto', height: heightWindow, width: 'auto' }}>
+                {listArray.length > 0
+                    ? listArray.map((item, index) => (
+                        <Row className={"table-tr"} key={index}>
+                            <Col className={"table-row"} span={4}>
+                                {list[item].name}
+                            </Col>
+                            <Col className={"table-row"} span={5}>
+                                <Image width={200} height={67.06} src={list[item].image_link}/>
+                            </Col>
+                            <Col className={"table-row"} span={10}>
+                                {list[item].image_link}
+                            </Col>
+                            <Col className={"table-row"} span={2}>
+                                {list[item].index}
+                            </Col>
+                            <Col className={"table-row"} span={3}>
+                                <Row>
+                                    <Col flex={1}>
+                                        <EditTwoTone className={"icon-slider"}
+                                                     onClick={() => showModalCancel('EDIT', list[item], item)}/>
+                                    </Col>
+                                    <Col flex={1}>
+                                        <Popconfirm
+                                            title="Bạn muốn xóa slider này？"
+                                            okText="Yes"
+                                            cancelText="No"
+                                            onConfirm={() => onDelete(item)}
+                                            icon={<QuestionCircleOutlined style={{color: 'red'}}/>}
+                                        >
+                                            <DeleteTwoTone
+                                                className={"icon-slider"}
+                                                twoToneColor={"red"}
+                                            />
+                                        </Popconfirm>
+                                    </Col>
+                                </Row>
+                            </Col>
+                        </Row>
+                    ))
+                    : (<Spin size="large" style={{textAlign: 'center', paddingLeft: '50%', paddingTop: '100px'}}/>)}
+            </div>
             <ModalAdd
                 visible={visible2}
                 handleOk={handleOk}
