@@ -47,14 +47,14 @@ function ModalEdit(props) {
     // const [index, setIndex] = useState('NULL');
     // const [name, setName] = useState('');
 
-    if(_data !== data) {
-        form.setFieldsValue({
-            name: name,
-            image_link: img,
-            index: index,
-        });
-        setData(data);
-    }
+    // if(_data !== data) {
+    //     form.setFieldsValue({
+    //         name: name,
+    //         image_link: img,
+    //         index: index,
+    //     });
+    //     setData(data);
+    // }
 
     form.setFieldsValue({
         'name': name,
@@ -63,6 +63,7 @@ function ModalEdit(props) {
     });
 
     const onFinish = (values) => {
+        debugger; // MongLV
         handleText(values);
         onReset();
         values.preventDefault();
@@ -96,7 +97,6 @@ function ModalEdit(props) {
                         }
                     ]}
                 >
-                    {name}
                     <Input />
                 </Form.Item>
                 <Form.Item
@@ -109,7 +109,6 @@ function ModalEdit(props) {
                         }
                     ]}
                 >
-                    {img}
                     <Input />
                 </Form.Item>
 
