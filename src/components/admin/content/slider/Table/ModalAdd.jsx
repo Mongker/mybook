@@ -7,56 +7,112 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-import React, {useEffect} from 'react';
-import {Col, Input, Modal, Row, Select} from "antd";
+import React from 'react';
+import {Button, Input, Modal, Select, Form, Row, Col} from "antd";
 import PropTypes from 'prop-types';
 
+// const
+const layout = {
+    labelCol: {
+        span: 4
+    },
+    wrapperCol: {
+        span: 20
+    }
+};
+const tailLayout = {
+    wrapperCol: {
+        offset: 8,
+        span: 16
+    }
+};
+
 function ModalAdd(props) {
-    const {visible, handleChangeSelect, handleText, cancelModal, handleOk, styleRow, styleCol, title, children, TYPE_TEXT} = props;
+    const [form] = Form.useForm();
+    const {visible, handleChangeSelect, handleText, cancelModal, title, children, TYPE_TEXT} = props;
     // TODO by MongV: xử dụng From để bao các input lại để reset text
+    const onFinish = (values) => {
+        handleText(values);
+        onReset();
+        values.preventDefault();
+    };
+
+    const onReset = () => {
+        form.resetFields();
+        cancelModal();
+    };
+
     return (
         <Modal
             visible={visible}
             closable
-            onOk={handleOk}
-            onCancel={cancelModal}
-            // footer={null}
+            footer={null}
             closeIcon
             title={title}
             centered
         >
-            <div>
-                <Row style={styleRow}>
-                    <Col span={3} style={styleCol}>
-                        Tên:
-                    </Col>
-                    <Col span={21}>
-                        <Input onChange={(e) => handleText(e, TYPE_TEXT.NAME)}/>
-                    </Col>
-                </Row>
-                <Row style={styleRow}>
-                    <Col span={3} style={styleCol}>
-                        Link:
-                    </Col>
-                    <Col span={21}>
-                        <Input onChange={(e) => handleText(e, TYPE_TEXT.LINK)}/>
-                    </Col>
-                </Row>
-                <Row style={styleRow}>
-                    <Col span={3} style={styleCol}>
-                        Vị trí:
-                    </Col>
-                    <Col span={21}>
-                        <Select
-                            defaultValue={'NULL'}
-                            // style={{ width: "30px" }}
-                            onChange={handleChangeSelect}
-                        >
-                            {children}
-                        </Select>
-                    </Col>
-                </Row>
-            </div>
+            <Form {...layout} form={form} name="control-hooks" onFinish={(value) => onFinish(value, TYPE_TEXT.ADD)}>
+
+                <Form.Item
+                    name="name"
+                    label="Tên"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Tên không được để trống'
+                        }
+                    ]}
+                >
+                    <Input/>
+                </Form.Item>
+                <Form.Item
+                    name="image_link"
+                    label="Link Ảnh"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Link không được để trống'
+                        }
+                    ]}
+                >
+                    <Input/>
+                </Form.Item>
+
+                <Form.Item
+                    name="index"
+                    label="Vị trí"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Vị trí không được để trống'
+                        }
+                    ]}
+                >
+                    <Select
+                        defaultValue={'NULL'}
+                        // style={{ width: "30px" }}
+                        onChange={handleChangeSelect}
+                        allowClear
+                    >
+                        {children}
+                    </Select>
+                </Form.Item>
+
+                <Form.Item {...tailLayout}>
+                    <Row>
+                        <Col span={18} style={{paddingLeft: '50%'}}>
+                            <Button type="primary" htmlType="submit">
+                                Thêm
+                            </Button>
+                        </Col>
+                        <Col span={6}>
+                            <Button onClick={onReset}>
+                                Đóng
+                            </Button>
+                        </Col>
+                    </Row>
+                </Form.Item>
+            </Form>
         </Modal>
     );
 }

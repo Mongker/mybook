@@ -24,7 +24,9 @@ const heightWindow =
 
 const TYPE_TEXT = {
     NAME: 'name',
-    LINK: 'link'
+    LINK: 'link',
+    EDIT: 'EDIT',
+    ADD: 'ADD'
 };
 
 const styleCol = {
@@ -57,7 +59,7 @@ function TableSlider(props) {
             setTitle(`Edit Slider: ${itemData['name']}`);
             itemData['id'] = id;
             const newData = {...itemData};
-            setData(newData)
+            setData(newData);
             setVisible(true);
         }
     };
@@ -102,16 +104,11 @@ function TableSlider(props) {
         setListArray([...newList]);
     }
 
-    function handleText(e, type) {
-        const text = e.target.value;
-        if (type === TYPE_TEXT.NAME) {
-            (text.length > 0) && (data['name'] = text);
-        } else {
-            data['image_link'] = (text.length > 0) ? text : 'https://via.placeholder.com/880x380';
+    function handleText(value, type) {
+        if(type === TYPE_TEXT.ADD) {
+            postSlider({...value});
         }
-        setData({...data});
-        e.preventDefault();
-        e.stopPropagation();
+        else putSlider(data['id'], value);
     }
 
     function handleChangeSelect(value) {
@@ -120,12 +117,6 @@ function TableSlider(props) {
         setData({...data});
     }
 
-    let nameDefault = data.name ? data.name : '';
-    let imgDefault = data.image_link ? data.image_link : '';
-    let indexDefault = data.index ? data.index : '';
-
-    const lengthArray = listArray.length;
-    debugger;
     return (
         <div>
             <Row style={{paddingBottom: "5px"}}>
@@ -217,6 +208,7 @@ function TableSlider(props) {
                 TYPE_TEXT={TYPE_TEXT}
             />
             <ModalEdit
+                data={data}
                 visible={visible}
                 handleOk={handleOk}
                 cancelModal={cancelModal}
@@ -227,9 +219,6 @@ function TableSlider(props) {
                 handleChangeSelect={handleChangeSelect}
                 children={children}
                 TYPE_TEXT={TYPE_TEXT}
-                nameDefault={nameDefault}
-                imgDefault={imgDefault}
-                indexDefault={indexDefault}
             />
         </div>
     );

@@ -7,70 +7,150 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-import React from 'react';
-import {Col, Input, Modal, Row, Select} from "antd";
-import PropTypes from "prop-types";
+import React, {useState} from 'react';
+import {Button, Input, Modal, Select, Form, Row, Col} from "antd";
+import PropTypes from 'prop-types';
+
+// const
+const layout = {
+    labelCol: {
+        span: 4
+    },
+    wrapperCol: {
+        span: 20
+    }
+};
+const tailLayout = {
+    wrapperCol: {
+        offset: 8,
+        span: 16
+    }
+};
 
 function ModalEdit(props) {
+    const [form] = Form.useForm();
     const {visible,
         handleChangeSelect,
         handleText,
         cancelModal,
-        handleOk,
-        styleRow,
-        styleCol,
         title,
         children,
-        TYPE_TEXT,
-        imgDefault ,
-        indexDefault,
-        nameDefault} = props;
-    return(
+        data
+    } = props;
+    const [_data, setData] = useState(data);
+
+    const name = data.name ? data.name : '';
+    const img = data.image_link ? data.image_link : '';
+    const index = data.index ? data.index : '';
+
+    // const [img, setImg] = useState('');
+    // const [index, setIndex] = useState('NULL');
+    // const [name, setName] = useState('');
+
+    if(_data !== data) {
+        form.setFieldsValue({
+            name: name,
+            image_link: img,
+            index: index,
+        });
+        setData(data);
+    }
+
+    form.setFieldsValue({
+        'name': name,
+        'image_link': img,
+        'index': index
+    });
+
+    const onFinish = (values) => {
+        handleText(values);
+        onReset();
+        values.preventDefault();
+    };
+
+    const onReset = () => {
+        form.resetFields();
+        cancelModal();
+    };
+    console.log(index);
+    console.log(img);
+    console.log(index);
+    console.log('---------------------------------------------------------------');
+    return (
         <Modal
             visible={visible}
             closable
-            onOk={handleOk}
-            onCancel={cancelModal}
-            // footer={null}
+            footer={null}
             closeIcon
             title={title}
             centered
         >
-            <div>
-                <Row style={styleRow}>
-                    <Col span={3} style={styleCol}>
-                        Tên:
-                    </Col>
-                    <Col span={21}>
-                        <Input defaultValue={nameDefault} onChange={(e) => handleText(e, TYPE_TEXT.NAME)}/>
-                    </Col>
-                </Row>
-                <Row style={styleRow}>
-                    <Col span={3} style={styleCol}>
-                        Link:
-                    </Col>
-                    <Col span={21}>
-                        <Input defaultValue={imgDefault} onChange={(e) => handleText(e, TYPE_TEXT.LINK)}/>
-                    </Col>
-                </Row>
-                <Row style={styleRow}>
-                    <Col span={3} style={styleCol}>
-                        Vị trí:
-                    </Col>
-                    <Col span={21}>
-                        <Select
-                            defaultValue={indexDefault}
-                            // style={{ width: "30px" }}
-                            onChange={handleChangeSelect}
-                        >
-                            {children}
-                        </Select>
-                    </Col>
-                </Row>
-            </div>
+            <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
+                <Form.Item
+                    name="name"
+                    label="Tên"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Tên không được để trống'
+                        }
+                    ]}
+                >
+                    {name}
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    name="image_link"
+                    label="Link Ảnh"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Link không được để trống'
+                        }
+                    ]}
+                >
+                    {img}
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    name="index"
+                    label="Vị trí"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Vị trí không được để trống'
+                        }
+                    ]}
+                >
+                    <Select
+                        defaultValue={index}
+                        onChange={handleChangeSelect}
+                        allowClear
+                    >
+                        {children}
+                    </Select>
+                </Form.Item>
+
+                <Form.Item {...tailLayout}>
+                    <Row>
+                        <Col span={18} style={{paddingLeft: '50%'}}>
+                            <Button type="primary" htmlType="submit">
+                                Lưu
+                            </Button>
+                        </Col>
+                        <Col span={6}>
+                            <Button onClick={onReset}>
+                                Đóng
+                            </Button>
+                        </Col>
+                    </Row>
+                </Form.Item>
+            </Form>
         </Modal>
     );
 }
+
 ModalEdit.propsTypes = {
     visible: PropTypes.bool,
 
@@ -89,4 +169,4 @@ ModalEdit.propsTypes = {
     // string
     title: PropTypes.string,
 };
-export default React.memo(ModalEdit);
+export default ModalEdit;
