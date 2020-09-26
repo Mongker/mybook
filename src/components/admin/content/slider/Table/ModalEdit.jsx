@@ -7,7 +7,7 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-import React, {useState} from 'react';
+import React from 'react';
 import {Button, Input, Modal, Select, Form, Row, Col} from "antd";
 import PropTypes from 'prop-types';
 
@@ -30,31 +30,16 @@ const tailLayout = {
 function ModalEdit(props) {
     const [form] = Form.useForm();
     const {visible,
-        handleChangeSelect,
         handleText,
         cancelModal,
         title,
         children,
         data
     } = props;
-    const [_data, setData] = useState(data);
 
     const name = data.name ? data.name : '';
     const img = data.image_link ? data.image_link : '';
     const index = data.index ? data.index : '';
-
-    // const [img, setImg] = useState('');
-    // const [index, setIndex] = useState('NULL');
-    // const [name, setName] = useState('');
-
-    // if(_data !== data) {
-    //     form.setFieldsValue({
-    //         name: name,
-    //         image_link: img,
-    //         index: index,
-    //     });
-    //     setData(data);
-    // }
 
     form.setFieldsValue({
         'name': name,
@@ -63,7 +48,6 @@ function ModalEdit(props) {
     });
 
     const onFinish = (values) => {
-        debugger; // MongLV
         handleText(values);
         onReset();
         values.preventDefault();
@@ -73,10 +57,6 @@ function ModalEdit(props) {
         form.resetFields();
         cancelModal();
     };
-    console.log(index);
-    console.log(img);
-    console.log(index);
-    console.log('---------------------------------------------------------------');
     return (
         <Modal
             visible={visible}
@@ -124,7 +104,6 @@ function ModalEdit(props) {
                 >
                     <Select
                         defaultValue={index}
-                        onChange={handleChangeSelect}
                         allowClear
                     >
                         {children}
@@ -156,7 +135,6 @@ ModalEdit.propsTypes = {
     children: PropTypes.array,
 
     // func
-    handleChangeSelect: PropTypes.func,
     handleText: PropTypes.func,
     cancelModal: PropTypes.func,
     handleOk: PropTypes.func,

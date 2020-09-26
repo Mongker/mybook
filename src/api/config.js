@@ -14,7 +14,7 @@
 
 'use strict';
 
-export const HTTP = {
+export const URL_API = {
   local: 'http://localhost:1999/api/',
   ngrok: 'https://b66cd0c7d917.ngrok.io/api/',
 };

@@ -9,7 +9,9 @@
 
 import { combineReducers } from "redux";
 import Slider from "./admin/slider/sliderReducers";
+import Admin from "./admin/admin/adminReducers";
 const allReducers = combineReducers({
-    Slider
+    Slider,
+    Admin
 });
 export default allReducers;

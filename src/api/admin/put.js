@@ -18,9 +18,9 @@ import axios from "axios";
 import {URL_API} from "../config";
 import {message} from "antd";
 
-export function putSlider(id, data) {
+export function putAdmin(id, data) {
     try {
-        return axios.put(`${URL_API.local}slider/${id}`, data)
+        return axios.put(`${URL_API.local}admin/${id}`, data)
             .then(res => res.data).then((result) => {
                 if (result.message === 'SUCCESS') {
                     message.success('Cập nhật thành công')

@@ -46,9 +46,7 @@ export function* watcherCallDelete() {
 
 export function* watcherCallUpdate() {
     while (true) {
-        debugger;
         const takeAction = yield take(SLIDER.CALL_PUT);
-        debugger;
         const {payload} = takeAction;
         const {id, data} = payload;
         yield putSlider(id, data);
@@ -58,7 +56,6 @@ export function* watcherCallUpdate() {
 
 // -------------------------------------- do Saga ---------------------------------------/
 export function* doCallListSlider() {
-    debugger;
     const sliders = yield getListSlider_API();
     yield put({type: SLIDER.GET_LIST, sliders});
 }

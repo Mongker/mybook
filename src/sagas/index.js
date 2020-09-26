@@ -9,6 +9,7 @@
 
 import { all } from "redux-saga/effects";
 import {watcherCallListSlider, watcherCallPost, watcherCallDelete, watcherCallUpdate} from "./admin/sliderSaga";
+import {watcherCallListAdmin} from "./admin/adminSaga";
 
 // saga
 export default function* rootSaga() {
@@ -17,5 +18,6 @@ export default function* rootSaga() {
         watcherCallPost(),
         watcherCallDelete(),
         watcherCallUpdate(),
+        watcherCallListAdmin()
     ]);
 }

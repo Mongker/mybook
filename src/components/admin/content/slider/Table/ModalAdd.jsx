@@ -29,10 +29,10 @@ const tailLayout = {
 
 function ModalAdd(props) {
     const [form] = Form.useForm();
-    const {visible, handleChangeSelect, handleText, cancelModal, title, children, TYPE_TEXT} = props;
+    const {visible, handleText, cancelModal, title, children, TYPE_TEXT} = props;
     // TODO by MongV: xử dụng From để bao các input lại để reset text
     const onFinish = (values) => {
-        handleText(values);
+        handleText(values, TYPE_TEXT.ADD);
         onReset();
         values.preventDefault();
     };
@@ -51,7 +51,7 @@ function ModalAdd(props) {
             title={title}
             centered
         >
-            <Form {...layout} form={form} name="control-hooks" onFinish={(value) => onFinish(value, TYPE_TEXT.ADD)}>
+            <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
 
                 <Form.Item
                     name="name"
@@ -90,8 +90,6 @@ function ModalAdd(props) {
                 >
                     <Select
                         defaultValue={'NULL'}
-                        // style={{ width: "30px" }}
-                        onChange={handleChangeSelect}
                         allowClear
                     >
                         {children}
@@ -123,7 +121,6 @@ ModalAdd.propsTypes = {
     children: PropTypes.array,
 
     // func
-    handleChangeSelect: PropTypes.func,
     handleText: PropTypes.func,
     cancelModal: PropTypes.func,
     handleOk: PropTypes.func,

@@ -81,7 +81,7 @@ function MenuAmin(props) {
           Khách hàng
         </Menu.Item>
         <Menu.Item key={KEY_MENU.ADMIN} icon={<TeamOutlined />}>
-          Nhân viên
+          <Link to={`${match.url}/admin`}>Nhân viên</Link>
         </Menu.Item>
         <Menu.Item key={KEY_MENU.SLIDER} icon={<PictureOutlined />}>
           <Link to={`${match.url}/slider`}>Slider</Link>

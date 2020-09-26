@@ -18,18 +18,18 @@ import axios from "axios";
 import {URL_API} from "../config";
 import {message} from "antd";
 
-export function putSlider(id, data) {
+export function deleteAdmin(id) {
     try {
-        return axios.put(`${URL_API.local}slider/${id}`, data)
+        return axios.delete(`${URL_API.local}admin/${id}`)
             .then(res => res.data).then((result) => {
                 if (result.message === 'SUCCESS') {
-                    message.success('Cập nhật thành công')
+                    message.success('Xóa thành công')
                 } else {
                     message.error('Lỗi rồi !');
                 }
             })
             .catch(error => message.error(error));
     } catch (e) {
-        message.error(e);
+        console.log('postSlider: ' + e);
     }
 }

@@ -93,8 +93,9 @@ function TableSlider(props) {
 
     const children = [];
     for (let i = 0; i <= 5; i++) {
+        const iString = (i!==0) ? i.toString() : 'Không hiễn thị';
         children.push(
-            <Option key={i.toString()}>{(i!==0) ? i.toString() : 'Không hiễn thị'}</Option>
+            <Option key={i.toString()}>{iString}</Option>
         );
     }
 
@@ -109,12 +110,6 @@ function TableSlider(props) {
             postSlider({...value});
         }
         else putSlider(data['id'], value);
-    }
-
-    function handleChangeSelect(value) {
-        const valueInt = parseInt(value);
-        data['index'] = valueInt;
-        setData({...data});
     }
 
     return (
@@ -203,7 +198,6 @@ function TableSlider(props) {
                 styleRow={styleRow}
                 styleCol={styleCol}
                 handleText={handleText}
-                handleChangeSelect={handleChangeSelect}
                 children={children}
                 TYPE_TEXT={TYPE_TEXT}
             />
@@ -216,7 +210,6 @@ function TableSlider(props) {
                 styleRow={styleRow}
                 styleCol={styleCol}
                 handleText={handleText}
-                handleChangeSelect={handleChangeSelect}
                 children={children}
                 TYPE_TEXT={TYPE_TEXT}
             />

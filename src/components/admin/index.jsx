@@ -14,6 +14,7 @@ import { Switch, Route, useRouteMatch } from "react-router-dom";
 // components
 import MenuAmin from "./menu/index.jsx";
 import SliderContainer from "./content/slider/SliderContainer";
+import AdminContainer from "./content/admin/AdminContainer";
 import HomeAdmin from "./content/home/Home.View.jsx";
 
 // styles
@@ -48,6 +49,11 @@ function Admin() {
             exact
             path={`${match.url}/slider`}
             render={() => <SliderContainer titleHeader={titleHeader} />}
+          />
+          <Route
+            exact
+            path={`${match.url}/admin`}
+            render={() => <AdminContainer titleHeader={titleHeader} />}
           />
         </Switch>
       </Layout>

@@ -13,6 +13,7 @@ import PropTypes from "prop-types";
 
 // components
 // import EditableTable from "./table/Table.View.jsx";
+import AdminContainer from "./admin/AdminContainer";
 import TableSliderContainer from "./slider/Table/TableSliderContainer";
 
 // util
@@ -29,7 +30,7 @@ function ContentAdmin(props) {
       CheckRender = <TableSliderContainer list={list} />;
       break;
     case KEY_MENU.ADMIN:
-      CheckRender = <div>Đang phát triển nhé</div>;
+      CheckRender = <>s</>;
       break;
     default:
       CheckRender = <div>Đang phát triển</div>;

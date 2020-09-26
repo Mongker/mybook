@@ -13,9 +13,9 @@ import axios from "axios";
 import {URL_API} from "../config";
 import {message} from "antd";
 
-export function postSlider(data) {
+export function postAdmin(data) {
     try {
-        return axios.post(`${URL_API.local}slider`, data)
+        return axios.post(`${URL_API.local}admin`, data)
             .then(res => res.data).then((result) => {
                 console.log(result);
                 if (result.message === 'SUCCESS') {

@@ -10,8 +10,8 @@
 import axios from 'axios';
 import {URL_API} from '../config';
 
-export function getListSlider_API() {
-	return axios.get(`${URL_API.local}slider`)
+export function getListAdmin_API() {
+	return axios.get(`${URL_API.local}admin`)
 	.then(res => res.data)
 	.catch(error => console.log(error));
 }
