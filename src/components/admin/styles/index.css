@@ -4,8 +4,7 @@
 }
 
 .site-layout {
-    border-left: 14px solid #bbbbbb;
-    border-right: 14px solid #bbbbbb;
+    /*border-radius: 25px;*/
 }
 
 .site-layout .site-layout-background {

@@ -1,13 +1,4 @@
 /**
- * Copyright 2020 present, Lê Văn Mong.
- * All rights reserved.
- * @author Mong_Le_Van on 25/09/2020
- * @email: levanmong.dola.99@gmail.com
- * @student-code: 68DCHT20091
- * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
- */
-
-/**
  * Copyright (c) 2020 Mongker.
  * All rights reserved.
  * @author Mongker 18/09/2020
@@ -29,8 +20,7 @@ import ContentAdmin from "../../content/Content.View.jsx";
 const {Header, Content} = Layout;
 
 function AdminView(props) {
-    const {titleHeader, getList, listSlider} = props;
-    debugger; // MongLV
+    const {titleHeader, getList, listAdmin} = props;
     useEffect(() => {
         getList();
     }, []);
@@ -43,7 +33,7 @@ function AdminView(props) {
             <Content style={{margin: "0 16px"}}>
                 <ContentAdmin
                     title={titleHeader}
-                    list={listSlider}
+                    list={listAdmin}
                 />
             </Content>
         </Layout>

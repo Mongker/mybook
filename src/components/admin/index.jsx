@@ -6,10 +6,10 @@
  * @student-code: 68DCHT20091
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
-import React, { useState } from "react";
-import { Helmet } from "react-helmet";
-import { Layout } from "antd";
-import { Switch, Route, useRouteMatch } from "react-router-dom";
+import React, {useState} from "react";
+import {Helmet} from "react-helmet";
+import {Layout} from "antd";
+import {Switch, Route, useRouteMatch} from "react-router-dom";
 
 // components
 import MenuAmin from "./menu/index.jsx";
@@ -21,44 +21,47 @@ import HomeAdmin from "./content/home/Home.View.jsx";
 import "./styles/index.css";
 
 // const
-const { Sider } = Layout;
+const {Sider} = Layout;
 
 function Admin() {
-  const [collapsed, setCollapsed] = useState(false);
-  const [titleHeader, setTitleHeader] = useState("ADCBook");
-  let match = useRouteMatch();
+    const [collapsed, setCollapsed] = useState(false);
+    const [titleHeader, setTitleHeader] = useState("ADCBook");
+    let match = useRouteMatch();
 
-  function onCollapse(collapsed) {
-    setCollapsed(collapsed);
-  }
+    function onCollapse(collapsed) {
+        setCollapsed(collapsed);
+    }
 
-  return (
-    <Route>
-      <Layout style={{ minHeight: "100vh" }}>
-        <Helmet title={`Quản trị: ${titleHeader}`} />
-        <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
-          <MenuAmin collapsed={collapsed} setTitleHeader={setTitleHeader} />
-        </Sider>
-        <Switch>
-          <Route
-            exact
-            path={`${match.url}/home`}
-            render={() => <HomeAdmin titleHeader={titleHeader} />}
-          />
-          <Route
-            exact
-            path={`${match.url}/slider`}
-            render={() => <SliderContainer titleHeader={titleHeader} />}
-          />
-          <Route
-            exact
-            path={`${match.url}/admin`}
-            render={() => <AdminContainer titleHeader={titleHeader} />}
-          />
-        </Switch>
-      </Layout>
-    </Route>
-  );
+    return (
+        <Route>
+            <Layout style={{minHeight: "100vh"}}>
+                <Helmet title={`Quản trị: ${titleHeader}`}/>
+                <div style={{borderRight: '14px solid #bbbbbb',  background: '#001529'}}>
+                    <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
+                        <MenuAmin collapsed={collapsed} setTitleHeader={setTitleHeader}/>
+                    </Sider>
+                </div>
+
+                <Switch>
+                    <Route
+                        exact
+                        path={`${match.url}/home`}
+                        render={() => <HomeAdmin titleHeader={titleHeader}/>}
+                    />
+                    <Route
+                        exact
+                        path={`${match.url}/slider`}
+                        render={() => <SliderContainer titleHeader={titleHeader}/>}
+                    />
+                    <Route
+                        exact
+                        path={`${match.url}/admin`}
+                        render={() => <AdminContainer titleHeader={titleHeader}/>}
+                    />
+                </Switch>
+            </Layout>
+        </Route>
+    );
 }
 
 export default React.memo(Admin);

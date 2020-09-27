@@ -1,7 +1,7 @@
 /**
  * Copyright 2020 present, Lê Văn Mong.
  * All rights reserved.
- * @author Mongker on 25/09/2020
+ * @author Mongker on 27/09/2020
  * @email: levanmong.dola.99@gmail.com
  * @student-code: 68DCHT20091
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
@@ -11,27 +11,19 @@
 import { connect } from 'react-redux';
 
 // components
-import AdminView from "./AdminView";
-
-// action type
-import { ADMIN } from "../../../../action/actionTypes";
+import TableAdmin from './TableAdmin';
 
 const mapStateToProps = state => {
-  const listAdmin = state.Admin;
-  return {
-    listAdmin
-  };
+  return {};
 };
 
 const mapDispatchToProps = dispatch => {
-  return {
-    getList: () => dispatch({type: ADMIN.CALL_GET_LIST})
-  };
+  return {};
 };
 
-const AdminContainer = connect(
+const TableAdminContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(AdminView);
+)(TableAdmin);
 
-export default AdminContainer;
+export default TableAdminContainer;
