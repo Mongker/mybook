@@ -8,30 +8,49 @@
  */
 
 import React, {useEffect, useState} from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import {Button, Input, Row, Col, Image, Popconfirm, Select, Spin, Avatar} from "antd";
 import {EditTwoTone, DeleteTwoTone, QuestionCircleOutlined, UserOutlined} from "@ant-design/icons";
+import EditAdminContainer from "../Modal/EditAdminContainer";
 
 // component
-// import ModalAdd from "./ModalAdd";
-// import ModalEdit from "./ModalEdit";
 
 // const
 const {Search} = Input;
+const COL_SPAN = {
+    avatar: 3,
+    name: 5,
+    email: 5,
+    phone: 5,
+    position: 3,
+    event: 3,
+
+};
 // const {Option} = Select;
 const avatar = require('./styles/avatar.jpg');
 const heightWindow =
-    (window.innerHeight - window.innerHeight * 0.25).toString() + "px";
+    (window.innerHeight - window.innerHeight * 0.32).toString() + "px";
 
 function TableAdmin(props) {
-    const {list} = props;
-    debugger; // MongLV
-    return(
+    const {list, deleteAdmin} = props;
+    const [visibleEdit, setVisibleEdit] = useState(false);
+    const onDelete = (id) => {
+        deleteAdmin(id);
+    };
+    const showModal = (type, id) => {
+        if(type === "EDIT") {
+            setVisibleEdit(true);
+        }
+    };
+    const disabledModal = () => {
+        setVisibleEdit(false);
+    };
+    return (
         <div>
-            <Row style={{paddingBottom: "5px"}}>
+            <Row style={{position: 'absolute', top: '11%', left: '60%', width: '500px'}}>
                 <Col span={12} offset={10}>
                     <Search
-                        placeholder="Tìm kiếm nhân viên"
+                        placeholder="Tìm kiếm"
                         style={{width: "97%"}}
                         enterButton
                         // onSearch={(value) => handleSearch(value)}
@@ -48,30 +67,30 @@ function TableAdmin(props) {
             </Row>
             {/* Table: Admin */}
             <Row className={"table-header"}>
-                <Col className={"table-row"} span={4}>
+                <Col className={"table-row"} span={COL_SPAN.avatar}>
                     Ảnh đại diện
                 </Col>
-                <Col className={"table-row"} span={4}>
+                <Col className={"table-row"} span={COL_SPAN.name}>
                     Họ tên đầy đủ
                 </Col>
-                <Col className={"table-row"} span={5}>
-                   Email
+                <Col className={"table-row"} span={COL_SPAN.email}>
+                    Email
                 </Col>
-                <Col className={"table-row"} span={4}>
-                   Số điện thoại
+                <Col className={"table-row"} span={COL_SPAN.phone}>
+                    Số điện thoại
                 </Col>
-                <Col className={"table-row"} span={2}>
-                   Chức vụ
+                <Col className={"table-row"} span={COL_SPAN.position}>
+                    Chức vụ
                 </Col>
-                <Col className={"table-row"} span={3}>
+                <Col className={"table-row"} span={COL_SPAN.event}>
                     Hành động
                 </Col>
             </Row>
-            <div style={{overflow: 'auto', height: heightWindow, width: 'auto' }}>
+            <div style={{overflow: 'auto', height: heightWindow, width: 'auto'}}>
                 {Object.keys(list).length > 0
                     ? Object.keys(list).map((item, index) => (
                         <Row className={"table-tr"} key={index}>
-                            <Col className={"table-row"} span={4}>
+                            <Col className={"table-row"} span={COL_SPAN.avatar}>
                                 <Image
                                     width={64}
                                     height={64}
@@ -79,24 +98,24 @@ function TableAdmin(props) {
                                     fallback={avatar}
                                 />
                             </Col>
-                            <Col className={"table-row"} span={4}>
+                            <Col className={"table-row"} span={COL_SPAN.name}>
                                 {list[item].name}
                             </Col>
-                            <Col className={"table-row"} span={5}>
+                            <Col className={"table-row"} span={COL_SPAN.email}>
                                 {list[item].email}
                             </Col>
-                            <Col className={"table-row"} span={4}>
+                            <Col className={"table-row"} span={COL_SPAN.phone}>
                                 {list[item].phone}
                             </Col>
-                            <Col className={"table-row"} span={2}>
+                            <Col className={"table-row"} span={COL_SPAN.position}>
                                 {list[item].position}
                             </Col>
-                            <Col className={"table-row"} span={3}>
+                            <Col className={"table-row"} span={COL_SPAN.event}>
                                 <Row>
                                     <Col flex={1}>
                                         <EditTwoTone
                                             className={"icon-slider"}
-                                            // onClick={() => showModalCancel('EDIT', list[item], item)}
+                                            onClick={() => showModal('EDIT', item)}
                                         />
                                     </Col>
                                     <Col flex={1}>
@@ -104,7 +123,7 @@ function TableAdmin(props) {
                                             title="Bạn muốn xóa slider này？"
                                             okText="Yes"
                                             cancelText="No"
-                                            // onConfirm={() => onDelete(item)}
+                                            onConfirm={() => onDelete(item)}
                                             icon={<QuestionCircleOutlined style={{color: 'red'}}/>}
                                         >
                                             <DeleteTwoTone
@@ -119,12 +138,22 @@ function TableAdmin(props) {
                     ))
                     : (<Spin size="large" style={{textAlign: 'center', paddingLeft: '50%', paddingTop: '100px'}}/>)}
             </div>
+            <EditAdminContainer
+                visible={visibleEdit}
+                disabledModal={disabledModal}
+            />
         </div>
     );
 }
 
-TableAdmin.propTypes = {};
+TableAdmin.propTypes = {
+    list: PropTypes.object,
+    deleteAdmin: PropTypes.func,
+};
 
-TableAdmin.defaultProps = {};
+TableAdmin.defaultProps = {
+    list: {},
+    deleteAdmin: () => null,
+};
 
 export default TableAdmin;

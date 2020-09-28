@@ -15,7 +15,7 @@ import PropTypes from "prop-types";
 // import EditableTable from "./table/Table.View.jsx";
 import AdminContainer from "./admin/AdminContainer";
 import TableSliderContainer from "./slider/Table/TableSliderContainer";
-import TableAdminContainer from "./admin/Table/TableAdminContainer";
+import TabAdminContainer from "./admin/Tab/TabAdminContainer";
 
 // util
 import { KEY_MENU } from "../../util/keyMenu";
@@ -31,7 +31,7 @@ function ContentAdmin(props) {
       CheckRender = <TableSliderContainer list={list} />;
       break;
     case KEY_MENU.ADMIN:
-      CheckRender = <TableAdminContainer list={list} />;
+      CheckRender = <TabAdminContainer list={list} />;
       break;
     default:
       CheckRender = <div>Đang phát triển</div>;

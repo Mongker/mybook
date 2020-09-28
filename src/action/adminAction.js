@@ -7,11 +7,27 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-import {ADMIN} from './actionTypes';
+import {ADMIN, SLIDER} from './actionTypes';
 
 export const getListAdmin = (payload) => {
     return {
         type: ADMIN.GET_LIST,
+        payload,
+        timestamp: Date.now()
+    }
+};
+
+export const callDeleteAdminAction= (payload) => {
+    return {
+        type: ADMIN.CALL_DELETE,
+        payload,
+        timestamp: Date.now()
+    }
+};
+
+export const deleteAdminAction= (payload) => {
+    return {
+        type: ADMIN.DELETE,
         payload,
         timestamp: Date.now()
     }

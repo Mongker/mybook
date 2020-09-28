@@ -5,6 +5,7 @@
 
 .site-layout {
     /*border-radius: 25px;*/
+    background-color: white;
 }
 
 .site-layout .site-layout-background {
@@ -41,7 +42,7 @@
     /*border-right: 0.5px solid #d8d9e1;*/
 }
 .table-tr {
-    background-color: #e5e9ee;
+    background-color: #f0f4f9;
     padding: 10px;
     /* font-weight: bold; */
     text-align: center;

@@ -13,12 +13,21 @@ import {call, put, take, select} from "redux-saga/effects";
 
 // api
 import {getListAdmin_API} from "../../api/admin/getList";
+import {deleteAdmin} from "../../api/admin/delete";
 
 // -------------------------------------- watcher Action --------------------------------------/
 export function* watcherCallListAdmin() {
     while (true) {
         yield take(ADMIN.CALL_GET_LIST);
-        debugger;
+        yield call(doCallListAdmin);
+    }
+}
+
+export function* watcherCallDeleteAdmin() {
+    while (true) {
+        const takeAction = yield take(ADMIN.CALL_DELETE);
+        const {payload} = takeAction;
+        yield deleteAdmin(payload);
         yield call(doCallListAdmin);
     }
 }

@@ -11,24 +11,19 @@
 import { connect } from 'react-redux';
 
 // components
-import TableAdmin from './TableAdmin';
-
-// action
-import * as AdminAction from '../../../../../action/adminAction';
+import EditAdmin from './EditAdmin';
 
 const mapStateToProps = state => {
   return {};
 };
 
 const mapDispatchToProps = dispatch => {
-  return {
-    deleteAdmin: (id) => dispatch(AdminAction.callDeleteAdminAction(id))
-  };
+  return {};
 };
 
-const TableAdminContainer = connect(
+const EditAdminContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(TableAdmin);
+)(EditAdmin);
 
-export default TableAdminContainer;
+export default EditAdminContainer;
