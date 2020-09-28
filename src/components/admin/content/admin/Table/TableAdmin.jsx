@@ -34,12 +34,14 @@ const heightWindow =
 function TableAdmin(props) {
     const {list, deleteAdmin} = props;
     const [visibleEdit, setVisibleEdit] = useState(false);
+    const [dataItem, setDataItem] = useState('');
     const onDelete = (id) => {
         deleteAdmin(id);
     };
-    const showModal = (type, id) => {
+    const showModal = (type, data) => {
         if(type === "EDIT") {
             setVisibleEdit(true);
+            setDataItem(data);
         }
     };
     const disabledModal = () => {
@@ -115,7 +117,7 @@ function TableAdmin(props) {
                                     <Col flex={1}>
                                         <EditTwoTone
                                             className={"icon-slider"}
-                                            onClick={() => showModal('EDIT', item)}
+                                            onClick={() => showModal('EDIT', list[item])}
                                         />
                                     </Col>
                                     <Col flex={1}>
@@ -141,6 +143,7 @@ function TableAdmin(props) {
             <EditAdminContainer
                 visible={visibleEdit}
                 disabledModal={disabledModal}
+                data={dataItem}
             />
         </div>
     );
