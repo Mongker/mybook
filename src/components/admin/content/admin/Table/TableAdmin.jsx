@@ -7,7 +7,7 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import PropTypes from "prop-types";
 import {Button, Input, Row, Col, Image, Popconfirm, Select, Spin, Avatar} from "antd";
 import {EditTwoTone, DeleteTwoTone, QuestionCircleOutlined, UserOutlined} from "@ant-design/icons";
@@ -16,6 +16,7 @@ import EditAdminContainer from "../Modal/EditAdminContainer";
 // component
 
 // const
+
 const {Search} = Input;
 const COL_SPAN = {
     avatar: 3,
@@ -49,7 +50,7 @@ function TableAdmin(props) {
     };
     return (
         <div>
-            <Row style={{position: 'absolute', top: '11%', left: '60%', width: '500px'}}>
+            <Row style={{position: 'absolute', top: `${window.innerHeight * 0.08}px`, left: '60%', width: '700px'}}>
                 <Col span={12} offset={10}>
                     <Search
                         placeholder="Tìm kiếm"
