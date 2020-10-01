@@ -7,11 +7,12 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import {Button, Input, Row, Col, Image, Popconfirm, Select, Spin, Avatar} from "antd";
 import {EditTwoTone, DeleteTwoTone, QuestionCircleOutlined, UserOutlined} from "@ant-design/icons";
 import EditAdminContainer from "../Modal/EditAdminContainer";
+import AddAdminContainer from "../Modal/AddAdminContainer";
 
 // component
 
@@ -33,24 +34,62 @@ const heightWindow =
     (window.innerHeight - window.innerHeight * 0.32).toString() + "px";
 
 function TableAdmin(props) {
-    const {list, deleteAdmin} = props;
+    const {list, deleteAdmin, type, type_key} = props;
     const [visibleEdit, setVisibleEdit] = useState(false);
+    const [visibleAdd, setVisibleAdd] = useState(false);
+    const [listArray, setListArray] = useState([]);
+    const [listObject, setListObject] = useState(list);
     const [dataItem, setDataItem] = useState('');
+
+    useEffect(() => {
+        let newList = [...Object.keys(listObject)];
+        switch (type) {
+            case type_key['1']:
+                newList = Object.keys(list).filter((item) => list[item].position === type_key['1'] && list[item].status === true);
+                break;
+            case type_key['2']:
+                newList = Object.keys(list).filter((item) =>  list[item].position === type_key['2'] && list[item].status === true);
+                break;
+            case type_key['3']:
+                newList = Object.keys(list).filter((item) =>  list[item].position === type_key['3'] && list[item].status === true) ;
+                break;
+            case type_key['4']:
+                newList = Object.keys(list).filter((item) =>  list[item].status === false);
+                break;
+            default:
+                newList = Object.keys(list).filter((item) =>  list[item].status === true);
+        }
+        setListArray(newList);
+        setListObject(list);
+    }, [list]);
     const onDelete = (id) => {
         deleteAdmin(id);
+        const newListArray = listArray.filter((item, index)=>  item[index] !== id);
+        setListArray([...newListArray]);
+        delete listObject.id;
+        setListObject({...listObject});
     };
     const showModal = (type, data) => {
-        if(type === "EDIT") {
+        if (type === "EDIT") {
             setVisibleEdit(true);
             setDataItem(data);
+        }
+        if (type === "ADD") {
+            setVisibleAdd(true);
         }
     };
     const disabledModal = () => {
         setVisibleEdit(false);
+        setVisibleAdd(false);
     };
     return (
         <div>
-            <Row style={{position: 'absolute', top: `${window.innerHeight * 0.08}px`, left: '60%', width: '700px'}}>
+            <Row style={{
+                position: 'absolute',
+                top: `${window.innerHeight * 0.115}px`,
+                left: '55%',
+                width: `${window.innerWidth * 0.4}px`
+            }}>
                 <Col span={12} offset={10}>
                     <Search
                         placeholder="Tìm kiếm"
@@ -62,7 +101,7 @@ function TableAdmin(props) {
                 <Col span={2}>
                     <Button
                         type="primary"
-                        // onClick={() => showModalCancel('ADD')}
+                        onClick={() => showModal('ADD')}
                     >
                         Thêm
                     </Button>
@@ -90,35 +129,35 @@ function TableAdmin(props) {
                 </Col>
             </Row>
             <div style={{overflow: 'auto', height: heightWindow, width: 'auto'}}>
-                {Object.keys(list).length > 0
-                    ? Object.keys(list).map((item, index) => (
+                {listArray.length > 0
+                    ? listArray.map((item, index) => (
                         <Row className={"table-tr"} key={index}>
                             <Col className={"table-row"} span={COL_SPAN.avatar}>
                                 <Image
                                     width={64}
                                     height={64}
-                                    src={list[item].avatar}
+                                    src={listObject[item].avatar}
                                     fallback={avatar}
                                 />
                             </Col>
                             <Col className={"table-row"} span={COL_SPAN.name}>
-                                {list[item].name}
+                                {listObject[item].name}
                             </Col>
                             <Col className={"table-row"} span={COL_SPAN.email}>
-                                {list[item].email}
+                                {listObject[item].email}
                             </Col>
                             <Col className={"table-row"} span={COL_SPAN.phone}>
-                                {list[item].phone}
+                                {listObject[item].phone}
                             </Col>
                             <Col className={"table-row"} span={COL_SPAN.position}>
-                                {list[item].position}
+                                {listObject[item].position}
                             </Col>
                             <Col className={"table-row"} span={COL_SPAN.event}>
                                 <Row>
                                     <Col flex={1}>
                                         <EditTwoTone
                                             className={"icon-slider"}
-                                            onClick={() => showModal('EDIT', list[item])}
+                                            onClick={() => showModal('EDIT', listObject[item])}
                                         />
                                     </Col>
                                     <Col flex={1}>
@@ -146,6 +185,10 @@ function TableAdmin(props) {
                 disabledModal={disabledModal}
                 data={dataItem}
             />
+            <AddAdminContainer
+                visible={visibleAdd}
+                disabledModal={disabledModal}
+            />
         </div>
     );
 }
@@ -153,6 +196,8 @@ function TableAdmin(props) {
 TableAdmin.propTypes = {
     list: PropTypes.object,
     deleteAdmin: PropTypes.func,
+    type: PropTypes.string,
+    type_key: PropTypes.object,
 };
 
 TableAdmin.defaultProps = {

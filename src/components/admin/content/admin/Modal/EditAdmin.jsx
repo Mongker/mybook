@@ -7,8 +7,8 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-import React, {useState} from 'react';
-import {Button, Col, Form, Switch, message, Modal, Popconfirm, Row, Select} from "antd";
+import React, {useEffect, useState} from 'react';
+import {Button, Col, Form, Switch, message, Modal, Popconfirm, Row, Select, Avatar} from "antd";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import md5 from 'md5';
 import {CopyOutlined} from '@ant-design/icons';
@@ -38,13 +38,31 @@ const OptionPosition = {
 
 function EditAdmin(props) {
     const [form] = Form.useForm();
-    const {visible, disabledModal, data} = props;
-    const [visibleCopy, setVisibleCopy] = useState(false)
-    const {name, _id} = data;
+    const {visible, disabledModal, data, update} = props;
+    const {name, _id, status, position, avatar, email, info, phone} = data;
+
+    const [visibleCopy, setVisibleCopy] = useState(false);
     const onFinish = (values) => {
+        (values.status !== data.status) && (data['status'] = values.status);
+        (values.position !== data.position) && (data['position'] = values.position);
+        (values.password) && (data['password'] = values.password);
+        const dataNew = {...data};
+        debugger;
+        update(dataNew);
         onReset();
         values.preventDefault();
     };
+
+    form.setFieldsValue({
+        avatar: avatar,
+        email: email,
+        info: info,
+        name: name,
+        phone: phone,
+        position: position,
+        status: status,
+        _id: _id,
+    });
 
     const onReset = () => {
         form.resetFields();
@@ -82,13 +100,21 @@ function EditAdmin(props) {
             title={`Cấu hình tài khoản ${name}`}
             centered
         >
+            <div style={{
+                textAlign: 'center',
+                alignItems: 'center',
+                paddingBottom: '15px'
+            }}>
+                <Avatar size={75} src={avatar}/>
+            </div>
+
             <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
 
                 <Form.Item
                     name="position"
                     label="Phân quyền"
                 >
-                    <Select defaultValue={OptionPosition.USER} style={{ width: '75%' }} onChange={handleSelect}>
+                    <Select defaultValue={position} style={{width: '60%'}} onChange={handleSelect}>
                         <Option value={OptionPosition.ADMIN}>{OptionPosition.ADMIN}</Option>
                         <Option value={OptionPosition.EXCEL}>{OptionPosition.EXCEL}</Option>
                         <Option value={OptionPosition.USER}>{OptionPosition.USER}</Option>
@@ -96,9 +122,9 @@ function EditAdmin(props) {
                 </Form.Item>
                 <Form.Item
                     name="status"
-                    label="Khóa tài khoản"
+                    label="Tắt/Bật User"
                 >
-                    <Switch defaultChecked onChange={handleSwitch} />
+                    <Switch defaultChecked={status} onChange={handleSwitch}/>
                 </Form.Item>
                 <Form.Item
                     name="password"
@@ -111,7 +137,7 @@ function EditAdmin(props) {
                             cancelText="No"
                             onConfirm={handleResetPass}
                         >
-                            <Button type={'danger '}>Reset</Button>
+                            <Button type={'danger'}>Reset</Button>
                         </Popconfirm>
                         {" "}
                         {
@@ -127,12 +153,12 @@ function EditAdmin(props) {
 
                 <Form.Item {...tailLayout}>
                     <Row>
-                        <Col flex={1/2}>
+                        <Col flex={1 / 2}>
                             <Button type="primary" htmlType="submit">
                                 Lưu
                             </Button>
                         </Col>
-                        <Col flex={1/2}>
+                        <Col flex={1 / 2}>
                             <Button onClick={onReset}>
                                 Đóng
                             </Button>

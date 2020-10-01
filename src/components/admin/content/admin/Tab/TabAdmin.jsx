@@ -20,7 +20,8 @@ const KEY_TAB = {
     0: 'Tất cả',
     1: 'Quản lý',
     2: 'Kế Toán',
-    3: 'Nhân viên'
+    3: 'Nhân viên',
+    4: 'Nghỉ làm'
 };
 
 function TabAdmin(props) {
@@ -31,17 +32,20 @@ function TabAdmin(props) {
 
     return(
         <Tabs defaultActiveKey={KEY_TAB["0"]} onChange={callback}>
-            <TabPane tab={KEY_TAB["0"]} key={KEY_TAB["0"]}>
-                <TableAdminContainer list={list} style={{background: '#fff'}} />
+            <TabPane tab={KEY_TAB["0"]} key={KEY_TAB["0"]} >
+                <TableAdminContainer list={list} type_key={KEY_TAB} style={{background: '#fff'}} />
             </TabPane>
             <TabPane tab={KEY_TAB["1"]} key={KEY_TAB["1"]}>
-                Content of Tab Pane 1
+                <TableAdminContainer list={list} type={KEY_TAB["1"]} type_key={KEY_TAB}  style={{background: '#fff'}} />
             </TabPane>
             <TabPane tab={KEY_TAB["2"]} key={KEY_TAB["2"]}>
-                Content of Tab Pane 2
+                <TableAdminContainer list={list} type={KEY_TAB["2"]} type_key={KEY_TAB} style={{background: '#fff'}} />
             </TabPane>
             <TabPane tab={KEY_TAB["3"]} key={KEY_TAB["3"]}>
-                Content of Tab Pane 3
+                <TableAdminContainer list={list} type={KEY_TAB["3"]} type_key={KEY_TAB} style={{background: '#fff'}} />
+            </TabPane>
+            <TabPane tab={KEY_TAB["4"]} key={KEY_TAB["4"]}>
+                <TableAdminContainer list={list} type={KEY_TAB["4"]} type_key={KEY_TAB} style={{background: '#fff'}} />
             </TabPane>
         </Tabs>
     );

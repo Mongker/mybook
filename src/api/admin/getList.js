@@ -15,3 +15,4 @@ export function getListAdmin_API() {
 	.then(res => res.data)
 	.catch(error => console.log(error));
 }
+// http://localhost:1999/api/admin
