@@ -21,7 +21,6 @@ import allReducers from './reducers';
 // Components
 import './index.css';
 import App from './App.jsx';
-
 // Middleware
 const sagaMiddleware = createSagaMiddleware();
 let store = createStore(allReducers, composeWithDevTools(applyMiddleware(sagaMiddleware)));

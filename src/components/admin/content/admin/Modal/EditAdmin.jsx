@@ -47,7 +47,6 @@ function EditAdmin(props) {
         (values.position !== data.position) && (data['position'] = values.position);
         (values.password) && (data['password'] = values.password);
         const dataNew = {...data};
-        debugger;
         update(dataNew);
         onReset();
         values.preventDefault();

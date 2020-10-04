@@ -50,7 +50,6 @@ function MenuAmin(props) {
      * @param: event
      */
     function handleClick(event) {
-        debugger;
         setTitleHeader(event.key);
     }
 

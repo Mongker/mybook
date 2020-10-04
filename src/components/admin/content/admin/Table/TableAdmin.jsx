@@ -9,8 +9,8 @@
 
 import React, {useEffect, useState} from "react";
 import PropTypes from "prop-types";
-import {Button, Input, Row, Col, Image, Popconfirm, Select, Spin, Avatar} from "antd";
-import {EditTwoTone, DeleteTwoTone, QuestionCircleOutlined, UserOutlined} from "@ant-design/icons";
+import {Button, Input, Row, Col, Image, Popconfirm, Spin} from "antd";
+import {EditTwoTone, DeleteTwoTone, QuestionCircleOutlined} from "@ant-design/icons";
 import EditAdminContainer from "../Modal/EditAdminContainer";
 import AddAdminContainer from "../Modal/AddAdminContainer";
 

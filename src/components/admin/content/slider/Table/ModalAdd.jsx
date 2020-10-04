@@ -7,9 +7,13 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-import React from 'react';
-import {Button, Input, Modal, Select, Form, Row, Col} from "antd";
+import React, {useState} from 'react';
+import axios, {post, get} from 'axios';
+import {Button, Input, Modal, Select, Form, Row, Col, Image} from "antd";
 import PropTypes from 'prop-types';
+
+// util
+import {URL_API} from '../../../../../api/config';
 
 // const
 const layout = {
@@ -30,18 +34,47 @@ const tailLayout = {
 function ModalAdd(props) {
     const [form] = Form.useForm();
     const {visible, handleText, cancelModal, title, children, TYPE_TEXT} = props;
+    const [file, setFile] = useState({});
+    const [linkFile, setLinkFile] = useState({});
     // TODO by MongV: xử dụng From để bao các input lại để reset text
-    const onFinish = (values) => {
-        handleText(values, TYPE_TEXT.ADD);
+    const onFinish = async (values) => {
+        values.image_link = linkFile;
+        await handleText(values, TYPE_TEXT.ADD);
+        await setFile({});
         onReset();
-        values.preventDefault();
+        // values.preventDefault();
     };
 
     const onReset = () => {
         form.resetFields();
+        setLinkFile('');
         cancelModal();
     };
-
+    const handleFile = async (evt) => {
+        evt.preventDefault();
+        console.log(evt.target.files[0]);
+        const file = evt.target.files[0];
+        setFile(file);
+        if (!file) {
+            alert('Bạn chưa chọn file.')
+            return;
+        }
+        const formData = new FormData();
+        formData.append("file", file);
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        };
+        await post(`${URL_API.local}file/upload`, formData, config).then(res => {
+            console.log('RES', res.data.fileNameInServer);
+            let filePath = res.data.fileNameInServer;
+            if (filePath) {
+                filePath = filePath.split('\\')[1]
+            }
+            setLinkFile(`${URL_API.local}file/` + filePath);
+        });
+    };
     return (
         <Modal
             visible={visible}
@@ -75,7 +108,19 @@ function ModalAdd(props) {
                         }
                     ]}
                 >
-                    <Input/>
+
+                    {
+                        linkFile.length > 0 ?
+                            <Image width={'100%'} height={200} src={linkFile} />
+                            :
+                            <Input
+                                type="file"
+                                name="avatar"
+                                id="avatar"
+                                placeholder="chọn file"
+                                onChange={handleFile}
+                            />
+                    }
                 </Form.Item>
 
                 <Form.Item
