@@ -42,11 +42,10 @@ function TableAdmin(props) {
     const [dataItem, setDataItem] = useState('');
     const [loading, setLoading] = useState(<Spin size="large" style={{textAlign: 'center', paddingLeft: '50%', paddingTop: '100px'}}/>);
 
-
     useEffect(() => {
         const time = setTimeout(() => {
-            setLoading({...(<Empty description={'Không có dữ liệu'} style={{paddingTop: '20px'}} />)});
-        }, 3000);
+            setLoading({...(<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={'Không có dữ liệu'} style={{paddingTop: '20px'}} />)});
+        }, 2200);
         return () => clearTimeout(time);
     });
 
@@ -91,6 +90,10 @@ function TableAdmin(props) {
         setVisibleEdit(false);
         setVisibleAdd(false);
     };
+    const handleSearch = (value) => {
+        const newList = Object.keys(list).filter((item) => (list[item].name.toLowerCase().indexOf(value.toLowerCase()) !== -1));
+        setListArray(newList);
+    };
     return (
         <div>
             <Row style={{
@@ -104,7 +107,7 @@ function TableAdmin(props) {
                         placeholder="Tìm kiếm"
                         style={{width: "97%"}}
                         enterButton
-                        // onSearch={(value) => handleSearch(value)}
+                        onSearch={(value) => handleSearch(value)}
                     />
                 </Col>
                 <Col span={2}>
