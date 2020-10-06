@@ -7,7 +7,7 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Button, Input, Modal, Select, Form, Row, Col, Image} from "antd";
 import PropTypes from 'prop-types';
 import useFile from "./useFile";
@@ -48,6 +48,11 @@ function ModalEdit(props) {
         'image_link': img,
         'index': index
     });
+    const formValue = form.getFieldsValue();
+
+    // useEffect(() => {
+    //     setLinkFile(formValue.image_link);
+    // });
 
     const onFinish = (values) => {
         handleText(values);
@@ -99,13 +104,14 @@ function ModalEdit(props) {
                         }
                     ]}
                 >
-                    <Input
-                        // type="file"
-                        // name="avatar"
-                        // id="avatar"
-                        placeholder="chọn file"
-                        onChange={handleFile}
-                    />
+                    {/*<Input*/}
+                    {/*    // type="file"*/}
+                    {/*    // name="avatar"*/}
+                    {/*    // id="avatar"*/}
+                    {/*    placeholder="chọn file"*/}
+                    {/*    onChange={handleFile}*/}
+                    {/*/>*/}
+                    <Image width={'100%'} height={200} src={formValue.image_link} />
                 </Form.Item>
 
                 <Form.Item
@@ -162,4 +168,4 @@ ModalEdit.propsTypes = {
     // string
     title: PropTypes.string,
 };
-export default ModalEdit;
+export default React.memo(ModalEdit);

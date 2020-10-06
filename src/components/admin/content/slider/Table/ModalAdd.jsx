@@ -35,16 +35,15 @@ const tailLayout = {
 function ModalAdd(props) {
     const [form] = Form.useForm();
     const {visible, handleText, cancelModal, title, children, TYPE_TEXT} = props;
-    const {file, setFile, linkFile, setLinkFile, postFile} = useFile();
+    const {setFile, linkFile, setLinkFile, postFile} = useFile();
     // TODO by MongV: xử dụng From để bao các input lại để reset text
     const onFinish = async (values) => {
         values.image_link = linkFile;
         await handleText(values, TYPE_TEXT.ADD);
         await setFile({});
         onReset();
-        // values.preventDefault();
+        values.preventDefault();
     };
-    console.log('setLinkFile: '+setLinkFile);
     const onReset = () => {
         form.resetFields();
         setLinkFile('');
