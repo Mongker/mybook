@@ -8,8 +8,9 @@
  */
 
 import React from 'react';
-import {Button, Input, Modal, Select, Form, Row, Col} from "antd";
+import {Button, Input, Modal, Select, Form, Row, Col, Image} from "antd";
 import PropTypes from 'prop-types';
+import useFile from "./useFile";
 
 // const
 const layout = {
@@ -36,6 +37,7 @@ function ModalEdit(props) {
         children,
         data
     } = props;
+    const {file, setFile, linkFile, setLinkFile, postFile} = useFile();
 
     const name = data.name ? data.name : '';
     const img = data.image_link ? data.image_link : '';
@@ -57,6 +59,14 @@ function ModalEdit(props) {
         form.resetFields();
         cancelModal();
     };
+
+    const handleFile = async (evt) => {
+        evt.preventDefault();
+        const fileData = evt.target.files[0];
+        setFile(fileData);
+        postFile(fileData);
+    };
+
     return (
         <Modal
             visible={visible}
@@ -89,7 +99,13 @@ function ModalEdit(props) {
                         }
                     ]}
                 >
-                    <Input />
+                    <Input
+                        // type="file"
+                        // name="avatar"
+                        // id="avatar"
+                        placeholder="chọn file"
+                        onChange={handleFile}
+                    />
                 </Form.Item>
 
                 <Form.Item

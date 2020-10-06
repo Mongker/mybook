@@ -14,6 +14,7 @@ import PropTypes from 'prop-types';
 
 // util
 import {URL_API} from '../../../../../api/config';
+import useFile from "./useFile";
 
 // const
 const layout = {
@@ -34,8 +35,7 @@ const tailLayout = {
 function ModalAdd(props) {
     const [form] = Form.useForm();
     const {visible, handleText, cancelModal, title, children, TYPE_TEXT} = props;
-    const [file, setFile] = useState({});
-    const [linkFile, setLinkFile] = useState({});
+    const {file, setFile, linkFile, setLinkFile, postFile} = useFile();
     // TODO by MongV: xử dụng From để bao các input lại để reset text
     const onFinish = async (values) => {
         values.image_link = linkFile;
@@ -44,7 +44,7 @@ function ModalAdd(props) {
         onReset();
         // values.preventDefault();
     };
-
+    console.log('setLinkFile: '+setLinkFile);
     const onReset = () => {
         form.resetFields();
         setLinkFile('');
@@ -52,28 +52,9 @@ function ModalAdd(props) {
     };
     const handleFile = async (evt) => {
         evt.preventDefault();
-        console.log(evt.target.files[0]);
-        const file = evt.target.files[0];
-        setFile(file);
-        if (!file) {
-            alert('Bạn chưa chọn file.')
-            return;
-        }
-        const formData = new FormData();
-        formData.append("file", file);
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        };
-        await post(`${URL_API.local}file/upload`, formData, config).then(res => {
-            console.log('RES', res.data.fileNameInServer);
-            let filePath = res.data.fileNameInServer;
-            if (filePath) {
-                filePath = filePath.split('\\')[1]
-            }
-            setLinkFile(`${URL_API.local}file/` + filePath);
-        });
+        const fileData = evt.target.files[0];
+        setFile(fileData);
+        postFile(fileData);
     };
     return (
         <Modal
