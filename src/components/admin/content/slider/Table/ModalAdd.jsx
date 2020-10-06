@@ -42,7 +42,6 @@ function ModalAdd(props) {
         await handleText(values, TYPE_TEXT.ADD);
         await setFile({});
         onReset();
-        values.preventDefault();
     };
     const onReset = () => {
         form.resetFields();
