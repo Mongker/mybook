@@ -9,7 +9,7 @@
 
 import React, {useEffect, useState} from "react";
 import PropTypes from "prop-types";
-import {Button, Input, Row, Col, Image, Popconfirm, Spin} from "antd";
+import {Button, Input, Row, Col, Image, Popconfirm, Spin, Empty} from "antd";
 import {EditTwoTone, DeleteTwoTone, QuestionCircleOutlined} from "@ant-design/icons";
 import EditAdminContainer from "../Modal/EditAdminContainer";
 import AddAdminContainer from "../Modal/AddAdminContainer";
@@ -40,6 +40,15 @@ function TableAdmin(props) {
     const [listArray, setListArray] = useState([]);
     const [listObject, setListObject] = useState(list);
     const [dataItem, setDataItem] = useState('');
+    const [loading, setLoading] = useState(<Spin size="large" style={{textAlign: 'center', paddingLeft: '50%', paddingTop: '100px'}}/>);
+
+
+    useEffect(() => {
+        const time = setTimeout(() => {
+            setLoading({...(<Empty description={'Không có dữ liệu'} style={{paddingTop: '20px'}} />)});
+        }, 3000);
+        return () => clearTimeout(time);
+    });
 
     useEffect(() => {
         let newList = [...Object.keys(listObject)];
@@ -86,9 +95,9 @@ function TableAdmin(props) {
         <div>
             <Row style={{
                 position: 'absolute',
-                top: `${window.innerHeight * 0.115}px`,
+                top: `${window.innerHeight * 0.025}px`,
                 left: '55%',
-                width: `${window.innerWidth * 0.4}px`
+                width: `${window.innerWidth * 0.42}px`
             }}>
                 <Col span={12} offset={10}>
                     <Search
@@ -178,7 +187,7 @@ function TableAdmin(props) {
                             </Col>
                         </Row>
                     ))
-                    : (<Spin size="large" style={{textAlign: 'center', paddingLeft: '50%', paddingTop: '100px'}}/>)}
+                    : loading }
             </div>
             <EditAdminContainer
                 visible={visibleEdit}
