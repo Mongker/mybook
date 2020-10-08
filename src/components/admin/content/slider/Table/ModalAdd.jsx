@@ -51,7 +51,7 @@ function ModalAdd(props) {
     });
     const UpFile = {
         name: 'file',
-        action: 'http://localhost:1999/api/file/upload',
+        action: `${URL_API.local}file/upload`,
         multiple: true,
 
         onChange(info) {

@@ -7,76 +7,44 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-// import React, {useEffect, useState} from 'react';
-// import axios from 'axios';
-// import '../../../App.css';
-//
-// function TodoApp() {
-//     const [data, setData] = useState([]);
-//     console.log(data);
-//     console.log(data.length);
-//     useEffect(() => {
-//         axios.post("http://localhost:1999/api/catalog", {
-//             "name": "Mong",
-//             "description": "oki"
-//         }).then(res => res.data).then((result) => {
-//         }).catch(err => console.log(err))
-//     }, []);
-//
-//     return (
-//         <div className="App">
-//             <h1>Mong đẹp trai</h1>
-//             {/*{data.length > 0 && data.map(item => (*/}
-//             {/*    <div>Todo: {item.todo}</div>*/}
-//             {/*))}*/}
-//         </div>
-//     );
-// }
-//
-// export default React.memo(TodoApp);
+import React, {useState} from 'react';
+import {Upload, message, Button} from 'antd';
+import {UploadOutlined} from '@ant-design/icons';
 
-import React from 'react';
-import {Upload} from 'antd';
+function TodoApp() {
+    const [data, setData] = useState({});
+    const props = {
+        name: 'file',
+        action: 'http://localhost:1999/api/file/upload',
+        multiple: true,
 
-const props = {
-    name: 'file',
-    action: 'http://localhost:1999/api/file/upload',
-    multiple: true,
-    onStart(file) {
-        console.log('onStart', file, file.name);
-    },
-    onSuccess(ret) {
-        console.log('onSuccess', ret);
-    },
-    onError(err) {
-        console.log('onError', err);
-    },
-    beforeUpload(file, fileList) {
-        console.log(file, fileList);
-        return new Promise(resolve => {
-            console.log('start check');
-            setTimeout(() => {
-                console.log('check finshed');
-                resolve(file);
-            }, 3000);
-        });
-    },
-};
-
-const Test = () => {
+        onChange(info) {
+            if (info.file.status !== 'uploading') {
+                console.log(info.file, info.fileList);
+            }
+            if (info.file.status === 'done') {
+                message.success(`${info.file.name} file uploaded successfully`);
+            } else if (info.file.status === 'error') {
+                message.error(`${info.file.name} file upload failed.`);
+            }
+            setData(info);
+        },
+    };
     return (
-        <div
-            style={{
-                margin: 100,
-            }}
-        >
-            <div>
-                <Upload {...props}>
-                    <a>Test</a>
-                </Upload>
-            </div>
+        <div>
+            <Upload
+                {...props}
+                listType="picture-card"
+            >
+                <Button icon={<UploadOutlined/>}>Click to Upload</Button>
+            </Upload>
+            {JSON.stringify(data, null, 2)}
         </div>
     );
-};
+}
 
-export default Test;
+TodoApp.propTypes = {};
+
+TodoApp.defaultProps = {};
+
+export default TodoApp;

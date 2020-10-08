@@ -7,8 +7,8 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-import React, {useEffect} from 'react';
-import {Button, Input, Modal, Select, Form, Row, Col, Image} from "antd";
+import React, {useEffect, useState} from 'react';
+import {Button, Input, Modal, Select, Form, Row, Col, Image, Progress, Upload, message} from "antd";
 import PropTypes from 'prop-types';
 import useFile from "./useFile";
 
@@ -32,7 +32,6 @@ const tailLayout = {
 };
 
 function ModalEdit(props) {
-    const [form] = Form.useForm();
     const {visible,
         handleText,
         cancelModal,
@@ -40,7 +39,40 @@ function ModalEdit(props) {
         children,
         data
     } = props;
-    const {file, setFile, linkFile, setLinkFile, postFile} = useFile();
+    const [form] = Form.useForm();
+    const [linkFile, setLinkFile] = useState('');
+    const [percent, setPercent] = useState(0);
+
+    useEffect(() => {
+        if(percent === 100) {
+            const time = setTimeout(() => {
+                setPercent(0);
+            }, 2000);
+            return () => clearTimeout(time);
+        }
+    });
+
+    const UpFile = {
+        name: 'file',
+        action: `${URL_API.local}file/upload`,
+        multiple: true,
+
+        onChange(info) {
+            setPercent(Math.ceil(info.file.percent)); // Làm tròn nhé
+            switch (info.file.status) {
+                case 'uploading':
+                    console.log(info.file, info.fileList);
+                    break;
+                case 'done':
+                    message.success(`${info.file.name} file uploaded successfully`);
+                    setLinkFile(info.file.response.fileNameInServer);
+                    debugger;
+                    break;
+                default:
+                    message.error(`${info.file.name} file upload failed.`);
+            }
+        },
+    };
 
     const name = data.name ? data.name : '';
     const img = data.image_link ? data.image_link : '';
@@ -51,13 +83,11 @@ function ModalEdit(props) {
         'image_link': img,
         'index': index
     });
+    const linkFileView = linkFile && URL_API.local+'file/'+linkFile;
     const formValue = form.getFieldsValue();
 
-    // useEffect(() => {
-    //     setLinkFile(formValue.image_link);
-    // });
-
     const onFinish = (values) => {
+        values.image_link = linkFile;
         handleText(values);
         onReset();
         values.preventDefault();
@@ -66,13 +96,6 @@ function ModalEdit(props) {
     const onReset = () => {
         form.resetFields();
         cancelModal();
-    };
-
-    const handleFile = async (evt) => {
-        evt.preventDefault();
-        const fileData = evt.target.files[0];
-        setFile(fileData);
-        postFile(fileData);
     };
 
     return (
@@ -107,14 +130,17 @@ function ModalEdit(props) {
                         }
                     ]}
                 >
-                    {/*<Input*/}
-                    {/*    // type="file"*/}
-                    {/*    // name="avatar"*/}
-                    {/*    // id="avatar"*/}
-                    {/*    placeholder="chọn file"*/}
-                    {/*    onChange={handleFile}*/}
-                    {/*/>*/}
-                    <Image width={'100%'} height={200} src={URL_API.local+'file/'+formValue.image_link} />
+                    <Upload
+                        {...UpFile}
+                        showUploadList={false}
+                    >
+                        <img
+                            alt="img error"
+                            src={linkFileView || URL_API.local+'file/'+formValue.image_link}
+                            style={{width: '100%', height:200}}
+                        />
+                        { percent > 0 && <Progress percent={percent} />}
+                    </Upload>
                 </Form.Item>
 
                 <Form.Item
