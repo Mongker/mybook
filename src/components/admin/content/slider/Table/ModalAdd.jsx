@@ -7,14 +7,12 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-import React, {useState} from 'react';
-import axios, {post, get} from 'axios';
-import {Button, Input, Modal, Select, Form, Row, Col, Image} from "antd";
+import React, {useEffect, useState} from 'react';
+import {Button, Input, Modal, Select, Form, Row, Col, Upload, message, Progress, Empty} from "antd";
 import PropTypes from 'prop-types';
 
 // util
 import {URL_API} from '../../../../../api/config';
-import useFile from "./useFile";
 
 // const
 const layout = {
@@ -32,15 +30,51 @@ const tailLayout = {
     }
 };
 
+// const imgDefault = 'https://thelongfortgroup.com/public/img/default/no-image-icon.jpg';
+const imgDefault = 'https://amfnews.com/wp-content/uploads/2014/10/default-img-1000x600.gif';
+
 function ModalAdd(props) {
     const [form] = Form.useForm();
+    const [linkFile, setLinkFile] = useState('');
+    const [percent, setPercent] = useState(0);
     const {visible, handleText, cancelModal, title, children, TYPE_TEXT} = props;
-    const {setFile, linkFile, setLinkFile, postFile} = useFile();
+    const linkFileView = linkFile ? URL_API.local+'file/'+linkFile : imgDefault;
+    // const {setFile, linkFile, setLinkFile, postFile} = useFile();
     // TODO by MongV: xử dụng From để bao các input lại để reset text
+    useEffect(() => {
+        if(percent === 100) {
+            const time = setTimeout(() => {
+                setPercent(0);
+            }, 2000);
+            return () => clearTimeout(time);
+        }
+    });
+    const UpFile = {
+        name: 'file',
+        action: 'http://localhost:1999/api/file/upload',
+        multiple: true,
+
+        onChange(info) {
+            setPercent(Math.ceil(info.file.percent)); // Làm tròn nhé
+            switch (info.file.status) {
+                    case 'uploading':
+                        console.log(info.file, info.fileList);
+                        break;
+                    case 'done':
+                        message.success(`${info.file.name} file uploaded successfully`);
+                        setLinkFile(info.file.response.fileNameInServer);
+                        debugger;
+                        break;
+                    default:
+                        message.error(`${info.file.name} file upload failed.`);
+                }
+        },
+    };
+
     const onFinish = async (values) => {
         values.image_link = linkFile;
         await handleText(values, TYPE_TEXT.ADD);
-        await setFile({});
+        await setLinkFile('');
         onReset();
     };
     const onReset = () => {
@@ -48,12 +82,7 @@ function ModalAdd(props) {
         setLinkFile('');
         cancelModal();
     };
-    const handleFile = async (evt) => {
-        evt.preventDefault();
-        const fileData = evt.target.files[0];
-        setFile(fileData);
-        postFile(fileData);
-    };
+
     return (
         <Modal
             visible={visible}
@@ -63,8 +92,8 @@ function ModalAdd(props) {
             title={title}
             centered
         >
+            {/*{linkFile}*/}
             <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
-
                 <Form.Item
                     name="name"
                     label="Tên"
@@ -87,19 +116,17 @@ function ModalAdd(props) {
                         }
                     ]}
                 >
-
-                    {
-                        linkFile.length > 0 ?
-                            <Image width={'100%'} height={200} src={URL_API.local+'file/'+linkFile} />
-                            :
-                            <Input
-                                type="file"
-                                name="avatar"
-                                id="avatar"
-                                placeholder="chọn file"
-                                onChange={handleFile}
-                            />
-                    }
+                    <Upload
+                        {...UpFile}
+                        showUploadList={false}
+                    >
+                        <img
+                            alt="example"
+                            src={linkFileView}
+                            style={{width: '100%', height:200}}
+                        />
+                        { percent > 0 && <Progress percent={percent} />}
+                    </Upload>
                 </Form.Item>
 
                 <Form.Item
