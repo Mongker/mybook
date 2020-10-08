@@ -9,7 +9,7 @@
 
 
 import React, {useEffect, useState} from 'react';
-import {Button, Col, Form, Switch, message, Modal, Input, Row, Select, InputNumber } from "antd";
+import {Button, Col, Form, Switch, message, Modal, Input, Row, Select, InputNumber, Progress, Upload} from "antd";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import md5 from 'md5';
 import {CopyTwoTone} from '@ant-design/icons';
@@ -17,6 +17,7 @@ import {CopyTwoTone} from '@ant-design/icons';
 
 // util
 import {OptionPosition} from './config';
+import {URL_API} from "../../../../../api/config";
 
 const layout = {
     labelCol: {
@@ -34,17 +35,20 @@ const tailLayout = {
 };
 const {Option} = Select;
 const PassDefault = 'Nhom9@2020';
+const imgDefault = require('../Table/styles/avatar.jpg');
 
 function AddAdmin(props) {
     const [form] = Form.useForm();
     const {visible, disabledModal, post} = props;
-    // const {name, _id, status, position, avatar, email, info, phone} = data;
+    const [linkFile, setLinkFile] = useState('');
+    const [fileList, setFileList] = useState([]);
+    const linkFileView = linkFile ? URL_API.local + 'file/' + linkFile : imgDefault;
 
     const [visibleCopy, setVisibleCopy] = useState(false);
     const onFinish = (values) => {
         const {avatar, email, name,code_phone, phone, position, status} = values;
         const newData = {
-            avatar: avatar,
+            avatar: linkFile,
             email: email,
             // info: info,
             name: name,
@@ -54,7 +58,6 @@ function AddAdmin(props) {
             status: true,
          };
         post({...newData});
-        console.log(newData);
         onReset();
         values.preventDefault();
     };
@@ -67,6 +70,8 @@ function AddAdmin(props) {
         form.resetFields();
         disabledModal();
         setVisibleCopy(false);
+        setLinkFile('');
+        setFileList([]);
     };
 
     const handleResetPass = () => {
@@ -112,6 +117,26 @@ function AddAdmin(props) {
         })
     };
 
+    const UpFile = {
+        name: 'file',
+        action: `${URL_API.local}file/upload`,
+        multiple: true,
+        onChange(info) {
+            switch (info.file.status) {
+                case 'uploading':
+                    console.log(info.file, info.fileList);
+                    break;
+                case 'done':
+                    // message.success(`${info.file.name} `);
+                    setLinkFile(info.file.response.fileNameInServer);
+                    break;
+                default:
+                    message.error(`${info.file.name}`);
+                    setLinkFile('');
+            }
+        },
+    };
+
     return (
         <Modal
             visible={visible}
@@ -131,6 +156,33 @@ function AddAdmin(props) {
                     code_phone: '+84',
             }}>
                 <Form.Item
+                    name="avatar"
+                    label="Avatar"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Không được để trống'
+                        },
+                    ]}
+                >
+                    <Upload
+                        {...UpFile}
+                        // fileList={fileList}
+                        listType="picture-card"
+                    >
+                        {
+                            linkFile.length === 0 ?
+                                (<img
+                                    alt="example"
+                                    src={linkFileView}
+                                    style={{width: '50px', height: '50px'}}
+                                />)
+                                : null
+                        }
+
+                    </Upload>
+                </Form.Item>
+                <Form.Item
                     name="name"
                     label="Họ và tên"
                     rules={[
@@ -145,22 +197,6 @@ function AddAdmin(props) {
                     ]}
                 >
                     <Input style={{width: '80%'}} allowClear/>
-                </Form.Item>
-                <Form.Item
-                    name="avatar"
-                    label="Link Avatar"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Không được để trống'
-                        },
-                        {
-                            type: "url",
-                            message: "Đây phải là một đường dẫn !"
-                        }
-                    ]}
-                >
-                    <Input style={{width: '80%'}} allowClear />
                 </Form.Item>
                 <Form.Item
                     name="email"

@@ -9,7 +9,6 @@
 
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
 import {Button, Input, Modal, Select, Form, Row, Col, Upload, message, Progress, Empty} from "antd";
 
 // custom Hooks

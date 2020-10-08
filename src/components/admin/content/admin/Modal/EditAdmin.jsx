@@ -38,7 +38,7 @@ const OptionPosition = {
 
 function EditAdmin(props) {
     const [form] = Form.useForm();
-    const {visible, disabledModal, data, update} = props;
+    const {visible, disabledModal, data, update, title} = props;
     const {name, _id, status, position, avatar, email, info, phone} = data;
 
     const [visibleCopy, setVisibleCopy] = useState(false);
@@ -95,18 +95,10 @@ function EditAdmin(props) {
             closable
             footer={null}
             closeIcon
-            // title={title}
-            title={`Cấu hình tài khoản ${name}`}
+            title={title}
+            // title={`Cấu hình tài khoản ${name}`}
             centered
         >
-            <div style={{
-                textAlign: 'center',
-                alignItems: 'center',
-                paddingBottom: '15px'
-            }}>
-                <Avatar size={75} src={avatar}/>
-            </div>
-
             <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
 
                 <Form.Item

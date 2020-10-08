@@ -9,10 +9,11 @@
 
 import React, {useEffect, useState} from "react";
 import PropTypes from "prop-types";
-import {Button, Input, Row, Col, Image, Popconfirm, Spin, Empty} from "antd";
+import {Button, Input, Row, Col, Image, Popconfirm, Spin, Empty, Avatar} from "antd";
 import {EditTwoTone, DeleteTwoTone, QuestionCircleOutlined} from "@ant-design/icons";
 import EditAdminContainer from "../Modal/EditAdminContainer";
 import AddAdminContainer from "../Modal/AddAdminContainer";
+import {URL_API} from "../../../../../api/config";
 
 // component
 
@@ -40,11 +41,18 @@ function TableAdmin(props) {
     const [listArray, setListArray] = useState([]);
     const [listObject, setListObject] = useState(list);
     const [dataItem, setDataItem] = useState('');
-    const [loading, setLoading] = useState(<Spin size="large" style={{textAlign: 'center', paddingLeft: '50%', paddingTop: '100px'}}/>);
+    const [loading, setLoading] = useState(<Spin size="large" style={{
+        textAlign: 'center',
+        paddingLeft: '50%',
+        paddingTop: '100px'
+    }}/>);
 
     useEffect(() => {
         const time = setTimeout(() => {
-            setLoading({...(<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={'Không có dữ liệu'} style={{paddingTop: '20px'}} />)});
+            setLoading({
+                ...(<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={'Không có dữ liệu'}
+                           style={{paddingTop: '20px'}}/>)
+            });
         }, 2200);
         return () => clearTimeout(time);
     });
@@ -56,24 +64,22 @@ function TableAdmin(props) {
                 newList = Object.keys(list).filter((item) => list[item].position === type_key['1'] && list[item].status === true);
                 break;
             case type_key['2']:
-                newList = Object.keys(list).filter((item) =>  list[item].position === type_key['2'] && list[item].status === true);
+                newList = Object.keys(list).filter((item) => list[item].position === type_key['2'] && list[item].status === true);
                 break;
             case type_key['3']:
-                newList = Object.keys(list).filter((item) =>  list[item].position === type_key['3'] && list[item].status === true) ;
+                newList = Object.keys(list).filter((item) => list[item].position === type_key['3'] && list[item].status === true);
                 break;
             case type_key['4']:
-                newList = Object.keys(list).filter((item) =>  list[item].status === false);
+                newList = Object.keys(list).filter((item) => list[item].status === false);
                 break;
             default:
-                newList = Object.keys(list).filter((item) =>  list[item].status === true);
+                newList = Object.keys(list).filter((item) => list[item].status === true);
         }
         setListArray(newList);
         setListObject(list);
     }, [list]);
     const onDelete = (id) => {
         deleteAdmin(id);
-        const newListArray = listArray.filter((item, index)=>  item[index] !== id);
-        setListArray([...newListArray]);
         delete listObject.id;
         setListObject({...listObject});
     };
@@ -91,9 +97,21 @@ function TableAdmin(props) {
         setVisibleAdd(false);
     };
     const handleSearch = (value) => {
-        const newList = Object.keys(list).filter((item) => (list[item].name.toLowerCase().indexOf(value.toLowerCase()) !== -1));
+        const newList = listArray.filter((item) => (list[item].name.toLowerCase().indexOf(value.toLowerCase()) !== -1));
         setListArray(newList);
     };
+
+    const Title = (
+        <div style={{
+            textAlign: 'center',
+            alignItems: 'center',
+            paddingBottom: '15px'
+        }}>
+            <Avatar size={40} src={URL_API.local + 'file/' + dataItem.avatar}/>
+            &nbsp;
+            &nbsp;
+            {dataItem.name}
+        </div>);
     return (
         <div>
             <Row style={{
@@ -148,7 +166,7 @@ function TableAdmin(props) {
                                 <Image
                                     width={64}
                                     height={64}
-                                    src={listObject[item].avatar}
+                                    src={URL_API.local + 'file/' + listObject[item].avatar}
                                     fallback={avatar}
                                 />
                             </Col>
@@ -190,12 +208,13 @@ function TableAdmin(props) {
                             </Col>
                         </Row>
                     ))
-                    : loading }
+                    : loading}
             </div>
             <EditAdminContainer
                 visible={visibleEdit}
                 disabledModal={disabledModal}
                 data={dataItem}
+                title={Title}
             />
             <AddAdminContainer
                 visible={visibleAdd}
