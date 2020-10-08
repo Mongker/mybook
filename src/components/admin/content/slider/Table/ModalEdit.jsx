@@ -12,6 +12,9 @@ import {Button, Input, Modal, Select, Form, Row, Col, Image} from "antd";
 import PropTypes from 'prop-types';
 import useFile from "./useFile";
 
+// util
+import {URL_API} from "../../../../../api/config";
+
 // const
 const layout = {
     labelCol: {
@@ -111,7 +114,7 @@ function ModalEdit(props) {
                     {/*    placeholder="chọn file"*/}
                     {/*    onChange={handleFile}*/}
                     {/*/>*/}
-                    <Image width={'100%'} height={200} src={formValue.image_link} />
+                    <Image width={'100%'} height={200} src={URL_API.local+'file/'+formValue.image_link} />
                 </Form.Item>
 
                 <Form.Item

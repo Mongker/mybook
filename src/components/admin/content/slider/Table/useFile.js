@@ -29,7 +29,7 @@ function useFile() {
             // if (filePath) {
             //     filePath = filePath.split('\\')[1]
             // }
-            setLinkFile(`${URL_API.local}file/` + filePath);
+            setLinkFile(filePath);
         });
     };
     return({file, setFile, linkFile, setLinkFile, postFile});

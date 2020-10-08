@@ -16,6 +16,9 @@ import {EditTwoTone, DeleteTwoTone, QuestionCircleOutlined} from "@ant-design/ic
 import ModalAdd from "./ModalAdd";
 import ModalEdit from "./ModalEdit";
 
+// util
+import {URL_API} from "../../../../../api/config";
+
 // const
 const {Search} = Input;
 const {Option} = Select;
@@ -156,10 +159,10 @@ function TableSlider(props) {
                                 {list[item].name}
                             </Col>
                             <Col className={"table-row"} span={5}>
-                                <Image width={200} height={67.06} src={list[item].image_link}/>
+                                <Image width={200} height={67.06} src={URL_API.local+'file/'+list[item].image_link}/>
                             </Col>
                             <Col className={"table-row"} span={10}>
-                                {list[item].image_link}
+                                {URL_API.local+'file/'+list[item].image_link}
                             </Col>
                             <Col className={"table-row"} span={2}>
                                 {list[item].index}

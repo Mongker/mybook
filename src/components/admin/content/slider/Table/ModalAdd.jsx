@@ -90,7 +90,7 @@ function ModalAdd(props) {
 
                     {
                         linkFile.length > 0 ?
-                            <Image width={'100%'} height={200} src={linkFile} />
+                            <Image width={'100%'} height={200} src={URL_API.local+'file/'+linkFile} />
                             :
                             <Input
                                 type="file"
