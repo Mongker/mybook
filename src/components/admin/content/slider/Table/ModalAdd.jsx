@@ -8,11 +8,14 @@
  */
 
 import React, {useEffect, useState} from 'react';
-import {Button, Input, Modal, Select, Form, Row, Col, Upload, message, Progress, Empty} from "antd";
 import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import {Button, Input, Modal, Select, Form, Row, Col, Upload, message, Progress, Empty} from "antd";
 
+// custom Hooks
+import useSelectIndex from '../customHooks/SelectIndex';
 // util
-import {URL_API} from '../../../../../api/config';
+import {URL_API} from '../../../../../api/config'
 
 // const
 const layout = {
@@ -30,19 +33,18 @@ const tailLayout = {
     }
 };
 
-// const imgDefault = 'https://thelongfortgroup.com/public/img/default/no-image-icon.jpg';
 const imgDefault = 'https://amfnews.com/wp-content/uploads/2014/10/default-img-1000x600.gif';
 
 function ModalAdd(props) {
     const [form] = Form.useForm();
+    const {putIndex} = useSelectIndex();
     const [linkFile, setLinkFile] = useState('');
     const [percent, setPercent] = useState(0);
     const {visible, handleText, cancelModal, title, children, TYPE_TEXT} = props;
-    const linkFileView = linkFile ? URL_API.local+'file/'+linkFile : imgDefault;
-    // const {setFile, linkFile, setLinkFile, postFile} = useFile();
-    // TODO by MongV: xử dụng From để bao các input lại để reset text
+    const linkFileView = linkFile ? URL_API.local + 'file/' + linkFile : imgDefault;
+
     useEffect(() => {
-        if(percent === 100) {
+        if (percent === 100) {
             const time = setTimeout(() => {
                 setPercent(0);
             }, 2000);
@@ -57,17 +59,16 @@ function ModalAdd(props) {
         onChange(info) {
             setPercent(Math.ceil(info.file.percent)); // Làm tròn nhé
             switch (info.file.status) {
-                    case 'uploading':
-                        console.log(info.file, info.fileList);
-                        break;
-                    case 'done':
-                        message.success(`${info.file.name} file uploaded successfully`);
-                        setLinkFile(info.file.response.fileNameInServer);
-                        debugger;
-                        break;
-                    default:
-                        message.error(`${info.file.name} file upload failed.`);
-                }
+                case 'uploading':
+                    console.log(info.file, info.fileList);
+                    break;
+                case 'done':
+                    message.success(`${info.file.name} file uploaded successfully`);
+                    setLinkFile(info.file.response.fileNameInServer);
+                    break;
+                default:
+                    message.error(`${info.file.name} file upload failed.`);
+            }
         },
     };
 
@@ -81,6 +82,34 @@ function ModalAdd(props) {
         form.resetFields();
         setLinkFile('');
         cancelModal();
+    };
+
+    const check = (value) => {
+        putIndex(value);
+        form.setFieldsValue({index: value});
+    };
+
+    const onSelectIndex = (value) => {
+        switch (value) {
+            case "1":
+                check(1);
+                break;
+            case "2":
+                check(2);
+                break;
+            case "3":
+                check(3);
+                break;
+            case "4":
+                check(4);
+                break;
+            case "5":
+                check(5);
+                break;
+            default:
+                // Note: nếu xét bằng 0 thì sẽ sẽ không được hiễn thị
+                form.setFieldsValue({index: 0});
+        }
     };
 
     return (
@@ -123,9 +152,9 @@ function ModalAdd(props) {
                         <img
                             alt="example"
                             src={linkFileView}
-                            style={{width: '100%', height:200}}
+                            style={{width: '100%', height: 200}}
                         />
-                        { percent > 0 && <Progress percent={percent} />}
+                        {percent > 0 && <Progress percent={percent}/>}
                     </Upload>
                 </Form.Item>
 
@@ -141,6 +170,7 @@ function ModalAdd(props) {
                 >
                     <Select
                         defaultValue={'NULL'}
+                        onChange={onSelectIndex}
                         allowClear
                     >
                         {children}

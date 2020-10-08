@@ -10,12 +10,15 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Input, Modal, Select, Form, Row, Col, Image, Progress, Upload, message} from "antd";
 import PropTypes from 'prop-types';
-import useFile from "./useFile";
+
+// custom Hooks
+import useSelectIndex from '../customHooks/SelectIndex';
 
 // util
 import {URL_API} from "../../../../../api/config";
 
 // const
+const {Option} = Select;
 const layout = {
     labelCol: {
         span: 4
@@ -39,6 +42,7 @@ function ModalEdit(props) {
         children,
         data
     } = props;
+    const {putIndex} = useSelectIndex();
     const [form] = Form.useForm();
     const [linkFile, setLinkFile] = useState('');
     const [percent, setPercent] = useState(0);
@@ -66,7 +70,6 @@ function ModalEdit(props) {
                 case 'done':
                     message.success(`${info.file.name} file uploaded successfully`);
                     setLinkFile(info.file.response.fileNameInServer);
-                    debugger;
                     break;
                 default:
                     message.error(`${info.file.name} file upload failed.`);
@@ -83,11 +86,12 @@ function ModalEdit(props) {
         'image_link': img,
         'index': index
     });
-    const linkFileView = linkFile && URL_API.local+'file/'+linkFile;
     const formValue = form.getFieldsValue();
-
+    const linkFileView = linkFile && URL_API.local+'file/'+linkFile;
+    const viewIndex = formValue.index || 0;
+    debugger;
     const onFinish = (values) => {
-        values.image_link = linkFile;
+        values.image_link = formValue.image_link || linkFile;
         handleText(values);
         onReset();
         values.preventDefault();
@@ -96,6 +100,34 @@ function ModalEdit(props) {
     const onReset = () => {
         form.resetFields();
         cancelModal();
+    };
+
+    const check = (value) => {
+        putIndex(value);
+        form.setFieldsValue({index: value});
+    };
+
+    const onSelectIndex = (value) => {
+        switch (value) {
+            case "1":
+                check(1);
+                break;
+            case "2":
+                check(2);
+                break;
+            case "3":
+                check(3);
+                break;
+            case "4":
+                check(4);
+                break;
+            case "5":
+                check(5);
+                break;
+            default:
+                // Note: nếu xét bằng 0 thì sẽ sẽ không được hiễn thị
+                form.setFieldsValue({index: 0});
+        }
     };
 
     return (
@@ -123,12 +155,6 @@ function ModalEdit(props) {
                 <Form.Item
                     name="image_link"
                     label="Link Ảnh"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Link không được để trống'
-                        }
-                    ]}
                 >
                     <Upload
                         {...UpFile}
@@ -136,7 +162,7 @@ function ModalEdit(props) {
                     >
                         <img
                             alt="img error"
-                            src={linkFileView || URL_API.local+'file/'+formValue.image_link}
+                            src={linkFileView || URL_API.local+'file/'+ formValue.image_link}
                             style={{width: '100%', height:200}}
                         />
                         { percent > 0 && <Progress percent={percent} />}
@@ -154,8 +180,9 @@ function ModalEdit(props) {
                     ]}
                 >
                     <Select
-                        defaultValue={index}
+                        value={viewIndex.toString()}
                         allowClear
+                        onChange={onSelectIndex}
                     >
                         {children}
                     </Select>

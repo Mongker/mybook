@@ -43,6 +43,7 @@ export const deleteSliderAction= (payload) => {
 };
 
 export const updateSliderAction= (payload) => {
+    debugger;
     return {
         type: SLIDER.CALL_PUT,
         payload,

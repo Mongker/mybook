@@ -23,10 +23,6 @@ import TableSlider from "./TableSlider";
 // action
 import * as SliderAction from '../../../../../action/sliderAction';
 
-const mapStateToProps = state => {
-  return {};
-};
-
 const mapDispatchToProps = dispatch => {
   return {
     deleteSlider: (id) => dispatch(SliderAction.callDeleteSlider(id)),
@@ -36,7 +32,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 const TableSliderContainer = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(TableSlider);
 

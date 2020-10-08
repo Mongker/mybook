@@ -95,8 +95,11 @@ function TableSlider(props) {
     };
 
     const children = [];
-    for (let i = 0; i <= 5; i++) {
-        const iString = (i!==0) ? i.toString() : 'Không hiễn thị';
+    children.push(
+        <Option key={'0'}>{'Không hiễn thị'}</Option>
+    );
+    for (let i = 1; i <= 5; i++) {
+        const iString = (i.toString()) ? i.toString() : 'Không hiễn thị';
         children.push(
             <Option key={i.toString()}>{iString}</Option>
         );
