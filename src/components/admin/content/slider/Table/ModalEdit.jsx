@@ -46,7 +46,7 @@ function ModalEdit(props) {
     const [form] = Form.useForm();
     const [linkFile, setLinkFile] = useState('');
     const [percent, setPercent] = useState(0);
-
+    const [tmp, setTmp] = useState(0);
     useEffect(() => {
         if(percent === 100) {
             const time = setTimeout(() => {
@@ -79,7 +79,7 @@ function ModalEdit(props) {
 
     const name = data.name ? data.name : '';
     const img = data.image_link ? data.image_link : '';
-    const index = data.index ? data.index : '';
+    const index = data.index ? data.index : tmp;
 
     form.setFieldsValue({
         'name': name,
@@ -89,8 +89,9 @@ function ModalEdit(props) {
     const formValue = form.getFieldsValue();
     const linkFileView = linkFile && URL_API.local+'file/'+linkFile;
     const viewIndex = formValue.index || 0;
-    debugger;
+
     const onFinish = (values) => {
+        debugger;
         values.image_link = formValue.image_link || linkFile;
         handleText(values);
         onReset();
@@ -103,7 +104,9 @@ function ModalEdit(props) {
     };
 
     const check = (value) => {
+        setTmp(value);
         putIndex(value);
+        debugger;
         form.setFieldsValue({index: value});
     };
 
