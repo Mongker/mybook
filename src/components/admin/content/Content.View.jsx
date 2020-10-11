@@ -16,6 +16,7 @@ import PropTypes from "prop-types";
 import AdminContainer from "./admin/AdminContainer";
 import TableSliderContainer from "./slider/Table/TableSliderContainer";
 import TabAdminContainer from "./admin/Tab/TabAdminContainer";
+import CatalogContent from "./catalog/CatalogContent";
 
 // util
 import { KEY_MENU } from "../../util/keyMenu";
@@ -32,6 +33,9 @@ function ContentAdmin(props) {
       break;
     case KEY_MENU.ADMIN:
       CheckRender = <TabAdminContainer list={list} />;
+      break;
+    case KEY_MENU.CATALOG:
+      CheckRender = <CatalogContent />;
       break;
     default:
       CheckRender = <div>Đang phát triển</div>;

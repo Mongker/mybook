@@ -66,6 +66,7 @@ function MenuAmin(props) {
                     <Link to={`${match.url}/home`}> Trang Chủ</Link>
                 </Menu.Item>
                 <Menu.Item key={KEY_MENU.CATALOG} icon={<BarsOutlined/>}>
+                    <Link to={`${match.url}/catalog`}> </Link>
                     Danh mục (Thể loại)
                 </Menu.Item>
                 <Menu.Item key={KEY_MENU.PRODUCT} icon={<ShoppingOutlined/>}>
