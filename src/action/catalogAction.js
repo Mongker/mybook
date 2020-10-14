@@ -10,9 +10,17 @@
 import {CATALOG} from './actionTypes';
 
 export const getList = (payload) => {
-    debugger; // MongLV
     return {
         type: CATALOG.GET_LIST,
+        payload,
+        timestamp: Date.now()
+    }
+};
+
+export const deleteCatalog= (payload) => {
+    debugger;
+    return {
+        type: CATALOG.CALL_DELETE,
         payload,
         timestamp: Date.now()
     }

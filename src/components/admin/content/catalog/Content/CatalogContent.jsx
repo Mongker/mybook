@@ -16,17 +16,20 @@ import TreeCatalog from '../TreeCatalog';
 import TableCatalogContainer from '../Table/TableCatalogContainer';
 
 function CatalogContent(props) {
-    const {getList, listCatalog} = props;
+    const {getList, listCatalog, deleteCatalog} = props;
     useEffect(
         () => {
-            getList && getList();
+            getList();
         },
         []
     );
     return(
         <Row>
             <Col flex={1}>
-                <TreeCatalog list={listCatalog} />
+                <TreeCatalog
+                    list={listCatalog}
+                    deleteId={deleteCatalog}
+                />
             </Col>
             <Col flex={6}>
                 <TableCatalogContainer />
@@ -36,11 +39,13 @@ function CatalogContent(props) {
 }
 
 CatalogContent.propTypes = {
-    getList: PropTypes.func,
+    getList: PropTypes.object,
+    deleteCatalog: PropTypes.func,
 };
 
 CatalogContent.defaultProps = {
-    getList: null
+    getList: {},
+    deleteCatalog: null,
 };
 
 export default CatalogContent;

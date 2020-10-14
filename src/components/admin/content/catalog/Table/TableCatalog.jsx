@@ -9,7 +9,7 @@
 
 import React, {useEffect, useState} from "react";
 import PropTypes from "prop-types";
-import {Button, Input, Row, Col, Image, Popconfirm, Spin, Empty, Avatar} from "antd";
+import {Button, Input, Row, Col, Image, Popconfirm, Spin, Empty, Skeleton} from "antd";
 import {EditTwoTone, DeleteTwoTone, QuestionCircleOutlined} from "@ant-design/icons";
 // import EditAdminContainer from "../Modal/EditAdminContainer";
 // import AddAdminContainer from "../Modal/AddAdminContainer";
@@ -78,6 +78,7 @@ function TableCatalog(props) {
             </Row>
             <div style={{overflow: 'auto', height: heightWindow, width: 'auto'}}>
                 {loading}
+                {/*<Skeleton active  rows={5} width={400} />*/}
             </div>
         </div>
     );

@@ -15,6 +15,7 @@ import CatalogContent from './CatalogContent';
 
 // action type
 import {CATALOG} from '../../../../../action/actionTypes';
+import * as action from '../../../../../action/catalogAction';
 
 const mapStateToProps = state => {
   return {
@@ -25,6 +26,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getList: () => dispatch({type: CATALOG.CALL_GET_LIST}),
+    deleteCatalog: (id) => dispatch(action.deleteCatalog(id))
   };
 };
 
