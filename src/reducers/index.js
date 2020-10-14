@@ -10,8 +10,10 @@
 import { combineReducers } from "redux";
 import Slider from "./admin/slider/sliderReducers";
 import Admin from "./admin/admin/adminReducers";
+import Catalog from "./admin/catalog/catalogReducers";
 const allReducers = combineReducers({
     Slider,
-    Admin
+    Admin,
+    Catalog,
 });
 export default allReducers;

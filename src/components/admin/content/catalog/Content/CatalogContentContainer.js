@@ -1,7 +1,7 @@
 /**
  * Copyright 2020 present, Lê Văn Mong.
  * All rights reserved.
- * @author Mongker on 11/10/2020
+ * @author Mongker on 13/10/2020
  * @email: levanmong.dola.99@gmail.com
  * @student-code: 68DCHT20091
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
@@ -11,19 +11,27 @@
 import { connect } from 'react-redux';
 
 // components
-import CatalogView from './CatalogView';
+import CatalogContent from './CatalogContent';
+
+// action type
+import {CATALOG} from '../../../../../action/actionTypes';
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    listCatalog: state.Catalog,
+  };
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    getList: () => dispatch({type: CATALOG.CALL_GET_LIST}),
+  };
 };
 
-const CatalogContainer = connect(
+const CatalogContentContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(CatalogView);
+)(CatalogContent);
 
-export default CatalogContainer;
+export default CatalogContentContainer;
+

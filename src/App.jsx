@@ -8,8 +8,7 @@
  */
 
 import React from "react";
-import { Layout, Menu } from "antd";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 // components
 import TodoApp from "./components/demo/todo/todoApp.jsx";

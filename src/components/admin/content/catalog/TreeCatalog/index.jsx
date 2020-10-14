@@ -8,38 +8,66 @@
  */
 
 import React from 'react';
-// import PropTypes from 'prop-types';
-import { Layout, Menu } from 'antd';
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
+import PropTypes from 'prop-types';
+import {Layout, Menu, Button, Popover, Row, Col} from 'antd';
+import {PlusCircleOutlined, ReadOutlined, SettingOutlined, EditOutlined, DeleteOutlined} from '@ant-design/icons';
 
-const { SubMenu } = Menu;
-
-const { Header, Content, Footer, Sider } = Layout;
+// const
+const {SubMenu} = Menu;
+const {Header, Content, Footer, Sider} = Layout;
+const heightWindow =
+    (window.innerHeight - window.innerHeight * 0.32).toString() + "px";
 
 function TreeCatalog(props) {
+    const {list} = props;
     const handleClick = e => {
         console.log('click ', e);
     };
-    return(
+    const content = (
+        <Row justify="space-between" >
+            <Col flex={1}><EditOutlined onClick={()=> {}} /></Col>
+            &nbsp; &nbsp; &nbsp;
+            <Col flex={1}><DeleteOutlined onClick={()=> {}} /></Col>
+        </Row>
+    );
+
+    return (
         <Menu
             onClick={handleClick}
-            style={{ width: 256 }}
+            style={{width: 256}}
             defaultSelectedKeys={['1']}
             defaultOpenKeys={['sub1']}
             mode="inline"
         >
-            <Menu.Item key="1">
-                        <span>
-                            <MailOutlined/>
-                            <span>Navigation One</span>
+            <Menu.Item key="1" style={{backgroundColor: '#33c6d6'}}>
+                        <span style={{color: '#fff'}}>
+                            <PlusCircleOutlined/>
+                            <span>Thêm</span>
                         </span>
             </Menu.Item>
+            {Object.keys(list).map((id) => (
+                <Menu.Item key={id}>
+                        <Row justify="space-between">
+                            <Col span={4}><ReadOutlined/></Col>
+                            <Col span={16}><span>{list[id].name}</span></Col>
+                            <Col>
+                                <Popover content={content} placement="right" trigger="click" >
+                                    <SettingOutlined />
+                                </Popover>
+                            </Col>
+                        </Row>
+                </Menu.Item>
+            ))}
         </Menu>
     );
 }
 
-TreeCatalog.propTypes = {};
+TreeCatalog.propTypes = {
+    list: PropTypes.object,
+};
 
-TreeCatalog.defaultProps = {};
+TreeCatalog.defaultProps = {
+    list: {}
+};
 
 export default TreeCatalog;

@@ -7,19 +7,26 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-import React from 'react';
-// import PropTypes from 'prop-types';
+import React, {useEffect} from 'react';
+import PropTypes from 'prop-types';
 import {Row, Col} from 'antd';
 
 // component
-import TreeCatalog from './TreeCatalog/index.jsx';
-import TableCatalogContainer from './Table/TableCatalogContainer';
+import TreeCatalog from '../TreeCatalog';
+import TableCatalogContainer from '../Table/TableCatalogContainer';
 
 function CatalogContent(props) {
+    const {getList, listCatalog} = props;
+    useEffect(
+        () => {
+            getList && getList();
+        },
+        []
+    );
     return(
         <Row>
             <Col flex={1}>
-                <TreeCatalog />
+                <TreeCatalog list={listCatalog} />
             </Col>
             <Col flex={6}>
                 <TableCatalogContainer />
@@ -28,8 +35,12 @@ function CatalogContent(props) {
     );
 }
 
-CatalogContent.propTypes = {};
+CatalogContent.propTypes = {
+    getList: PropTypes.func,
+};
 
-CatalogContent.defaultProps = {};
+CatalogContent.defaultProps = {
+    getList: null
+};
 
 export default CatalogContent;

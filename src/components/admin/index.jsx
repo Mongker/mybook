@@ -15,7 +15,7 @@ import {Switch, Route, useRouteMatch} from "react-router-dom";
 import MenuAmin from "./menu/index.jsx";
 import SliderContainer from "./content/slider/SliderContainer";
 import AdminContainer from "./content/admin/AdminContainer";
-import CatalogContainer from './content/catalog/CatalogContainer';
+import CatalogView from './content/catalog/CatalogView';
 import HomeAdmin from "./content/home/Home.View.jsx";
 
 // styles
@@ -59,7 +59,7 @@ function Admin() {
                     />
                     <Route
                         path={`${match.url}/catalog`}
-                        render={() => <CatalogContainer titleHeader={titleHeader}/>}
+                        render={() => <CatalogView titleHeader={titleHeader}/>}
                     />
                 </Switch>
             </Layout>

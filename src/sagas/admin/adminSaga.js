@@ -8,7 +8,7 @@
  */
 
 // action types
-import {ADMIN, SLIDER} from "../../action/actionTypes";
+import {ADMIN} from "../../action/actionTypes";
 import {call, put, take, select} from "redux-saga/effects";
 
 // api

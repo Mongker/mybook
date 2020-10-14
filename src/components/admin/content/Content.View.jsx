@@ -16,7 +16,7 @@ import PropTypes from "prop-types";
 import AdminContainer from "./admin/AdminContainer";
 import TableSliderContainer from "./slider/Table/TableSliderContainer";
 import TabAdminContainer from "./admin/Tab/TabAdminContainer";
-import CatalogContent from "./catalog/CatalogContent";
+import CatalogContentContainer from "./catalog/Content/CatalogContentContainer";
 
 // util
 import { KEY_MENU } from "../../util/keyMenu";
@@ -24,6 +24,7 @@ import { KEY_MENU } from "../../util/keyMenu";
 let CheckRender;
 function ContentAdmin(props) {
   const { title, list } = props;
+
   useEffect(() => {}, [title]);
 
   switch (title) {
@@ -35,7 +36,7 @@ function ContentAdmin(props) {
       CheckRender = <TabAdminContainer list={list} />;
       break;
     case KEY_MENU.CATALOG:
-      CheckRender = <CatalogContent />;
+      CheckRender = <CatalogContentContainer />;
       break;
     default:
       CheckRender = <div>Đang phát triển</div>;

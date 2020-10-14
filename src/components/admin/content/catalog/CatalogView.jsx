@@ -7,16 +7,8 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-/**
- * Copyright (c) 2020 Mongker.
- * All rights reserved.
- * @author Mongker 18/09/2020
- * @email: levanmong.dola.99@gmail.com
- * @student-code: 68DCHT20091
- * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
- */
 
-import React, {useEffect} from "react";
+import React from "react";
 import {Layout} from "antd";
 import PropTypes from "prop-types";
 
@@ -29,11 +21,7 @@ import ContentAdmin from "../../content/Content.View.jsx";
 const {Header, Content} = Layout;
 
 function CatalogView(props) {
-    const {titleHeader, getList, listSlider} = props;
-
-    useEffect(() => {
-        // getList();
-    }, []);
+    const {titleHeader} = props;
 
     return (
         <Layout className="site-layout">
@@ -43,7 +31,6 @@ function CatalogView(props) {
             <Content style={{margin: "0 16px"}}>
                 <ContentAdmin
                     title={titleHeader}
-                    list={listSlider}
                 />
             </Content>
         </Layout>
