@@ -18,7 +18,6 @@ export const getList = (payload) => {
 };
 
 export const deleteCatalog= (payload) => {
-    debugger;
     return {
         type: CATALOG.CALL_DELETE,
         payload,
@@ -26,3 +25,18 @@ export const deleteCatalog= (payload) => {
     }
 };
 
+export const postCatalog= (payload) => {
+    return {
+        type: CATALOG.CALL_POST,
+        payload,
+        timestamp: Date.now()
+    }
+};
+
+export const putCatalog = (payload) => {
+    return {
+        type: CATALOG.CALL_PUT,
+        payload,
+        timestamp: Date.now()
+    }
+};

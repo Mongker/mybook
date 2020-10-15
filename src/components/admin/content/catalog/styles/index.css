@@ -1,5 +1,11 @@
-.container-content-catalog {
+.container_content_catalog {
     width: 256px
+}
+
+.modalAdd {
+    text-align: center;
+    font-size: 20px;
+    font-family: fantasy;
 }
 
 .menuTitle {
@@ -26,4 +32,10 @@
 }
 .addCatalog {
     margin-left: 160px;
+}
+.ant-modal-body {
+    padding-top: 24px;
+    padding-left: 12px;
+    padding-right: 24px;
+    padding-bottom: 5px
 }

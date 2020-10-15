@@ -26,7 +26,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getList: () => dispatch({type: CATALOG.CALL_GET_LIST}),
-    deleteCatalog: (id) => dispatch(action.deleteCatalog(id))
+    deleteCatalog: (id) => dispatch(action.deleteCatalog(id)),
+    postCatalog: (data) => dispatch(action.postCatalog({data})),
+    putCatalog: (id, data) => dispatch(action.putCatalog({id, data}))
   };
 };
 

@@ -16,7 +16,7 @@ import TreeCatalog from '../TreeCatalog';
 import TableCatalogContainer from '../Table/TableCatalogContainer';
 
 function CatalogContent(props) {
-    const {getList, listCatalog, deleteCatalog} = props;
+    const {getList, listCatalog, deleteCatalog, postCatalog, putCatalog} = props;
     useEffect(
         () => {
             getList();
@@ -29,6 +29,8 @@ function CatalogContent(props) {
                 <TreeCatalog
                     list={listCatalog}
                     deleteId={deleteCatalog}
+                    post={postCatalog}
+                    put={putCatalog}
                 />
             </Col>
             <Col flex={6}>

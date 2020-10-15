@@ -8,7 +8,7 @@
  */
 
 // action types
-import {CATALOG} from "../../action/actionTypes";
+import {CATALOG, SLIDER} from "../../action/actionTypes";
 import {call, put, take, select} from "redux-saga/effects";
 
 
@@ -29,9 +29,28 @@ export function* watcherCallListCatalog() {
 export function * watcherCallDeleteCatalog() {
     while (true) {
         const takeAction = yield take(CATALOG.CALL_DELETE);
-        debugger; // MongLV
         const {payload} = takeAction;
         yield deleteCatalog(payload);
+        yield call(doCallListCatalog);
+    }
+}
+
+export function* watcherCallPostCatalog() {
+    while (true) {
+        const takeAction = yield take(CATALOG.CALL_POST);
+        debugger;
+        const {payload} = takeAction;
+        const {data} = payload;
+        yield postCatalog(data);
+        yield call(doCallListCatalog);
+    }
+}
+export function* watcherCallPutCatalog() {
+    while (true) {
+        const takeAction = yield take(CATALOG.CALL_PUT);
+        const {payload} = takeAction;
+        const {id, data} = payload;
+        yield putCatalog(id, data);
         yield call(doCallListCatalog);
     }
 }
