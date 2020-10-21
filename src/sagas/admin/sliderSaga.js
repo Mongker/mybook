@@ -46,12 +46,9 @@ export function* watcherCallDelete() {
 
 export function* watcherCallUpdate() {
     while (true) {
-        debugger;
         const takeAction = yield take(SLIDER.CALL_PUT);
-        debugger;
         const {payload} = takeAction;
         const {id, data} = payload;
-        debugger;
         yield putSlider(id, data);
         yield call(doCallListSlider);
     }

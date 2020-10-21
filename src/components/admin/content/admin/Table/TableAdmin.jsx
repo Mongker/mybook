@@ -105,7 +105,6 @@ function TableAdmin(props) {
         <div style={{
             textAlign: 'center',
             alignItems: 'center',
-            paddingBottom: '15px'
         }}>
             <Avatar size={40} src={URL_API.local + 'file/' + dataItem.avatar}/>
             &nbsp;

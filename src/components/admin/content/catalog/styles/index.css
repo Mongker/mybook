@@ -1,0 +1,41 @@
+.container_content_catalog {
+    width: 256px
+}
+
+.modalAdd {
+    text-align: center;
+    font-size: 20px;
+    font-family: fantasy;
+}
+
+.menuTitle {
+    text-align: justify;
+    color: #fff;
+    padding-left: 20px;
+    font-size: 20px;
+}
+
+.editTwoTone {
+    font-size: 12px;
+}
+
+.editTwoTone:hover {
+    font-size: 15px;
+}
+
+.deleteTwoTone {
+    font-size: 12px;
+}
+
+.deleteTwoTone:hover {
+    font-size: 15px;
+}
+.addCatalog {
+    margin-left: 160px;
+}
+.ant-modal-body {
+    padding-top: 24px;
+    padding-left: 12px;
+    padding-right: 24px;
+    padding-bottom: 5px
+}
