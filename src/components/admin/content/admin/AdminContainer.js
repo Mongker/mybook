@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import AdminView from "./AdminView";
 
 // action type
-import { ADMIN } from "../../../../action/actionTypes";
+import {ADMIN} from "src/action/actionTypes";
 
 const mapStateToProps = state => {
   const listAdmin = state.Admin;

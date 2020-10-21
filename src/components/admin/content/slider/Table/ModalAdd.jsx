@@ -14,7 +14,7 @@ import {Button, Input, Modal, Select, Form, Row, Col, Upload, message, Progress,
 // custom Hooks
 import useSelectIndex from '../customHooks/SelectIndex';
 // util
-import {URL_API} from '../../../../../api/config'
+import {URL_API} from 'src/api/config'
 
 // const
 const layout = {

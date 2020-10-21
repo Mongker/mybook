@@ -8,8 +8,8 @@
  */
 
 
-import React, {useEffect, useState} from 'react';
-import {Button, Col, Form, Switch, message, Modal, Input, Row, Select, InputNumber, Progress, Upload} from "antd";
+import React, {useState} from 'react';
+import {Button, Col, Form, message, Modal, Input, Row, Select, Upload} from "antd";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import md5 from 'md5';
 import {CopyTwoTone} from '@ant-design/icons';
@@ -17,7 +17,7 @@ import {CopyTwoTone} from '@ant-design/icons';
 
 // util
 import {OptionPosition} from './config';
-import {URL_API} from "../../../../../api/config";
+import {URL_API} from "src/api/config";
 
 const layout = {
     labelCol: {

@@ -21,7 +21,7 @@ import { connect } from 'react-redux';
 import TableSlider from "./TableSlider";
 
 // action
-import * as SliderAction from '../../../../../action/sliderAction';
+import * as SliderAction from 'src/action/sliderAction';
 
 const mapDispatchToProps = dispatch => {
   return {

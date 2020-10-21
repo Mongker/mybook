@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import EditAdmin from './EditAdmin';
 
 // action
-import * as Admin from '../../../../../action/adminAction';
+import * as Admin from 'src/action/adminAction';
 
 const mapStateToProps = state => {
   return {};

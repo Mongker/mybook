@@ -13,7 +13,7 @@ import {Button, Input, Row, Col, Image, Popconfirm, Spin, Empty, Avatar} from "a
 import {EditTwoTone, DeleteTwoTone, QuestionCircleOutlined} from "@ant-design/icons";
 import EditAdminContainer from "../Modal/EditAdminContainer";
 import AddAdminContainer from "../Modal/AddAdminContainer";
-import {URL_API} from "../../../../../api/config";
+import {URL_API} from "src/api/config";
 
 // component
 

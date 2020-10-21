@@ -7,7 +7,7 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Button, Col, Form, Switch, message, Modal, Popconfirm, Row, Select, Avatar} from "antd";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import md5 from 'md5';

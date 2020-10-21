@@ -18,7 +18,8 @@ import TableSliderContainer from "./slider/Table/TableSliderContainer";
 import TabAdminContainer from "./admin/Tab/TabAdminContainer";
 
 // util
-import { KEY_MENU } from "../../util/keyMenu";
+import {KEY_MENU} from "src/components/util/keyMenu";
+
 // const
 let CheckRender;
 function ContentAdmin(props) {

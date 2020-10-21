@@ -10,7 +10,7 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 // action
-import * as SliderAction from '../../../../../action/sliderAction';
+import * as SliderAction from 'src/action/sliderAction';
 
 function useSelectIndex() {
     const dispatch = useDispatch();

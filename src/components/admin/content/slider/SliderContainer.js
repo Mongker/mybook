@@ -11,7 +11,7 @@
 import { connect } from "react-redux";
 
 // action type
-import { SLIDER } from "../../../../action/actionTypes";
+import { SLIDER } from "src/action/actionTypes";
 
 // components
 import SliderAdmin from "./Slider.View";

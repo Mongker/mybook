@@ -25,7 +25,8 @@ import {
 import {Route, Link, useRouteMatch} from "react-router-dom";
 
 // util
-import {KEY_MENU} from "../../util/keyMenu";
+import {KEY_MENU} from "src/components/util/keyMenu";
+
 // const
 const {SubMenu} = Menu;
 

@@ -17,7 +17,7 @@ import ModalAdd from "./ModalAdd";
 import ModalEdit from "./ModalEdit";
 
 // util
-import {URL_API} from "../../../../../api/config";
+import {URL_API} from "src/api/config";
 
 // const
 const {Search} = Input;

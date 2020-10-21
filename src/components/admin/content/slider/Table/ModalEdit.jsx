@@ -15,7 +15,7 @@ import PropTypes from 'prop-types';
 import useSelectIndex from '../customHooks/SelectIndex';
 
 // util
-import {URL_API} from "../../../../../api/config";
+import {URL_API} from "src/api/config";
 
 // const
 const {Option} = Select;
