@@ -6,16 +6,16 @@
  * @student-code: 68DCHT20091
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
-
-// action types
-import {ADMIN} from "../../action/actionTypes";
 import {call, put, take, select} from "redux-saga/effects";
 
+// action types
+import {ADMIN} from "src/action/actionTypes";
+
 // api
-import {getListAdmin_API} from "../../api/admin/getList";
-import {deleteAdmin} from "../../api/admin/delete";
-import {putAdmin} from "../../api/admin/put";
-import {postAdmin} from "../../api/admin/post";
+import {getListAdmin_API} from 'src/api/admin/getList';
+import {deleteAdmin} from 'src/api/admin/delete';
+import {putAdmin} from 'src/api/admin/put';
+import {postAdmin} from 'src/api/admin/post';
 
 // -------------------------------------- watcher Action --------------------------------------/
 export function* watcherCallListAdmin() {

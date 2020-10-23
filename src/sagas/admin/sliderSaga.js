@@ -7,15 +7,16 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
+import {call, put, take, select} from 'redux-saga/effects';
+
 // action types
-import {SLIDER} from "../../action/actionTypes";
-import {call, put, take, select} from "redux-saga/effects";
+import {SLIDER} from 'src/action/actionTypes';
 
 // api
-import {getListSlider_API} from "src/api/slider/getList";
-import {postSlider} from "src/api/slider/post";
-import {deleteSlider} from "src/api/slider/delete";
-import {putSlider} from "src/api/slider/put";
+import {getListSlider_API} from 'src/api/slider/getList';
+import {postSlider} from 'src/api/slider/post';
+import {deleteSlider} from 'src/api/slider/delete';
+import {putSlider} from 'src/api/slider/put';
 
 // -------------------------------------- watcher Action --------------------------------------/
 export function* watcherCallListSlider() {

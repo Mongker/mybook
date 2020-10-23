@@ -6,17 +6,16 @@
  * @student-code: 68DCHT20091
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
-
-// action types
-import {CATALOG, SLIDER} from "../../action/actionTypes";
 import {call, put, take, select} from "redux-saga/effects";
 
+// action types
+import {CATALOG} from "src/action/actionTypes";
 
 // api
-import {getListCatalog_API} from "../../api/catalog/getList";
-import {postCatalog} from "../../api/catalog/post";
-import {putCatalog} from "../../api/catalog/put";
-import {deleteCatalog} from "../../api/catalog/delete";
+import {getListCatalog_API} from 'src/api/catalog/getList';
+import {postCatalog} from 'src/api/catalog/post';
+import {putCatalog} from 'src/api/catalog/put';
+import {deleteCatalog} from "src/api/catalog/delete";
 
 // -------------------------------------- watcher Action --------------------------------------/
 export function* watcherCallListCatalog() {
