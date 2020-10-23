@@ -39,3 +39,29 @@
     padding-right: 24px;
     padding-bottom: 5px
 }
+
+.table-header-catalog {
+    background-color: #33c6d6;
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 0.5px solid #d8d9e1;
+}
+.table-row-catalog {
+    /* border: 0.5px solid #d8d9e1 ; */
+    padding-left: 10px;
+    padding-right: 10px;
+    /*border-left: 0.5px solid #d8d9e1;*/
+    /*border-right: 0.5px solid #d8d9e1;*/
+}
+.table-tr-catalog {
+    background-color: #f0f4f9;
+    padding: 10px;
+    /* font-weight: bold; */
+    text-align: center;
+    align-items: center;
+    border-bottom: 0.5px solid #d8d9e1;
+}
+.table-tr-catalog:hover {
+    background-color: #ccced1;
+}

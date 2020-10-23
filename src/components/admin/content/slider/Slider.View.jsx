@@ -53,4 +53,4 @@ SliderAdmin.defaultProps = {
     getList: () => null,
 };
 
-export default SliderAdmin;
+export default React.memo(SliderAdmin);

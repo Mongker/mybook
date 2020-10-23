@@ -9,7 +9,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Menu, Tooltip, Popover, Row, Col, Popconfirm, Button, Modal, Form, Input} from 'antd';
+import { Link, useHistory } from 'react-router-dom';
+import { Menu, Tooltip, Popover, Row, Col, Popconfirm, Button, Modal, Form, Input } from 'antd';
 import {
     PlusCircleOutlined,
     ReadOutlined,
@@ -41,7 +42,8 @@ const tailLayout = {
 };
 
 function TreeCatalog(props) {
-    const {list, deleteId, post, put} = props;
+    let history = useHistory();
+    const { list, deleteId, post, put } = props;
     const [form] = Form.useForm();
     const [formEdit] = Form.useForm();
     const [visible, setVisible] = React.useState(false);
@@ -61,6 +63,10 @@ function TreeCatalog(props) {
     const showModal = () => {
         setVisible(true);
     };
+
+    function handleClick(id) {
+        history.push(`/admin/catalog/${id}`);
+    }
 
     const showModalEdit = (id) => {
         setVisibleEdit(true);
@@ -90,17 +96,17 @@ function TreeCatalog(props) {
     };
 
     function TitleAdd() {
-        return(
+        return (
             <div className={'modalAdd'}>Thêm thể loại sách </div>
         );
     }
     function TitleEdit() {
-        return(
+        return (
             <div className={'modalAdd'}>Sửa thể loại sách </div>
         );
     }
 
-    const Content = ({id}) => {
+    const Content = ({ id }) => {
         return (
             <Row justify="space-between">
 
@@ -118,7 +124,7 @@ function TreeCatalog(props) {
                         okText="Phải"
                         cancelText="Không"
                         onConfirm={() => deleteIdCatalog(id)}
-                        icon={<QuestionCircleOutlined style={{color: 'red'}}/>}
+                        icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
                     >
                         <DeleteTwoTone
                             className={'deleteTwoTone'}
@@ -133,40 +139,40 @@ function TreeCatalog(props) {
     return (
         <div className={'container-catalog'}>
             <Menu
-                style={{width: 256}}
+                style={{ width: 256 }}
                 defaultSelectedKeys={['Title']}
                 defaultOpenKeys={['Title']}
                 mode="inline"
             >
-                <Menu.Item key="Title" style={{backgroundColor: '#33c6d6'}}>
-                        <span className={'menuTitle'}>
-                            <span>Danh sách thể loại</span>
-                        </span>
+                <Menu.Item key="Title" style={{ backgroundColor: '#33c6d6' }}>
+                    <span className={'menuTitle'}>
+                        <span>Danh sách thể loại</span>
+                    </span>
                 </Menu.Item>
             </Menu>
-            <div style={{overflow: 'auto', height: heightWindow, width: 256}}>
+            <div style={{ overflow: 'auto', height: heightWindow, width: 256 }}>
                 <Menu
                     // onClick={handleClick}
-                    style={{width: 256}}
+                    style={{ width: 256 }}
                     defaultSelectedKeys={['1']}
                     defaultOpenKeys={['sub1']}
                     mode="inline"
                 >
                     {Object.keys(list).map((id) => (
-                        <Menu.Item key={id}>
-                            <Row justify="space-between">
-                                <Col span={4}>
-                                    <Tooltip placement="right" title={list[id].description}>
-                                        <ReadOutlined />
-                                    </Tooltip>
-                                </Col>
-                                <Col span={16}><span>{list[id].name}</span></Col>
-                                <Col>
-                                    <Popover content={<Content id={id}/>} placement="right" trigger="click">
-                                        <SettingOutlined/>
-                                    </Popover>
-                                </Col>
-                            </Row>
+                        <Menu.Item key={id} onClick={() => handleClick(id)}>
+                                <Row justify="space-between">
+                                    <Col span={4}>
+                                        <Tooltip placement="right" title={list[id].description}>
+                                            <ReadOutlined />
+                                        </Tooltip>
+                                    </Col>
+                                    <Col span={16}><span>{list[id].name}</span></Col>
+                                    <Col>
+                                        <Popover content={<Content id={id} />} placement="right" trigger="click">
+                                            <SettingOutlined />
+                                        </Popover>
+                                    </Col>
+                                </Row>
                         </Menu.Item>
                     ))}
                     {
@@ -226,12 +232,12 @@ function TreeCatalog(props) {
                         <Row style={{
                             alignItems: 'center',
                         }}>
-                            <Col style={{paddingRight: '20px'}}>
+                            <Col style={{ paddingRight: '20px' }}>
                                 <Button type="primary" htmlType="submit">
                                     Thêm
                                 </Button>
                             </Col>
-                            <Col style={{paddingLeft: '20px'}}>
+                            <Col style={{ paddingLeft: '20px' }}>
                                 <Button onClick={onReset}>
                                     Đóng
                                 </Button>
@@ -269,12 +275,12 @@ function TreeCatalog(props) {
                         <Row style={{
                             alignItems: 'center',
                         }}>
-                            <Col style={{paddingRight: '20px'}}>
+                            <Col style={{ paddingRight: '20px' }}>
                                 <Button type="primary" htmlType="submit">
                                     Lưu
                                 </Button>
                             </Col>
-                            <Col style={{paddingLeft: '20px'}}>
+                            <Col style={{ paddingLeft: '20px' }}>
                                 <Button onClick={onReset}>
                                     Đóng
                                 </Button>

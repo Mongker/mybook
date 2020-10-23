@@ -6,15 +6,15 @@
  * @student-code: 68DCHT20091
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
-
+import React, {memo} from 'react';
 // Redux
 import { connect } from 'react-redux';
 
 // components
-import TableCatalog from './TableCatalog';
+import TableCatalog from './TableCatalog.jsx';
 
 // action
-import * as AdminAction from '../../../../../action/adminAction';
+import * as AdminAction from 'src/action/adminAction';
 
 const mapStateToProps = state => {
   return {};
@@ -31,4 +31,4 @@ const TableCatalogContainer = connect(
   null
 )(TableCatalog);
 
-export default TableCatalogContainer;
+export default React.memo(TableCatalogContainer);

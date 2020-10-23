@@ -49,5 +49,5 @@ CatalogView.defaultProps = {
     getList: () => null,
 };
 
-export default CatalogView;
+export default React.memo(CatalogView);
 

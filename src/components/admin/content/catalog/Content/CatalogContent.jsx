@@ -7,23 +7,25 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {Row, Col} from 'antd';
+import { Row, Col } from 'antd';
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
 
 // component
 import TreeCatalog from '../TreeCatalog';
 import TableCatalogContainer from '../Table/TableCatalogContainer';
 
 function CatalogContent(props) {
-    const {getList, listCatalog, deleteCatalog, postCatalog, putCatalog} = props;
+    let match = useRouteMatch();
+    const { getList, listCatalog, deleteCatalog, postCatalog, putCatalog } = props;
     useEffect(
         () => {
             getList();
         },
         []
     );
-    return(
+    return (
         <Row>
             <Col flex={1}>
                 <TreeCatalog
@@ -33,9 +35,17 @@ function CatalogContent(props) {
                     put={putCatalog}
                 />
             </Col>
-            <Col flex={6}>
-                <TableCatalogContainer />
-            </Col>
+            <Switch>
+                <Route
+                    to={`${match.url}/:id`}
+                    children={
+                        <Col flex={6}>
+                            <TableCatalogContainer />
+                        </Col>
+                        }
+                />
+            </Switch>
+
         </Row>
     );
 }
@@ -50,4 +60,4 @@ CatalogContent.defaultProps = {
     deleteCatalog: null,
 };
 
-export default CatalogContent;
+export default React.memo(CatalogContent);

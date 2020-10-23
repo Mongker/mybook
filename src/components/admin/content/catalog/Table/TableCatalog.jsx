@@ -7,18 +7,17 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-import React, {useEffect, useState} from "react";
-import PropTypes from "prop-types";
-import {Button, Input, Row, Col, Image, Popconfirm, Spin, Empty, Skeleton} from "antd";
-import {EditTwoTone, DeleteTwoTone, QuestionCircleOutlined} from "@ant-design/icons";
+import React, {useEffect, useState} from 'react';
+import PropTypes from 'prop-types';
+import {Button, Input, Row, Col, Image, Popconfirm, Spin, Empty, Skeleton} from 'antd';
+import {EditTwoTone, DeleteTwoTone, QuestionCircleOutlined} from '@ant-design/icons';
 // import EditAdminContainer from "../Modal/EditAdminContainer";
 // import AddAdminContainer from "../Modal/AddAdminContainer";
-import {URL_API} from "../../../../../api/config";
+import {URL_API} from 'src/api/config';
 
 // component
 
 // const
-
 const COL_SPAN = {
     img: 3,
     name: 4,
@@ -33,7 +32,7 @@ const heightWindow =
     (window.innerHeight - window.innerHeight * 0.32).toString() + "px";
 
 function TableCatalog(props) {
-
+    debugger; // MongLV
     const [loading, setLoading] = useState(<Spin size="large" style={{
         textAlign: 'center',
         paddingLeft: '50%',
@@ -53,26 +52,26 @@ function TableCatalog(props) {
     return (
         <div>
             {/* Table: Admin */}
-            <Row className={"table-header"}>
-                <Col className={"table-row"} span={COL_SPAN.img}>
+            <Row className={"table-header-catalog"}>
+                <Col className={"table-row-catalog"} span={COL_SPAN.img}>
                     Hình ảnh
                 </Col>
-                <Col className={"table-row"} span={COL_SPAN.name}>
+                <Col className={"table-row-catalog"} span={COL_SPAN.name}>
                     Tên sách
                 </Col>
-                <Col className={"table-row"} span={COL_SPAN.price}>
+                <Col className={"table-row-catalog"} span={COL_SPAN.price}>
                     Giá tiền
                 </Col>
-                <Col className={"table-row"} span={COL_SPAN.amount}>
+                <Col className={"table-row-catalog"} span={COL_SPAN.amount}>
                     Số lượng
                 </Col>
-                <Col className={"table-row"} span={COL_SPAN.view_user}>
+                <Col className={"table-row-catalog"} span={COL_SPAN.view_user}>
                     Số lượt xem
                 </Col>
-                <Col className={"table-row"} span={COL_SPAN.vote_user}>
+                <Col className={"table-row-catalog"} span={COL_SPAN.vote_user}>
                     Số lượng bình chọn
                 </Col>
-                <Col className={"table-row"} span={COL_SPAN.event}>
+                <Col className={"table-row-catalog"} span={COL_SPAN.event}>
                     Hành động
                 </Col>
             </Row>
@@ -89,6 +88,7 @@ TableCatalog.propTypes = {
     deleteAdmin: PropTypes.func,
     type: PropTypes.string,
     type_key: PropTypes.object,
+    match: PropTypes.func,
 };
 
 TableCatalog.defaultProps = {
@@ -96,4 +96,4 @@ TableCatalog.defaultProps = {
     deleteAdmin: () => null,
 };
 
-export default TableCatalog;
+export default React.memo(TableCatalog);

@@ -40,4 +40,4 @@ HomeAdmin.propTypes = {};
 
 HomeAdmin.defaultProps = {};
 
-export default HomeAdmin;
+export default React.memo(HomeAdmin);

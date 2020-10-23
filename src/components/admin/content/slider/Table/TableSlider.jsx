@@ -237,4 +237,4 @@ TableSlider.defaultProps = {
     putSlider: () => null,
 };
 
-export default TableSlider;
+export default React.memo(TableSlider);
