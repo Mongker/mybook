@@ -7,7 +7,7 @@
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
-import {ADMIN} from '../../../action/actionTypes.js';
+import {ADMIN} from 'src/action/actionTypes.js';
 
 const Admin = (state = {}, action) => {
     switch (action.type) {

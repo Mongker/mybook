@@ -8,7 +8,7 @@
  */
 
 // action types
-import {CATALOG} from '../../../action/actionTypes.js';
+import {CATALOG} from 'src/action/actionTypes.js';
 
 const Catalog = (state = {}, action) => {
     switch (action.type) {

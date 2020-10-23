@@ -8,7 +8,7 @@
  */
 
 // action types
-import {SLIDER} from '../../../action/actionTypes.js';
+import {SLIDER} from 'src/action/actionTypes.js';
 
 const Slider = (state = {}, action) => {
     switch (action.type) {
