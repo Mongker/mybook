@@ -1,5 +1,0 @@
-{"_id":{"$oid":"5ea3075684779444cc661ef7"},"status":true,"created_at":{"$date":"2020-04-24T15:35:16.428Z"},"name":"D&G","__v":0}
-{"_id":{"$oid":"5ea307a965f4c94540768c19"},"status":true,"created_at":{"$date":"2020-04-24T15:36:52.864Z"},"name":"Gucci","__v":0}
-{"_id":{"$oid":"5ea308109cc96c42b0c682c5"},"status":true,"created_at":{"$date":"2020-04-24T15:38:42.871Z"},"name":"Việt Nam","__v":0}
-{"_id":{"$oid":"5ea3089ae2b2ab50349fc7a0"},"status":true,"created_at":{"$date":"2020-04-24T15:40:57.843Z"},"name":"Hàn Quốc","__v":0}
-{"_id":{"$oid":"5eb024f0e27f015e40c35a21"},"status":true,"created_at":{"$date":"2020-05-04T14:18:57.477Z"},"name":"Elise","__v":0}

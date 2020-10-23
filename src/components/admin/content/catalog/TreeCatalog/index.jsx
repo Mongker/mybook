@@ -299,7 +299,7 @@ TreeCatalog.propTypes = {
 TreeCatalog.defaultProps = {
     list: {},
     post: () => null,
-    put: () => null
+    put: () => null,
 };
 
 export default TreeCatalog;
