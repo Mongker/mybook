@@ -91,7 +91,6 @@ function ModalEdit(props) {
     const viewIndex = formValue.index || 0;
 
     const onFinish = (values) => {
-        debugger;
         values.image_link = formValue.image_link || linkFile;
         handleText(values);
         onReset();
@@ -106,7 +105,6 @@ function ModalEdit(props) {
     const check = (value) => {
         setTmp(value);
         putIndex(value);
-        debugger;
         form.setFieldsValue({index: value});
     };
 

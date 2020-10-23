@@ -12,10 +12,10 @@ import {SLIDER} from "../../action/actionTypes";
 import {call, put, take, select} from "redux-saga/effects";
 
 // api
-import {getListSlider_API} from "../../api/slider/getList";
-import {postSlider} from "../../api/slider/post";
-import {deleteSlider} from "../../api/slider/delete";
-import {putSlider} from "../../api/slider/put";
+import {getListSlider_API} from "src/api/slider/getList";
+import {postSlider} from "src/api/slider/post";
+import {deleteSlider} from "src/api/slider/delete";
+import {putSlider} from "src/api/slider/put";
 
 // -------------------------------------- watcher Action --------------------------------------/
 export function* watcherCallListSlider() {

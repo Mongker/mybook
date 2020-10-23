@@ -9,43 +9,10 @@
 
 // action Type
 import {SLIDER} from './actionTypes';
+import createActionNoAppID from 'src/base/createActionNoAppID';
 
-export const getListSlider = (payload) => {
-    return {
-        type: SLIDER.GET_LIST,
-        payload,
-        timestamp: Date.now()
-    }
-};
-
-export const postSlider = (payload) => {
-    return {
-        type: SLIDER.CALL_POST_SLIDER,
-        payload,
-        timestamp: Date.now()
-    }
-};
-
-export const callDeleteSlider= (payload) => {
-    return {
-        type: SLIDER.CALL_DELETE,
-        payload,
-        timestamp: Date.now()
-    }
-};
-
-export const deleteSliderAction= (payload) => {
-    return {
-        type: SLIDER.DELETE,
-        payload,
-        timestamp: Date.now()
-    }
-};
-
-export const updateSliderAction= (payload) => {
-    return {
-        type: SLIDER.CALL_PUT,
-        payload,
-        timestamp: Date.now()
-    }
-};
+export const getListSlider= (payload) => createActionNoAppID(SLIDER.GET_LIST, payload);
+export const callDeleteSlider= (payload) => createActionNoAppID(SLIDER.CALL_DELETE, payload);
+export const postSlider= (payload) => createActionNoAppID(SLIDER.CALL_POST_SLIDER, payload);
+export const deleteSliderAction= (payload) => createActionNoAppID(SLIDER.DELETE, payload);
+export const updateSliderAction= (payload) => createActionNoAppID(SLIDER.CALL_PUT, payload);

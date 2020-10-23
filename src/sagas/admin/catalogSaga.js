@@ -38,7 +38,6 @@ export function * watcherCallDeleteCatalog() {
 export function* watcherCallPostCatalog() {
     while (true) {
         const takeAction = yield take(CATALOG.CALL_POST);
-        debugger;
         const {payload} = takeAction;
         const {data} = payload;
         yield postCatalog(data);
@@ -60,4 +59,3 @@ export function* doCallListCatalog() {
     const catalog = yield getListCatalog_API();
     yield put({type: CATALOG.GET_LIST, catalog});
 }
-
