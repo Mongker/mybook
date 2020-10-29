@@ -16,22 +16,22 @@ import TableCatalog from './TableCatalog.jsx';
 // action
 import * as ProductAction from 'src/action/productAction';
 
-const mapStateToProps = state => {
-  return {};
+const mapStateToProps = (state) => {
+  const listProduct = state.Product;
+  return {
+    listProduct
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     // deleteAdmin: (id) => dispatch(ProductAction.callDeleteAdminAction(id)),
-    getListIdCatalog: (id) => {
-      debugger; // MongLV
-      return dispatch(ProductAction.getList_IdCatalog({id}))
-    },
+    getListIdCatalog: (id) => dispatch(ProductAction.getList_IdCatalog({id})),
   };
 };
 
 const TableCatalogContainer = connect(
-  null,
+    mapStateToProps,
     mapDispatchToProps
 )(TableCatalog);
 

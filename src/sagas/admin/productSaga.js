@@ -19,10 +19,8 @@ import {getListProduct_IDCatalog} from 'src/api/product/getListIdCatalog';
 export function* watcherCallListIDCatalog() {
     while (true) {
         const takeAction = yield take(PRODUCT.CALL_GET_LIST_ID_CATALOG);
-        debugger; // MongLV
         const {payload} = takeAction;
         const {id} = payload;
-        debugger; // MongLV
         if(id) {
             const product = yield getListProduct_IDCatalog(id);
             console.log(product);

@@ -9,7 +9,7 @@
 
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import {Button, Input, Row, Col, Image, Popconfirm, Spin, Empty, Skeleton} from 'antd';
+import {Button, Input, Row, Col, Image, Popconfirm, Spin, Empty, Skeleton, Drawer} from 'antd';
 import {EditTwoTone, DeleteTwoTone, QuestionCircleOutlined} from '@ant-design/icons';
 // import EditAdminContainer from "../Modal/EditAdminContainer";
 // import AddAdminContainer from "../Modal/AddAdminContainer";
@@ -32,13 +32,29 @@ const heightWindow =
     (window.innerHeight - window.innerHeight * 0.32).toString() + "px";
 
 function TableCatalog(props) {
-    const {id, getListIdCatalog} = props;
-    const [loading, setLoading] = useState(<Spin size="large" style={{
+    const {id, getListIdCatalog, listProduct} = props;
+
+    // const default
+    const loadingDefault = (<Spin size="large" style={{
         textAlign: 'center',
         paddingLeft: '50%',
         paddingTop: '100px'
     }}/>);
 
+    // state
+    const [list, setList] = React.useState(listProduct);
+    const [loading, setLoading] = useState(loadingDefault);
+    const [visible, setVisible] = useState(false);
+
+    // update state
+    if (listProduct !== list) {
+        setList(listProduct);
+    }
+
+    // const prop or state
+    const listArray = Object.keys(list);
+
+    // lifecycle
     useEffect(() => {
         const time = setTimeout(() => {
             setLoading({
@@ -48,16 +64,33 @@ function TableCatalog(props) {
         }, 2200);
         return () => clearTimeout(time);
     }, []);
-    useEffect(()=> {
-        console.log('id 3: '+id);
-        console.log('test');
-        console.log('---------------------------------')
 
+    useEffect(() => {
         getListIdCatalog(id);
     }, [id]);
+
+    // func
+    const showDrawer = () => {
+        setVisible(true);
+    };
+
+    const onClose = () => {
+        setVisible(false);
+    };
+
+    // JSX
+    const Title = (
+        <div style={{
+            textAlign: 'center',
+            alignItems: 'center',
+        }}>
+            <h2>Thêm sách vào thư mục</h2>
+        </div>
+    );
+
     return (
         <div>
-            {/* Table: Admin */}
+            {/* Table: Product */}
             <Row className={"table-header-catalog"}>
                 <Col className={"table-row-catalog"} span={COL_SPAN.img}>
                     Hình ảnh
@@ -82,15 +115,61 @@ function TableCatalog(props) {
                 </Col>
             </Row>
             <div style={{overflow: 'auto', height: heightWindow, width: 'auto'}}>
-                {loading}
-                {/*<Skeleton active  rows={5} width={400} />*/}
+                {listArray.length > 0 ? (
+                    listArray.map((item, index) => (
+                        <Row className={"table-tr-catalog"} key={index}>
+                            <Col className={"table-row-catalog"} span={COL_SPAN.img}>
+                                <Image
+                                    width={60}
+                                    height={80}
+                                    // src={URL_API.local+'file/'+list[item].image_link}
+                                    src={'https://sachvui.com/cover/2020/de-co-tri-nho-tot.jpg'}
+                                    fallback={'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'}
+                                />
+                            </Col>
+                            <Col className={"table-row-catalog"} span={COL_SPAN.name}>
+                                {list[item].name}
+                            </Col>
+                            <Col className={"table-row-catalog"} span={COL_SPAN.price}>
+                                {list[item].price} VNĐ
+                            </Col>
+                            <Col className={"table-row-catalog"} span={COL_SPAN.amount}>
+                                {list[item].amount}
+                            </Col>
+                            <Col className={"table-row-catalog"} span={COL_SPAN.view_user}>
+                                {list[item].view_user}
+                            </Col>
+                            <Col className={"table-row-catalog"} span={COL_SPAN.vote_user}>
+                                {list[item].vote_user}
+                            </Col>
+                            <Col className={"table-row-catalog"} span={COL_SPAN.event}>
+                                Hành động
+                            </Col>
+                        </Row>)
+                    )
+                ) : loading
+                }
+                {(loading !== loadingDefault && id !== null) && (<Button type="primary" style={{marginTop: '10px'}} onClick={showDrawer}>Thêm</Button>)}
             </div>
+            <Drawer
+                width={"35%"}
+                title={Title}
+                placement={'right'}
+                closable={false}
+                onClose={onClose}
+                visible={visible}
+                key={'right'}
+            >
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+            </Drawer>
         </div>
     );
 }
 
 TableCatalog.propTypes = {
-    list: PropTypes.object,
+    listProduct: PropTypes.object,
     type_key: PropTypes.object,
 
     getListIdCatalog: PropTypes.func,
@@ -102,7 +181,7 @@ TableCatalog.propTypes = {
 };
 
 TableCatalog.defaultProps = {
-    list: {},
+    listProduct: {},
     deleteAdmin: () => null,
     id: null,
     getListIdCatalog: () => null
