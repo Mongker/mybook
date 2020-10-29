@@ -11,7 +11,6 @@
 import {PRODUCT} from 'src/action/actionTypes.js';
 
 const Product = (state = {}, action) => {
-    debugger; // MongLV
     switch (action.type) {
         case PRODUCT.GET_LIST_ID_CATALOG:
             return action.product;

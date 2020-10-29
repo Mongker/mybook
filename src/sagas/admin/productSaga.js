@@ -14,7 +14,6 @@ import {CATALOG, PRODUCT} from 'src/action/actionTypes';
 
 // api
 import {getListProduct_IDCatalog} from 'src/api/product/getListIdCatalog';
-import {getListCatalog_API} from "src/api/catalog/getList";
 
 // -------------------------------------- watcher Action --------------------------------------/
 export function* watcherCallListIDCatalog() {
@@ -25,7 +24,8 @@ export function* watcherCallListIDCatalog() {
         const {id} = payload;
         debugger; // MongLV
         if(id) {
-            const product = yield getListCatalog_API(id);
+            const product = yield getListProduct_IDCatalog(id);
+            console.log(product);
             yield put({type: PRODUCT.GET_LIST_ID_CATALOG, product});
         }
     }
