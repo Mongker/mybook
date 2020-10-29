@@ -8,12 +8,14 @@
  */
 
 import { combineReducers } from "redux";
-import Slider from "./admin/slider/sliderReducers";
-import Admin from "./admin/admin/adminReducers";
-import Catalog from "./admin/catalog/catalogReducers";
+import Slider from "./admin/slider/sliderReducer";
+import Admin from "./admin/admin/adminReducer";
+import Catalog from "./admin/catalog/catalogReducer";
+import Product from "./admin/product/productReducer";
 const allReducers = combineReducers({
     Slider,
     Admin,
     Catalog,
+    Product,
 });
 export default allReducers;

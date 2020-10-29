@@ -9,7 +9,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, useHistory } from 'react-router-dom';
+import {Link, useRouteMatch } from 'react-router-dom';
 import { Menu, Tooltip, Popover, Row, Col, Popconfirm, Button, Modal, Form, Input } from 'antd';
 import {
     PlusCircleOutlined,
@@ -42,14 +42,13 @@ const tailLayout = {
 };
 
 function TreeCatalog(props) {
-    let history = useHistory();
+    let match = useRouteMatch();
     const { list, deleteId, post, put } = props;
     const [form] = Form.useForm();
     const [formEdit] = Form.useForm();
     const [visible, setVisible] = React.useState(false);
     const [visibleEdit, setVisibleEdit] = React.useState(false);
     const [idPut, setIdPut] = React.useState('');
-
     const deleteIdCatalog = (id) => {
         deleteId(id);
     };
@@ -63,10 +62,6 @@ function TreeCatalog(props) {
     const showModal = () => {
         setVisible(true);
     };
-
-    function handleClick(id) {
-        history.push(`/admin/catalog/${id}`);
-    }
 
     const showModalEdit = (id) => {
         setVisibleEdit(true);
@@ -159,7 +154,8 @@ function TreeCatalog(props) {
                     mode="inline"
                 >
                     {Object.keys(list).map((id) => (
-                        <Menu.Item key={id} onClick={() => handleClick(id)}>
+                        <Menu.Item key={id} >
+                            <Link to={`${match.url}/${id}`} >
                                 <Row justify="space-between">
                                     <Col span={4}>
                                         <Tooltip placement="right" title={list[id].description}>
@@ -173,6 +169,7 @@ function TreeCatalog(props) {
                                         </Popover>
                                     </Col>
                                 </Row>
+                            </Link>
                         </Menu.Item>
                     ))}
                     {

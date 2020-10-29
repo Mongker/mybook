@@ -32,7 +32,7 @@ const heightWindow =
     (window.innerHeight - window.innerHeight * 0.32).toString() + "px";
 
 function TableCatalog(props) {
-    debugger; // MongLV
+    const {id, getListIdCatalog} = props;
     const [loading, setLoading] = useState(<Spin size="large" style={{
         textAlign: 'center',
         paddingLeft: '50%',
@@ -47,8 +47,14 @@ function TableCatalog(props) {
             });
         }, 2200);
         return () => clearTimeout(time);
-    });
+    }, []);
+    useEffect(()=> {
+        console.log('id 3: '+id);
+        console.log('test');
+        console.log('---------------------------------')
 
+        getListIdCatalog(id);
+    }, [id]);
     return (
         <div>
             {/* Table: Admin */}
@@ -85,15 +91,21 @@ function TableCatalog(props) {
 
 TableCatalog.propTypes = {
     list: PropTypes.object,
-    deleteAdmin: PropTypes.func,
-    type: PropTypes.string,
     type_key: PropTypes.object,
+
+    getListIdCatalog: PropTypes.func,
     match: PropTypes.func,
+    deleteAdmin: PropTypes.func,
+
+    type: PropTypes.string,
+    id: PropTypes.string,
 };
 
 TableCatalog.defaultProps = {
     list: {},
     deleteAdmin: () => null,
+    id: null,
+    getListIdCatalog: () => null
 };
 
 export default React.memo(TableCatalog);

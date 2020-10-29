@@ -6,10 +6,10 @@
  * @student-code: 68DCHT20091
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
-import {call, put, take, select} from "redux-saga/effects";
+import {call, put, take} from 'redux-saga/effects';
 
 // action types
-import {CATALOG} from "src/action/actionTypes";
+import {CATALOG} from 'src/action/actionTypes';
 
 // api
 import {getListCatalog_API} from 'src/api/catalog/getList';

@@ -6,7 +6,7 @@
  * @student-code: 68DCHT20091
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
-import React, {memo} from 'react';
+import React from 'react';
 // Redux
 import { connect } from 'react-redux';
 
@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import TableCatalog from './TableCatalog.jsx';
 
 // action
-import * as AdminAction from 'src/action/adminAction';
+import * as ProductAction from 'src/action/productAction';
 
 const mapStateToProps = state => {
   return {};
@@ -22,13 +22,17 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteAdmin: (id) => dispatch(AdminAction.callDeleteAdminAction(id))
+    // deleteAdmin: (id) => dispatch(ProductAction.callDeleteAdminAction(id)),
+    getListIdCatalog: (id) => {
+      debugger; // MongLV
+      return dispatch(ProductAction.getList_IdCatalog({id}))
+    },
   };
 };
 
 const TableCatalogContainer = connect(
   null,
-  null
+    mapDispatchToProps
 )(TableCatalog);
 
 export default React.memo(TableCatalogContainer);

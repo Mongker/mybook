@@ -11,7 +11,7 @@
 import { connect } from 'react-redux';
 
 // components
-import TabAdmin from "./TabAdmin";
+import TabAdmin from './TabAdmin';
 
 const mapStateToProps = state => {
   return {};

@@ -10,21 +10,35 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'antd';
-import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import { Switch, Route, useRouteMatch, useHistory } from 'react-router-dom';
 
 // component
 import TreeCatalog from '../TreeCatalog';
 import TableCatalogContainer from '../Table/TableCatalogContainer';
 
 function CatalogContent(props) {
+    let id;
     let match = useRouteMatch();
+    let { location } = useHistory();
+    const { pathname } = location;
+    if(match.url !== pathname) {
+        const lengthUrl = match.url.length;
+        id = pathname.split('').filter((item, index) => index > lengthUrl).join('');
+    }
+
     const { getList, listCatalog, deleteCatalog, postCatalog, putCatalog } = props;
+    console.log('id: '+id);
+    const [idCatalog, setIdCatalog] = React.useState(id);
+    console.log('id 2: '+idCatalog);
     useEffect(
         () => {
             getList();
         },
         []
     );
+    if(idCatalog !== id) {
+        setIdCatalog(id);
+    }
     return (
         <Row>
             <Col flex={1}>
@@ -40,7 +54,7 @@ function CatalogContent(props) {
                     to={`${match.url}/:id`}
                     children={
                         <Col flex={6}>
-                            <TableCatalogContainer />
+                            <TableCatalogContainer id={idCatalog} />
                         </Col>
                         }
                 />
