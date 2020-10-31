@@ -11,11 +11,10 @@ import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {Button, Input, Row, Col, Image, Popconfirm, Spin, Empty, Skeleton, Drawer} from 'antd';
 import {EditTwoTone, DeleteTwoTone, QuestionCircleOutlined} from '@ant-design/icons';
-// import EditAdminContainer from "../Modal/EditAdminContainer";
-// import AddAdminContainer from "../Modal/AddAdminContainer";
 import {URL_API} from 'src/api/config';
 
-// component
+// styles
+import styles from './styles/index.local.less';
 
 // const
 const COL_SPAN = {
@@ -88,37 +87,39 @@ function TableCatalog(props) {
         </div>
     );
 
+    const test = styles.mong;
+    debugger; // MongLV
     return (
         <div>
             {/* Table: Product */}
-            <Row className={"table-header-catalog"}>
-                <Col className={"table-row-catalog"} span={COL_SPAN.img}>
+            <Row className={'table-header-catalog'}>
+                <Col className={'table-row-catalog'} span={COL_SPAN.img}>
                     Hình ảnh
                 </Col>
-                <Col className={"table-row-catalog"} span={COL_SPAN.name}>
+                <Col className={'table-row-catalog'} span={COL_SPAN.name}>
                     Tên sách
                 </Col>
-                <Col className={"table-row-catalog"} span={COL_SPAN.price}>
+                <Col className={'table-row-catalog'} span={COL_SPAN.price}>
                     Giá tiền
                 </Col>
-                <Col className={"table-row-catalog"} span={COL_SPAN.amount}>
+                <Col className={'table-row-catalog'} span={COL_SPAN.amount}>
                     Số lượng
                 </Col>
-                <Col className={"table-row-catalog"} span={COL_SPAN.view_user}>
+                <Col className={'table-row-catalog'} span={COL_SPAN.view_user}>
                     Số lượt xem
                 </Col>
-                <Col className={"table-row-catalog"} span={COL_SPAN.vote_user}>
+                <Col className={'table-row-catalog'} span={COL_SPAN.vote_user}>
                     Số lượng bình chọn
                 </Col>
-                <Col className={"table-row-catalog"} span={COL_SPAN.event}>
+                <Col className={'table-row-catalog'} span={COL_SPAN.event}>
                     Hành động
                 </Col>
             </Row>
             <div style={{overflow: 'auto', height: heightWindow, width: 'auto'}}>
                 {listArray.length > 0 ? (
                     listArray.map((item, index) => (
-                        <Row className={"table-tr-catalog"} key={index}>
-                            <Col className={"table-row-catalog"} span={COL_SPAN.img}>
+                        <Row className={'table-tr-catalog'} key={index}>
+                            <Col className={'table-row-catalog'} span={COL_SPAN.img}>
                                 <Image
                                     width={60}
                                     height={80}
@@ -127,22 +128,22 @@ function TableCatalog(props) {
                                     fallback={'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'}
                                 />
                             </Col>
-                            <Col className={"table-row-catalog"} span={COL_SPAN.name}>
+                            <Col className={'table-row-catalog'} span={COL_SPAN.name}>
                                 {list[item].name}
                             </Col>
-                            <Col className={"table-row-catalog"} span={COL_SPAN.price}>
+                            <Col className={'table-row-catalog'} span={COL_SPAN.price}>
                                 {list[item].price} VNĐ
                             </Col>
-                            <Col className={"table-row-catalog"} span={COL_SPAN.amount}>
+                            <Col className={'table-row-catalog'} span={COL_SPAN.amount}>
                                 {list[item].amount}
                             </Col>
-                            <Col className={"table-row-catalog"} span={COL_SPAN.view_user}>
+                            <Col className={'table-row-catalog'} span={COL_SPAN.view_user}>
                                 {list[item].view_user}
                             </Col>
-                            <Col className={"table-row-catalog"} span={COL_SPAN.vote_user}>
+                            <Col className={'table-row-catalog'} span={COL_SPAN.vote_user}>
                                 {list[item].vote_user}
                             </Col>
-                            <Col className={"table-row-catalog"} span={COL_SPAN.event}>
+                            <Col className={'table-row-catalog'} span={COL_SPAN.event}>
                                 Hành động
                             </Col>
                         </Row>)
@@ -160,9 +161,7 @@ function TableCatalog(props) {
                 visible={visible}
                 key={'right'}
             >
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
+
             </Drawer>
         </div>
     );
