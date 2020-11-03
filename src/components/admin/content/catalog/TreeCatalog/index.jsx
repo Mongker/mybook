@@ -104,7 +104,6 @@ function TreeCatalog(props) {
     const Content = ({ id }) => {
         return (
             <Row justify="space-between">
-
                 <Col flex={1}>
                     <EditTwoTone
                         className={'editTwoTone'}

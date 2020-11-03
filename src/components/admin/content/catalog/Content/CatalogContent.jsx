@@ -27,9 +27,7 @@ function CatalogContent(props) {
     }
 
     const { getList, listCatalog, deleteCatalog, postCatalog, putCatalog } = props;
-    console.log('id: '+id);
     const [idCatalog, setIdCatalog] = React.useState(id);
-    console.log('id 2: '+idCatalog);
     useEffect(
         () => {
             getList();

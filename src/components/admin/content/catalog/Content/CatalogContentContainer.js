@@ -14,8 +14,8 @@ import { connect } from 'react-redux';
 import CatalogContent from './CatalogContent';
 
 // action type
-import {CATALOG} from '../../../../../action/actionTypes';
-import * as action from '../../../../../action/catalogAction';
+import {CATALOG} from 'src/action/actionTypes';
+import * as action from 'src/action/catalogAction';
 
 const mapStateToProps = state => {
   return {

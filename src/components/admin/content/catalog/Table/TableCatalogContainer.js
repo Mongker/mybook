@@ -25,8 +25,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    // deleteAdmin: (id) => dispatch(ProductAction.callDeleteAdminAction(id)),
+    postProduct: (data) => dispatch(ProductAction.postProduct({data})),
     getListIdCatalog: (id) => dispatch(ProductAction.getList_IdCatalog({id})),
+    deleteProduct: (id) => dispatch(ProductAction.deleteProduct({id})),
+    puProduct: (id, data) => dispatch(ProductAction.putProduct({id, data})),
   };
 };
 

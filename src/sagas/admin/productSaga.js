@@ -8,12 +8,14 @@
  */
 
 import {call, put, take} from 'redux-saga/effects';
-
 // action types
 import {CATALOG, PRODUCT} from 'src/action/actionTypes';
 
 // api
 import {getListProduct_IDCatalog} from 'src/api/product/getListIdCatalog';
+import {postProduct} from 'src/api/product/post';
+import {deleteProduct} from 'src/api/product/delete';
+import {putProduct} from 'src/api/product/put';
 
 // -------------------------------------- watcher Action --------------------------------------/
 export function* watcherCallListIDCatalog() {
@@ -22,10 +24,49 @@ export function* watcherCallListIDCatalog() {
         const {payload} = takeAction;
         const {id} = payload;
         if(id) {
-            const product = yield getListProduct_IDCatalog(id);
-            console.log(product);
-            yield put({type: PRODUCT.GET_LIST_ID_CATALOG, product});
+            localStorage.setItem('id_click_catalog', id);
+            yield put({type: 'RUN_ListIDCatalog', id});
         }
     }
 }
+export function * watcherGetListIDCatalog() {
+   while (true) {
+       const takeAction = yield take('RUN_ListIDCatalog');
+       const {id} = takeAction;
+       const product = yield getListProduct_IDCatalog(id || localStorage.getItem('id_click_catalog'));
+       console.log(localStorage.getItem('id_click_catalog'));
+       yield put({type: PRODUCT.GET_LIST_ID_CATALOG, product});
+   }
+}
 
+export function* watcherCallPostProduct() {
+    while (true) {
+        const takeAction = yield take(PRODUCT.POST);
+        const {payload} = takeAction;
+        debugger; // MongLV
+        yield postProduct(payload.data);
+        yield put({type: 'RUN_ListIDCatalog'})
+    }
+}
+export function * watcherCallDeleteProduct() {
+    while (true) {
+        const takeAction = yield take(PRODUCT.DELETE);
+        debugger; // MongLV
+        const {payload} = takeAction;
+        yield deleteProduct(payload.id);
+        yield put({type: 'RUN_ListIDCatalog'})
+    }
+}
+
+export function* watcherPutProduct() {
+    while (true) {
+        const takeAction = yield take(PRODUCT.PUT);
+        const {payload} = takeAction;
+        const {id, data} = payload;
+        debugger; // MongLV
+        yield putProduct(id, data);
+        yield put({type: 'RUN_ListIDCatalog'});
+    }
+}
+
+// -------------------------------------- do Saga ---------------------------------------/
