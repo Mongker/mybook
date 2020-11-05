@@ -1,6 +1,6 @@
 import {render} from '@testing-library/react';
 import React, {Component} from 'react';
-import './style.css';
+import './style/style.css';
 import {Menu, Dropdown} from 'antd';
 import {DownOutlined} from '@ant-design/icons';
 import 'antd/dist/antd.css';
@@ -8,10 +8,11 @@ import {Input} from 'antd';
 import {AudioOutlined} from '@ant-design/icons';
 import {Carousel} from 'antd';
 //styles
-const adcbook = require('./book.PNG');
-const backgroundpink = require('./background-pink.jpg');
-const ferbuarybook = require('./ferbuary-book.png');
-
+const adcbook = require('./img/book.PNG');
+//const backgroundpink = require('../img/background-pink.jpg');
+const ferbuarybook = require('./img/ferbuary-book.png');
+const shoppingcart = require('./img/shopping-cart.png');
+const phonecall = require('./img/phone-call.png');
 //search
 const {Search} = Input;
 const onSearch = value => console.log(value);
@@ -155,8 +156,28 @@ const contentStyle = {
 function Header() {
     return (
         <div className={'header'}>
-            <div className={'list-menu-item'}>
+            <div className={'class-list-menu'}>
+                <ul className={'list-ul-up-menu'} >
+                    <li className={'after-text-list'}><a href="#">Tin tức </a></li>
+                    <li className={'after-text-list'}><a href="#">Hỏi đáp </a></li>
+                    <li className={'after-text-list'}><a href="#">Hệ thống cửa hàng </a></li>
+                    <li className={'after-text-list'}><a href="#">Đăng ký </a></li>
+                    <li ><a href="#">Đăng nhập </a></li>
+                </ul>
+            </div>
+
+            <div className={'up-menu'}>
                 <img src={adcbook} alt="" className={'book-logo'} href='#'/>
+                <Search placeholder="input search text" onSearch={onSearch} style={{width: 600}} className={'search'}/>
+                <a href="#" className={'img-shopping'}>
+                    <img src={shoppingcart} alt=""/>
+                    <p className={'text-shopping'}>Giỏ hàng của bạn</p>
+                    <span className={'number-shopping'}>0</span>
+                </a>
+            </div>
+
+            <div className={'list-menu-item'}>
+
                 <ul className={'menu'}>
                     <li>
                         <Dropdown overlay={home}>
@@ -195,7 +216,7 @@ function Header() {
                         </Dropdown>
                     </li>
                 </ul>
-                <Search placeholder="input search text" onSearch={onSearch} style={{width: 600}} className={'search'}/>
+
             </div>
 
             <Carousel autoplay>
@@ -278,6 +299,7 @@ function Header() {
             </Carousel>
 
         </div>
+
     );
 
 }

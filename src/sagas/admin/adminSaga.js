@@ -58,6 +58,7 @@ export function* watcherLoginAdmin() {
         const takeAction = yield take(ADMIN.LOGIN);
         const {payload} = takeAction;
         const dataLogin = yield getLoginAdmin(payload.data);
+        debugger; // MongLV
         if(dataLogin && Object.keys(dataLogin).length > 1) {
             localStorage.setItem('token_admin', dataLogin.password);
             localStorage.setItem('id_admin', dataLogin.id_admin);

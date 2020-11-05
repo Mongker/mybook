@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import './style.css';
+import './style/style.css';
 import 'antd/dist/antd.css';
 
 
 // const
-const adcbook = require('./book.PNG');
-const instagram = require('./instagram.png');
-const facebook = require('./facebook.png');
-const youtube = require('./youtube.png');
-const twitter = require('./twitter.png');
-const pinterest = require('./pinterest.png');
-const websitehethong1 = require('./website-cung-he-thong-1.png');
-const logo3 = require('./logo3.png');
+const adcbook = require('./img/book.PNG');
+const instagram = require('./img/instagram.png');
+const facebook = require('./img/facebook.png');
+const youtube = require('./img/youtube.png');
+const twitter = require('./img/twitter.png');
+const pinterest = require('./img/pinterest.png');
+const websitehethong1 = require('./img/website-cung-he-thong-1.png');
+const logo3 = require('./img/logo3.png');
 function Footer(){
     return (
         <div className={'footer'}>
@@ -67,7 +67,7 @@ function Footer(){
            <div className={'lower-footer'}>
                <div className={'footer-cass'}>
                    <p className={'text-lower-cass'}>© 2018 - Bản quyền của CÔNG TY CP MĨ THUẬT VÀ TRUYỀN THÔNG - ADCBook</p>
-                   
+
                </div>
                <div className={'lower-img'}>
                  <img src={websitehethong1} alt=""/>
@@ -75,7 +75,7 @@ function Footer(){
                </div>
            </div>
         </div>
-           
+
     )
 }
 

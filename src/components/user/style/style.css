@@ -1,12 +1,15 @@
 body {
     margin:0;
     font-family: "Jost", sans-serif;
-    background-color:#fff;
+    /*background-color:#fff;*/
 }
 /* header */
 .list-menu-item {
    display: flex;
     align-items: center;
+    justify-content: center;
+    border: 1px solid #eae8e4!important;
+    background-color: #dd0917;
 }
 
 .menu {
@@ -16,11 +19,21 @@ body {
     list-style: none;
     font-size: 20px;
     margin-bottom: 0px;
+    padding: 20px 0px;
+
+}
+.menu a {
+    color: #ffff;
+}
+.menu li {
+    margin: 0px 20px;
+
+
 }
 li {
     padding-right: 30px;
     margin-right: 10px;
-    
+
 }
 
 .home-menu {
@@ -42,7 +55,55 @@ li {
     color: #19110b;
 }
 ul {
-   
+
+}
+.up-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin: auto;
+}
+.text-shopping {
+    margin: 0px 20px;
+}
+.class-list-menu {
+    background-color: #f4f4f4;
+}
+.list-ul-up-menu a {
+    color: #777777;
+}
+.after-text-list {
+    padding: 0;
+}
+.after-text-list::after {
+    content: "|";
+}
+.list-ul-up-menu {
+    list-style: none;
+   padding: 10px 0px;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 0;
+
+    display: flex;
+    justify-content: flex-end;
+}
+.img-shopping {
+   border: 1px solid #eae8e4!important;
+    background-color: #faf1ff;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.number-shopping {
+    border: 1px solid #eae8e4!important;
+    padding: 8px;
+    border-radius: 20px;
+    background-color: yellow;
 }
 .book-logo {
     padding: 5px 10px;
@@ -63,7 +124,7 @@ ul {
     height: 500px;
     width:100%;
     z-index: -1;
-  
+
 } */
 .slider {
     background: url('./background-pink.jpg');
@@ -80,7 +141,7 @@ ul {
     z-index: 0;
     /* display: flex;
     justify-content:space-between; */
-    
+
     margin: auto;
     width: 80%;
 }
@@ -102,19 +163,19 @@ ul {
 .content-img {
     max-width: 100%;
     height: auto;
-    
+
 }
 .text-bold {
     text-align: left;
     font-size: 56px;
     font-weight: bold;
     margin-bottom: 0px;
-   
+
 }
 .button-see-more {
     text-align: left;
     margin: 30px 0px;
-    
+
     background-color: #161619;
     padding: 10px 50px;
     border: 1px solid transparent;
@@ -125,15 +186,15 @@ ul {
     align-items: flex-start;
 }
 .button-see-more  a{
-   
+
     color: #fff;
 }
 /* Content */
-.content {
+.content-m {
     border: 1px solid #eae8e4!important;
 }
 .feature-categories {
-    
+
     width:80%;
     margin: auto;
 }
@@ -207,7 +268,7 @@ ul {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    
+
     padding: 32px 40px 32px 40px;
 }
 .food {
@@ -215,7 +276,7 @@ ul {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    
+
     padding: 32px 40px 32px 40px;
 }
 .romance {
@@ -223,7 +284,7 @@ ul {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    
+
     padding: 32px 40px 32px 40px;
 }
 .health {
@@ -231,7 +292,7 @@ ul {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    
+
     padding: 32px 40px 32px 40px;
 }
 .health-text {
@@ -248,7 +309,7 @@ ul {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    
+
     padding: 32px 40px 32px 40px;
 }
 .biography-text {
@@ -283,7 +344,7 @@ ul {
     display: flex;
    padding: 40px 0px;
    justify-content: space-between;
-} 
+}
 .cost {
     margin-top:10px;
     font-weight: 700;
@@ -319,9 +380,9 @@ ul {
     background-repeat: no-repeat;
     background-position: top center;
     height: 100%;
-    
+
     padding: 50px 56px;
-    
+
 }
 .img-release {
     margin-top: 120px;
@@ -373,7 +434,7 @@ ul {
 }
 .author{
     padding-bottom: 96px;
-   
+
 }
 .author-img {
     margin: 0px 69px 32px;
@@ -388,11 +449,15 @@ ul {
     color: #161619;
     padding:0px;
     margin: 0px;
+    display: flex;
+    justify-content: center;
 }
 .text-publish {
     color: #7c6e65;
     padding:0px;
     margin: 0px;
+    display: flex;
+    justify-content: center;
 }
 .text-favorite-author {
     display: flex;
@@ -410,7 +475,7 @@ ul {
 .div-img-author {
     display: flex;
     justify-content:space-between;
-    
+
 }
 /* footer */
 .footer {
@@ -450,7 +515,7 @@ ul {
    width: 60%;
    justify-content:space-between;
    padding-bottom: 96px;
-   
+
 }
 .explore {
     color: #161619;
