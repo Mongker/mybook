@@ -541,3 +541,125 @@ ul {
     justify-content:space-between;
     align-items: center;
 }
+/*detail-product*/
+.detail {
+
+}
+.arrow-li {
+    padding: 0;
+}
+.arrow-li::after {
+    content: "  >";
+}
+.line-page {
+    border: 1px solid #eae8e4!important;
+
+}
+.list-line {
+    list-style: none;
+    display: flex;
+    justify-content: flex-start;
+    padding: 24px 0px;
+    width: 80%;
+    margin: auto;
+}
+.product {
+    padding-top: 56px;
+    width: 80%;
+    margin: auto;
+    display: flex;
+
+}
+.img-product {
+ margin: 0px 56px;
+}
+.banner-product {
+    color: #161619;
+    font-size: 30px;
+    margin-bottom: 16px;
+
+}
+.cost-book {
+    color: #161619;
+    font-size: 22px;
+    margin-bottom: 16px;
+    font-weight: 500;
+}
+.text-area-book{
+    margin-bottom: 50px;
+}
+.by-author {
+    color: #161619;
+    font-size: 14px;
+
+}
+.content-product {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+.input-number {
+    padding: 10px 5px;
+}
+.buy-now {
+    color: #ffffff;
+
+    padding: 20px 50px;
+    margin: 0px 0px 0px 24px;
+    background-color: #dd0917;
+}
+.add-to-cart {
+    color: #ffffff;
+
+    padding: 20px 50px;
+    margin: 0px 0px 0px 24px;
+    background-color: #07A185;
+}
+.list-certificate {
+    display: flex;
+    flex-direction: column;
+}
+.items-certificate {
+    display: flex;
+    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+    padding: 30px;
+    border: 1px solid #eae8e4!important;
+}
+.delivery {
+   margin-bottom: 4px;
+    color: #161619;
+    font-weight: 600;
+    font-size: 16px;
+}
+.order-over {
+    margin: 0;
+    font-size: 16px;
+}
+.img-delivery {
+    margin-right: 20px;
+}
+.infomation-product {
+    padding: 64px 15px 0px 64px;
+    width: 80%;
+    margin: auto;
+}
+.book-infor{
+    width: 60%;
+}
+.SKU {
+    display: flex;
+    justify-content: space-between;
+}
+.items-infor {
+    width: 50% ;
+    display: flex;
+    justify-content: space-between;
+
+}
+.categories-detail {
+    display: flex;
+    justify-content: space-between;
+}

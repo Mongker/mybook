@@ -11,12 +11,30 @@ import React from 'react';
 import Header from './header.jsx'
 import Content from './content.jsx';
 import Footer from './footer.jsx';
+import {Switch, Route, useRouteMatch} from 'react-router-dom';
+
+import SliderContainer from "src/components/admin/content/slider/SliderContainer";
+import TodoApp from 'src/components/demo/todo/todoApp';
+import DetailProduct from "src/components/user/detailproduct";
 
 function User() {
+    let match = useRouteMatch();
+    console.log(match.url);
+    debugger; // MongLV
     return(
         <div className="App">
             <Header />
-            <Content />
+            <DetailProduct />
+            {/*<Switch>*/}
+            {/*    <Route*/}
+            {/*        path={`${match.url}`}*/}
+            {/*        component={Content}*/}
+            {/*    />*/}
+            {/*    <Route*/}
+            {/*        path={`${match.url}product-detail `}*/}
+            {/*        component={TodoApp}*/}
+            {/*    />*/}
+            {/*</Switch>*/}
             <Footer />
         </div>
     );

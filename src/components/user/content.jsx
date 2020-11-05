@@ -1,14 +1,17 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './style/style.css';
 import 'antd/dist/antd.css';
-import { Carousel } from 'antd';
-import { Card, Avatar } from 'antd';
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import {Carousel, Menu} from 'antd';
+import {Card, Avatar} from 'antd';
+import {Link, useHistory} from "react-router-dom";
+import {EditOutlined, EllipsisOutlined, SettingOutlined} from '@ant-design/icons';
 //const
-const { Meta } = Card;
+const {Meta} = Card;
+
 function onChange(a, b, c) {
     console.log(a, b, c);
 }
+
 const contentStyle = {
     height: '160px',
     color: '#fff',
@@ -29,9 +32,100 @@ const author2 = require('./img/author-2.jpg');
 const author3 = require('./img/author-3.jpg');
 const author4 = require('./img/author-4.jpg');
 const author5 = require('./img/author-5.jpg');
+
+const adcbook = require('./img/book.PNG');
+//const backgroundpink = require('../img/background-pink.jpg');
+const ferbuarybook = require('./img/ferbuary-book.png');
+const shoppingcart = require('./img/shopping-cart.png');
+const phonecall = require('./img/phone-call.png');
+
+
 function Content() {
+    let history = useHistory();
+    const handleClick = () => {
+        debugger; // MongLV
+        history.push('/product-detail');
+    };
     return (
         <div className={'content-m'}>
+            <Carousel autoplay>
+                <div>
+                    <div className={"slider"}>
+
+                        <div className={'text-slider'}>
+                            <div className={'bookworm-editor'}>
+                                <div className={'editor'}>
+                                    <p className={'text-1'}>THE ADCBOOK EDITORS'</p>
+                                    <p className={'text-2'}>Featureds Books of The</p>
+                                    <p className={'text-bold'}> Ferbuary</p>
+                                    <div className={'button-see-more'}><a href={'#'} className={'see-more'}>See more</a>
+                                    </div>
+                                </div>
+
+                                <img src={ferbuarybook} alt="" className={'content-img'}/>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div className={"slider"}>
+
+                        <div className={'text-slider'}>
+                            <div className={'bookworm-editor'}>
+                                <div className={'editor'}>
+                                    <p className={'text-1'}>THE ADCBOOK EDITORS'</p>
+                                    <p className={'text-2'}>Featureds Books of The</p>
+                                    <p className={'text-bold'}> Ferbuary</p>
+                                    <div className={'button-see-more'}><a href={'#'} className={'see-more'}>See more</a>
+                                    </div>
+                                </div>
+
+                                <img src={ferbuarybook} alt="" className={'content-img'}/>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div className={"slider"}>
+
+                        <div className={'text-slider'}>
+                            <div className={'bookworm-editor'}>
+                                <div className={'editor'}>
+                                    <p className={'text-1'}>THE ADCBOOK EDITORS'</p>
+                                    <p className={'text-2'}>Featureds Books of The</p>
+                                    <p className={'text-bold'}> Ferbuary</p>
+                                    <div className={'button-see-more'}><a href={'#'} className={'see-more'}>See more</a>
+                                    </div>
+                                </div>
+
+                                <img src={ferbuarybook} alt="" className={'content-img'}/>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div className={"slider"}>
+
+                        <div className={'text-slider'}>
+                            <div className={'bookworm-editor'}>
+                                <div className={'editor'}>
+                                    <p className={'text-1'}>THE ADCBOOK EDITORS'</p>
+                                    <p className={'text-2'}>Featureds Books of The</p>
+                                    <p className={'text-bold'}> Ferbuary</p>
+                                    <div className={'button-see-more'}><a href={'#'} className={'see-more'}>See more</a>
+                                    </div>
+                                </div>
+
+                                <img src={ferbuarybook} alt="" className={'content-img'}/>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </Carousel>
             <div className={'feature-categories'}>
                 {/*<div className={'feature'}>*/}
                 {/*    <p className={'text-feature'}>Featured Categories</p>*/}
@@ -85,55 +179,59 @@ function Content() {
                         <div className={'carousel-x'}>
                             <Card
                                 hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
+                                onClick={handleClick}
                             >
-                                <Meta title="Angry God " description="L.J Shen" />
+                                <Link to={'/product-detail'}>
+                                    <Meta title="Angry God " description="L.J Shen"/>
+                                    <p className={'cost'}>$1.30</p>
+                                    <a href="#" className={'add-cart'}>Add to Cart</a>
+                                </Link>
+
+                            </Card>
+                            <Card
+                                hoverable
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
+                            >
+                                <Meta title="Angry God " description="L.J Shen"/>
                                 <p className={'cost'}>$1.30</p>
                                 <a href="#" className={'add-cart'}>Add to Cart</a>
                             </Card>
                             <Card
                                 hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
                             >
-                                <Meta title="Angry God " description="L.J Shen" />
+                                <Meta title="Angry God " description="L.J Shen"/>
                                 <p className={'cost'}>$1.30</p>
                                 <a href="#" className={'add-cart'}>Add to Cart</a>
                             </Card>
                             <Card
                                 hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
                             >
-                                <Meta title="Angry God " description="L.J Shen" />
+                                <Meta title="Angry God " description="L.J Shen"/>
                                 <p className={'cost'}>$1.30</p>
                                 <a href="#" className={'add-cart'}>Add to Cart</a>
                             </Card>
                             <Card
                                 hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
                             >
-                                <Meta title="Angry God " description="L.J Shen" />
+                                <Meta title="Angry God " description="L.J Shen"/>
                                 <p className={'cost'}>$1.30</p>
                                 <a href="#" className={'add-cart'}>Add to Cart</a>
                             </Card>
                             <Card
                                 hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
                             >
-                                <Meta title="Angry God " description="L.J Shen" />
-                                <p className={'cost'}>$1.30</p>
-                                <a href="#" className={'add-cart'}>Add to Cart</a>
-                            </Card>
-                            <Card
-                                hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
-                            >
-                                <Meta title="Angry God " description="L.J Shen" />
+                                <Meta title="Angry God " description="L.J Shen"/>
                                 <p className={'cost'}>$1.30</p>
                                 <a href="#" className={'add-cart'}>Add to Cart</a>
                             </Card>
@@ -144,114 +242,55 @@ function Content() {
                         <div className={'carousel-x'}>
                             <Card
                                 hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
                             >
-                                <Meta title="Angry God " description="L.J Shen" />
+                                <Meta title="Angry God " description="L.J Shen"/>
                                 <p className={'cost'}>$1.30</p>
                                 <a href="#" className={'add-cart'}>Add to Cart</a>
                             </Card>
                             <Card
                                 hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
                             >
-                                <Meta title="Angry God " description="L.J Shen" />
+                                <Meta title="Angry God " description="L.J Shen"/>
                                 <p className={'cost'}>$1.30</p>
                                 <a href="#" className={'add-cart'}>Add to Cart</a>
                             </Card>
                             <Card
                                 hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
                             >
-                                <Meta title="Angry God " description="L.J Shen" />
+                                <Meta title="Angry God " description="L.J Shen"/>
                                 <p className={'cost'}>$1.30</p>
                                 <a href="#" className={'add-cart'}>Add to Cart</a>
                             </Card>
                             <Card
                                 hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
                             >
-                                <Meta title="Angry God " description="L.J Shen" />
+                                <Meta title="Angry God " description="L.J Shen"/>
                                 <p className={'cost'}>$1.30</p>
                                 <a href="#" className={'add-cart'}>Add to Cart</a>
                             </Card>
                             <Card
                                 hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
                             >
-                                <Meta title="Angry God " description="L.J Shen" />
+                                <Meta title="Angry God " description="L.J Shen"/>
                                 <p className={'cost'}>$1.30</p>
                                 <a href="#" className={'add-cart'}>Add to Cart</a>
                             </Card>
                             <Card
                                 hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
                             >
-                                <Meta title="Angry God " description="L.J Shen" />
-                                <p className={'cost'}>$1.30</p>
-                                <a href="#" className={'add-cart'}>Add to Cart</a>
-                            </Card>
-
-                        </div>
-                    </div>
-                    <div>
-                        <div className={'carousel-x'}>
-                            <Card
-                                hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
-                            >
-                                <Meta title="Angry God " description="L.J Shen" />
-                                <p className={'cost'}>$1.30</p>
-                                <a href="#" className={'add-cart'}>Add to Cart</a>
-                            </Card>
-                            <Card
-                                hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
-                            >
-                                <Meta title="Angry God " description="L.J Shen" />
-                                <p className={'cost'}>$1.30</p>
-                                <a href="#" className={'add-cart'}>Add to Cart</a>
-                            </Card>
-                            <Card
-                                hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
-                            >
-                                <Meta title="Angry God " description="L.J Shen" />
-                                <p className={'cost'}>$1.30</p>
-                                <a href="#" className={'add-cart'}>Add to Cart</a>
-                            </Card>
-                            <Card
-                                hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
-                            >
-                                <Meta title="Angry God " description="L.J Shen" />
-                                <p className={'cost'}>$1.30</p>
-                                <a href="#" className={'add-cart'}>Add to Cart</a>
-                            </Card>
-                            <Card
-                                hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
-                            >
-                                <Meta title="Angry God " description="L.J Shen" />
-                                <p className={'cost'}>$1.30</p>
-                                <a href="#" className={'add-cart'}>Add to Cart</a>
-                            </Card>
-                            <Card
-                                hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
-                            >
-                                <Meta title="Angry God " description="L.J Shen" />
+                                <Meta title="Angry God " description="L.J Shen"/>
                                 <p className={'cost'}>$1.30</p>
                                 <a href="#" className={'add-cart'}>Add to Cart</a>
                             </Card>
@@ -262,55 +301,114 @@ function Content() {
                         <div className={'carousel-x'}>
                             <Card
                                 hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
                             >
-                                <Meta title="Angry God " description="L.J Shen" />
+                                <Meta title="Angry God " description="L.J Shen"/>
                                 <p className={'cost'}>$1.30</p>
                                 <a href="#" className={'add-cart'}>Add to Cart</a>
                             </Card>
                             <Card
                                 hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
                             >
-                                <Meta title="Angry God " description="L.J Shen" />
+                                <Meta title="Angry God " description="L.J Shen"/>
                                 <p className={'cost'}>$1.30</p>
                                 <a href="#" className={'add-cart'}>Add to Cart</a>
                             </Card>
                             <Card
                                 hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
                             >
-                                <Meta title="Angry God " description="L.J Shen" />
+                                <Meta title="Angry God " description="L.J Shen"/>
                                 <p className={'cost'}>$1.30</p>
                                 <a href="#" className={'add-cart'}>Add to Cart</a>
                             </Card>
                             <Card
                                 hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
                             >
-                                <Meta title="Angry God " description="L.J Shen" />
+                                <Meta title="Angry God " description="L.J Shen"/>
                                 <p className={'cost'}>$1.30</p>
                                 <a href="#" className={'add-cart'}>Add to Cart</a>
                             </Card>
                             <Card
                                 hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
                             >
-                                <Meta title="Angry God " description="L.J Shen" />
+                                <Meta title="Angry God " description="L.J Shen"/>
                                 <p className={'cost'}>$1.30</p>
                                 <a href="#" className={'add-cart'}>Add to Cart</a>
                             </Card>
                             <Card
                                 hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
                             >
-                                <Meta title="Angry God " description="L.J Shen" />
+                                <Meta title="Angry God " description="L.J Shen"/>
+                                <p className={'cost'}>$1.30</p>
+                                <a href="#" className={'add-cart'}>Add to Cart</a>
+                            </Card>
+
+                        </div>
+                    </div>
+                    <div>
+                        <div className={'carousel-x'}>
+                            <Card
+                                hoverable
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
+                            >
+                                <Meta title="Angry God " description="L.J Shen"/>
+                                <p className={'cost'}>$1.30</p>
+                                <a href="#" className={'add-cart'}>Add to Cart</a>
+                            </Card>
+                            <Card
+                                hoverable
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
+                            >
+                                <Meta title="Angry God " description="L.J Shen"/>
+                                <p className={'cost'}>$1.30</p>
+                                <a href="#" className={'add-cart'}>Add to Cart</a>
+                            </Card>
+                            <Card
+                                hoverable
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
+                            >
+                                <Meta title="Angry God " description="L.J Shen"/>
+                                <p className={'cost'}>$1.30</p>
+                                <a href="#" className={'add-cart'}>Add to Cart</a>
+                            </Card>
+                            <Card
+                                hoverable
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
+                            >
+                                <Meta title="Angry God " description="L.J Shen"/>
+                                <p className={'cost'}>$1.30</p>
+                                <a href="#" className={'add-cart'}>Add to Cart</a>
+                            </Card>
+                            <Card
+                                hoverable
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
+                            >
+                                <Meta title="Angry God " description="L.J Shen"/>
+                                <p className={'cost'}>$1.30</p>
+                                <a href="#" className={'add-cart'}>Add to Cart</a>
+                            </Card>
+                            <Card
+                                hoverable
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
+                            >
+                                <Meta title="Angry God " description="L.J Shen"/>
                                 <p className={'cost'}>$1.30</p>
                                 <a href="#" className={'add-cart'}>Add to Cart</a>
                             </Card>
@@ -322,55 +420,55 @@ function Content() {
                         <div className={'carousel-x'}>
                             <Card
                                 hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
                             >
-                                <Meta title="Angry God " description="L.J Shen" />
+                                <Meta title="Angry God " description="L.J Shen"/>
                                 <p className={'cost'}>$1.30</p>
                                 <a href="#" className={'add-cart'}>Add to Cart</a>
                             </Card>
                             <Card
                                 hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
                             >
-                                <Meta title="Angry God " description="L.J Shen" />
+                                <Meta title="Angry God " description="L.J Shen"/>
                                 <p className={'cost'}>$1.30</p>
                                 <a href="#" className={'add-cart'}>Add to Cart</a>
                             </Card>
                             <Card
                                 hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
                             >
-                                <Meta title="Angry God " description="L.J Shen" />
+                                <Meta title="Angry God " description="L.J Shen"/>
                                 <p className={'cost'}>$1.30</p>
                                 <a href="#" className={'add-cart'}>Add to Cart</a>
                             </Card>
                             <Card
                                 hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
                             >
-                                <Meta title="Angry God " description="L.J Shen" />
+                                <Meta title="Angry God " description="L.J Shen"/>
                                 <p className={'cost'}>$1.30</p>
                                 <a href="#" className={'add-cart'}>Add to Cart</a>
                             </Card>
                             <Card
                                 hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
                             >
-                                <Meta title="Angry God " description="L.J Shen" />
+                                <Meta title="Angry God " description="L.J Shen"/>
                                 <p className={'cost'}>$1.30</p>
                                 <a href="#" className={'add-cart'}>Add to Cart</a>
                             </Card>
                             <Card
                                 hoverable
-                                style={{ width: 180 }}
-                                cover={<img alt="example" src={avenir} />}
+                                style={{width: 180}}
+                                cover={<img alt="example" src={avenir}/>}
                             >
-                                <Meta title="Angry God " description="L.J Shen" />
+                                <Meta title="Angry God " description="L.J Shen"/>
                                 <p className={'cost'}>$1.30</p>
                                 <a href="#" className={'add-cart'}>Add to Cart</a>
                             </Card>
@@ -386,10 +484,10 @@ function Content() {
                     <p className={'text-release'}>New Releases</p>
 
                 </div>
-                <div className={'banner-release'} >
+                <div className={'banner-release'}>
                     <div className={'pic-release'}>
                         <div className={'pic-sale'}>
-                            <img src={release} alt="" className={'img-release'} />
+                            <img src={release} alt="" className={'img-release'}/>
                             <p className={'text-extra'}>Get Extra</p>
                             <p className={'text-sale'}>Sale -25%</p>
                             <p className={'text-order'}>ON ORDER OVER 100%</p>
@@ -400,37 +498,37 @@ function Content() {
                             <div className={'release-1'}>
                                 <Card
                                     hoverable
-                                    style={{ width: 180 }}
-                                    cover={<img alt="example" src={avenir} className={'release-card-sale'} />}
+                                    style={{width: 180}}
+                                    cover={<img alt="example" src={avenir} className={'release-card-sale'}/>}
                                 >
-                                    <Meta title="Angry God " description="L.J Shen" />
+                                    <Meta title="Angry God " description="L.J Shen"/>
                                     <p className={'cost'}>$1.30</p>
                                     <a href="#" className={'add-cart'}>Add to Cart</a>
                                 </Card>
                                 <Card
                                     hoverable
-                                    style={{ width: 180 }}
-                                    cover={<img alt="example" src={avenir} className={'release-card-sale'} />}
+                                    style={{width: 180}}
+                                    cover={<img alt="example" src={avenir} className={'release-card-sale'}/>}
                                 >
-                                    <Meta title="Angry God " description="L.J Shen" />
+                                    <Meta title="Angry God " description="L.J Shen"/>
                                     <p className={'cost'}>$1.30</p>
                                     <a href="#" className={'add-cart'}>Add to Cart</a>
                                 </Card>
                                 <Card
                                     hoverable
-                                    style={{ width: 180 }}
-                                    cover={<img alt="example" src={avenir} className={'release-card-sale'} />}
+                                    style={{width: 180}}
+                                    cover={<img alt="example" src={avenir} className={'release-card-sale'}/>}
                                 >
-                                    <Meta title="Angry God " description="L.J Shen" />
+                                    <Meta title="Angry God " description="L.J Shen"/>
                                     <p className={'cost'}>$1.30</p>
                                     <a href="#" className={'add-cart'}>Add to Cart</a>
                                 </Card>
                                 <Card
                                     hoverable
-                                    style={{ width: 180 }}
-                                    cover={<img alt="example" src={avenir} className={'release-card-sale'} />}
+                                    style={{width: 180}}
+                                    cover={<img alt="example" src={avenir} className={'release-card-sale'}/>}
                                 >
-                                    <Meta title="Angry God " description="L.J Shen" />
+                                    <Meta title="Angry God " description="L.J Shen"/>
                                     <p className={'cost'}>$1.30</p>
                                     <a href="#" className={'add-cart'}>Add to Cart</a>
                                 </Card>
@@ -438,37 +536,37 @@ function Content() {
                             <div className={'release-2'}>
                                 <Card
                                     hoverable
-                                    style={{ width: 180 }}
-                                    cover={<img alt="example" src={avenir} className={'release-card-sale'} />}
+                                    style={{width: 180}}
+                                    cover={<img alt="example" src={avenir} className={'release-card-sale'}/>}
                                 >
-                                    <Meta title="Angry God " description="L.J Shen" />
+                                    <Meta title="Angry God " description="L.J Shen"/>
                                     <p className={'cost'}>$1.30</p>
                                     <a href="#" className={'add-cart'}>Add to Cart</a>
                                 </Card>
                                 <Card
                                     hoverable
-                                    style={{ width: 180 }}
-                                    cover={<img alt="example" src={avenir} className={'release-card-sale'} />}
+                                    style={{width: 180}}
+                                    cover={<img alt="example" src={avenir} className={'release-card-sale'}/>}
                                 >
-                                    <Meta title="Angry God " description="L.J Shen" />
+                                    <Meta title="Angry God " description="L.J Shen"/>
                                     <p className={'cost'}>$1.30</p>
                                     <a href="#" className={'add-cart'}>Add to Cart</a>
                                 </Card>
                                 <Card
                                     hoverable
-                                    style={{ width: 180 }}
-                                    cover={<img alt="example" src={avenir} className={'release-card-sale'} />}
+                                    style={{width: 180}}
+                                    cover={<img alt="example" src={avenir} className={'release-card-sale'}/>}
                                 >
-                                    <Meta title="Angry God " description="L.J Shen" />
+                                    <Meta title="Angry God " description="L.J Shen"/>
                                     <p className={'cost'}>$1.30</p>
                                     <a href="#" className={'add-cart'}>Add to Cart</a>
                                 </Card>
                                 <Card
                                     hoverable
-                                    style={{ width: 180 }}
-                                    cover={<img alt="example" src={avenir} className={'release-card-sale'} />}
+                                    style={{width: 180}}
+                                    cover={<img alt="example" src={avenir} className={'release-card-sale'}/>}
                                 >
-                                    <Meta title="Angry God " description="L.J Shen" />
+                                    <Meta title="Angry God " description="L.J Shen"/>
                                     <p className={'cost'}>$1.30</p>
                                     <a href="#" className={'add-cart'}>Add to Cart</a>
                                 </Card>
@@ -488,27 +586,27 @@ function Content() {
                         </div>
                         <div className={'div-img-author'}>
                             <a href="#">
-                                <img src={author1} alt="" className={'author-img'} />
+                                <img src={author1} alt="" className={'author-img'}/>
                                 <p className={'text-name-author'}>Barbara O'Neal</p>
                                 <p className={'text-publish'}>1 Published Book</p>
                             </a>
                             <a href="#">
-                                <img src={author2} alt="" className={'author-img'} />
+                                <img src={author2} alt="" className={'author-img'}/>
                                 <p className={'text-name-author'}>A J Riddle</p>
                                 <p className={'text-publish'}>2 Published Book</p>
                             </a>
                             <a href="#">
-                                <img src={author3} alt="" className={'author-img'} />
+                                <img src={author3} alt="" className={'author-img'}/>
                                 <p className={'text-name-author'}>Anna Banks</p>
                                 <p className={'text-publish'}>6 Published Book</p>
                             </a>
                             <a href="#">
-                                <img src={author4} alt="" className={'author-img'} />
+                                <img src={author4} alt="" className={'author-img'}/>
                                 <p className={'text-name-author'}>Ashlee Vance</p>
                                 <p className={'text-publish'}>2 Published Book</p>
                             </a>
                             <a href="#">
-                                <img src={author5} alt="" className={'author-img'} />
+                                <img src={author5} alt="" className={'author-img'}/>
                                 <p className={'text-name-author'}>Andre Aciman</p>
                                 <p className={'text-publish'}>1 Published Book</p>
                             </a>
