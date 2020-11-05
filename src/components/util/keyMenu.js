@@ -17,4 +17,6 @@ export const KEY_MENU = {
     ADMIN: "Nhân Viên",
     USER: "Khách Hàng",
     SETTING: "Cài Đặt",
+    LOGOUT: "Đăng Xuất",
+    SETTING_USER: " "
 };

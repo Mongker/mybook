@@ -19,11 +19,10 @@ import {
     Popconfirm,
     Spin,
     Empty,
-    Skeleton,
     Drawer,
     Form,
     Upload,
-    Modal,
+    Select,
     Popover
 } from 'antd';
 import {EditTwoTone, DeleteTwoTone, QuestionCircleOutlined, AppstoreTwoTone, PlusOutlined} from '@ant-design/icons';
@@ -33,6 +32,8 @@ import {URL_API} from 'src/api/config';
 import getBase64 from 'src/components/util/getBase64';
 import getIdRandom from 'src/components/util/getIdRandom';
 // const
+const {Search} = Input;
+const {Option} = Select;
 const COL_SPAN = {
     img: 3,
     name: 4,
@@ -54,9 +55,8 @@ const layout = {
 const heightWindow =
     (window.innerHeight - window.innerHeight * 0.32).toString() + "px";
 
-function TableCatalog(props) {
-    const {id, getListIdCatalog, listProduct, postProduct, deleteProduct, puProduct} = props;
-    debugger; // MongLV
+function TableProduct(props) {
+    const {id, type, listCatalog, getListIdCatalog, listProduct, postProduct, deleteProduct, puProduct, getListProduct, getListCatalog} = props;
     // const default
     const loadingDefault = (<Spin size="large" style={{
         textAlign: 'center',
@@ -68,6 +68,7 @@ function TableCatalog(props) {
 
     // state
     const [list, setList] = React.useState(listProduct);
+    const [listArray, setListArray] = React.useState([]);
     const [loading, setLoading] = useState(loadingDefault);
     const [visible, setVisible] = useState(false);
     const [visibleEdit, setVisibleEdit] = useState(false);
@@ -77,14 +78,11 @@ function TableCatalog(props) {
     const [previewImage, setPreviewImage] = useState('');
     const [previewTitle, setPreviewTitle] = useState('');
     const [idEdit, setIdEdit] = useState('');
-
     // update state
     if (listProduct !== list) {
         setList(listProduct);
+        setListArray(Object.keys(listProduct))
     }
-
-    // const prop or state
-    const listArray = Object.keys(list);
 
     // lifecycle
     useEffect(() => {
@@ -100,27 +98,28 @@ function TableCatalog(props) {
     useEffect(() => {
         getListIdCatalog(id);
     }, [id]);
-
+    useEffect(() => {
+        getListProduct();
+        getListCatalog();
+    }, []);
     // func
     const showDrawer = () => {
         setVisible(true);
+        form1.setFieldsValue({
+            catalog_id: localStorage.getItem('id_click_catalog') || '',
+        });
     };
-
     const onClose = () => {
         setVisible(false);
         setVisibleEdit(false);
         setFileList([]);
         setFileListImg([]);
-        onReset();
     };
     const onFinish = (values) => {
         values.image_link = fileListImg;
-        if (localStorage.getItem('id_click_catalog')) {
-            values.catalog_id = localStorage.getItem('id_click_catalog');
-            postProduct(values);
-            onReset();
-            onClose();
-        }
+        postProduct(values);
+        onReset();
+        onClose();
     };
     const logicUpdateDataProduct = (values = {}) => {
         let newValue;
@@ -136,7 +135,7 @@ function TableCatalog(props) {
             amount: values.add_amount,
         };
         Object.keys(newValue.history_amount['items']).map((item) => {
-            sum = sum +  newValue.history_amount.items[item].amount
+            sum = sum + newValue.history_amount.items[item].amount
         });
         newValue.history_amount['total'] = sum;
         newValue['amount'] = sum;
@@ -145,7 +144,7 @@ function TableCatalog(props) {
 
     const onFinishEdit = (values) => {
         let newValue = {};
-        if(idEdit && fileListImg.length > 0) {
+        if (idEdit && fileListImg.length > 0) {
             values.image_link = fileListImg;
             newValue = logicUpdateDataProduct(values);
         } else {
@@ -168,7 +167,6 @@ function TableCatalog(props) {
     };
     const handlePreview = async (file) => {
         if (!file.url && !file.preview) {
-            debugger; // MongLV
             file.preview = await getBase64(file.originFileObj);
         }
         showModalImage();
@@ -176,15 +174,12 @@ function TableCatalog(props) {
         setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf("/") + 1));
     };
     const showModalImage = () => setPreviewVisible(!previewVisible);
+
     const onReset = () => {
         form1.resetFields(); // Reset lại các dữ liệu của form
-        onResetEdit(idEdit); // Reset lại các dữ liệu của form
-        setFileListImg([]);
-        setFileList([]);
     };
-    const onResetEdit = (id) => {
+    const onResetEdit = (id = idEdit) => {
         let listImgDefault = [];
-        debugger; // MongLV
         listProduct[id] && listProduct[id].image_link.map((item) => {
             const object = {
                 uid: getIdRandom(),
@@ -192,10 +187,10 @@ function TableCatalog(props) {
                 status: 'done',
                 url: `${URL_API.local}file/${item}`
             };
+            console.log(object);
             listImgDefault.push(object);
         });
         setFileList(listImgDefault);
-        debugger; // MongLV
         listProduct[id] && form2.setFieldsValue({
             name: listProduct[id].name,
             price: listProduct[id].price,
@@ -203,6 +198,7 @@ function TableCatalog(props) {
             add_amount: 0,
             image_link: listImgDefault,
             description: listProduct[id].description,
+            catalog_id: listProduct[id].catalog_id,
         });
     };
 
@@ -213,6 +209,15 @@ function TableCatalog(props) {
         setIdEdit(id);
         setVisibleEdit(true);
         onResetEdit(id);
+    };
+
+    const handleSearch = (value) => {
+        const newList = Object.keys(listProduct).filter((item) => (listProduct[item].name.toLowerCase().indexOf(value.toLowerCase()) !== -1) ||
+            (listProduct[item].amount.toString().toLowerCase().indexOf(value.toLowerCase()) !== -1 ) ||
+            listProduct[item].price.toString().toLowerCase().indexOf(value.toLowerCase()) !== -1
+            )
+        ;
+        setListArray(newList);
     };
 
     // JSX
@@ -259,9 +264,38 @@ function TableCatalog(props) {
                 </Col>
             </Row>)
     };
+    const CatalogText = ({id}) => {
+        const textCatalog = Object.keys(listCatalog).length > 0 && listCatalog[id].name;
+        return (<>{textCatalog}</>)
+    };
+
+    console.log(listArray);
 
     return (
         <div>
+            <Row style={{
+                position: !type ? 'absolute' : 'fixed',
+                top: `${window.innerHeight * 0.025}px`,
+                left: '55%',
+                width: `${window.innerWidth * 0.42}px`
+            }}>
+                <Col span={12} offset={10}>
+                    <Search
+                        placeholder="Tìm kiếm"
+                        style={{width: "97%"}}
+                        enterButton
+                        onSearch={(value) => handleSearch(value)}
+                    />
+                </Col>
+                <Col span={2}>
+                    <Button
+                        type="primary"
+                        onClick={showDrawer}
+                    >
+                        Thêm
+                    </Button>
+                </Col>
+            </Row>
             {/* Table: Product */}
             <Row className={'table-header-catalog'}>
                 <Col className={'table-row-catalog'} span={COL_SPAN.img}>
@@ -277,10 +311,10 @@ function TableCatalog(props) {
                     Số lượng
                 </Col>
                 <Col className={'table-row-catalog'} span={COL_SPAN.view_user}>
-                    Số lượt xem
+                    Đã bán
                 </Col>
                 <Col className={'table-row-catalog'} span={COL_SPAN.vote_user}>
-                    Số lượng bình chọn
+                    Thể loại
                 </Col>
                 <Col className={'table-row-catalog'} span={COL_SPAN.event}>
                     Hành động
@@ -300,19 +334,22 @@ function TableCatalog(props) {
                                 />
                             </Col>
                             <Col className={'table-row-catalog'} span={COL_SPAN.name}>
-                                {list[item].name}
+                                <Row>
+                                    <Row><b>{list[item].name}</b></Row>
+                                    <Row>View: {list[item].view_user} | Vote: {list[item].vote_user}</Row>
+                                </Row>
                             </Col>
                             <Col className={'table-row-catalog'} span={COL_SPAN.price}>
-                                {list[item].price} VNĐ
+                                {`${list[item].price}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")} VNĐ
                             </Col>
                             <Col className={'table-row-catalog'} span={COL_SPAN.amount}>
                                 {list[item].amount}
                             </Col>
                             <Col className={'table-row-catalog'} span={COL_SPAN.view_user}>
-                                {list[item].view_user}
+                                {list[item].sold}
                             </Col>
                             <Col className={'table-row-catalog'} span={COL_SPAN.vote_user}>
-                                {list[item].vote_user}
+                                <CatalogText id={list[item].catalog_id}/>
                             </Col>
                             <Col className={'table-row-catalog'} span={COL_SPAN.event}>
                                 <Popover content={<Setting id={item}/>} placement="left" trigger="click">
@@ -324,8 +361,6 @@ function TableCatalog(props) {
                 ) : loading
                 }
             </div>
-            {(loading !== loadingDefault && id !== null) && (
-                <Button type="primary" onClick={showDrawer}>Thêm</Button>)}
             {/* Thêm Product */}
             <Drawer
                 width={"35%"}
@@ -411,6 +446,29 @@ function TableCatalog(props) {
                             )}
                         </Upload>
                     </Form.Item>
+                    <Form.Item
+                        name={'catalog_id'}
+                        label={'Thư mục:'}
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Bắt buộc phải có',
+                            },
+                        ]}
+                    >
+                        <Select
+                            placeholder="Select a option and change input text above"
+                            showSearch
+                            filterOption={(input, option) =>
+                                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                            }
+                            allowClear
+                        >
+                            {Object.keys(listCatalog).length > 0 && Object.keys(listCatalog).map((item, index) => (
+                                <Option value={item}>{listCatalog[item].name}</Option>
+                            ))}
+                        </Select>
+                    </Form.Item>
                     <Form.Item wrapperCol={{...layout.wrapperCol, offset: 7}}>
                         <Button type="primary" htmlType="submit" style={{marginRight: '50px'}}>
                             Add
@@ -480,7 +538,7 @@ function TableCatalog(props) {
                             },
                         ]}
                     >
-                        <InputNumber style={{width: '100px'}} min={0} max={100000000}/>
+                        <InputNumber disabled={true} style={{width: '100px'}} min={0} max={100000000}/>
                     </Form.Item>
                     <Form.Item
                         name={'add_amount'}
@@ -523,11 +581,34 @@ function TableCatalog(props) {
                             )}
                         </Upload>
                     </Form.Item>
+                    <Form.Item
+                        name={'catalog_id'}
+                        label={'Thư mục:'}
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Bắt buộc phải có',
+                            },
+                        ]}
+                    >
+                        <Select
+                            placeholder="Select a option and change input text above"
+                            showSearch
+                            filterOption={(input, option) =>
+                                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                            }
+                            allowClear
+                        >
+                            {Object.keys(listCatalog).length > 0 && Object.keys(listCatalog).map((item, index) => (
+                                <Option value={item}>{listCatalog[item].name}</Option>
+                            ))}
+                        </Select>
+                    </Form.Item>
                     <Form.Item wrapperCol={{...layout.wrapperCol, offset: 7}}>
                         <Button type="primary" htmlType="submit" style={{marginRight: '50px'}}>
                             Save
                         </Button>
-                        <Button onClick={onReset} htmlType="button" style={{paddingLeft: '10px'}}>
+                        <Button onClick={() => onResetEdit(idEdit)} htmlType="button" style={{paddingLeft: '10px'}}>
                             Reset
                         </Button>
                     </Form.Item>
@@ -548,8 +629,9 @@ function TableCatalog(props) {
     );
 }
 
-TableCatalog.propTypes = {
+TableProduct.propTypes = {
     listProduct: PropTypes.object,
+    listCatalog: PropTypes.object,
     type_key: PropTypes.object,
 
     getListIdCatalog: PropTypes.func,
@@ -558,19 +640,25 @@ TableCatalog.propTypes = {
     postProduct: PropTypes.func,
     deleteProduct: PropTypes.func,
     puProduct: PropTypes.func,
+    getListProduct: PropTypes.func,
+    getListCatalog: PropTypes.func,
 
     type: PropTypes.string,
     id: PropTypes.string,
 };
 
-TableCatalog.defaultProps = {
+TableProduct.defaultProps = {
     listProduct: {},
+    listCatalog: {},
     deleteAdmin: () => null,
     id: null,
+    type: null,
     getListIdCatalog: () => null,
     postProduct: () => null,
     deleteProduct: () => null,
-    puProduct: () => null
+    puProduct: () => null,
+    getListProduct: () => null,
+    getListCatalog: () => null
 };
 
-export default React.memo(TableCatalog);
+export default React.memo(TableProduct);

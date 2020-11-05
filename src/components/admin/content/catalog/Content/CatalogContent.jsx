@@ -14,7 +14,7 @@ import { Switch, Route, useRouteMatch, useHistory } from 'react-router-dom';
 
 // component
 import TreeCatalog from '../TreeCatalog';
-import TableCatalogContainer from '../Table/TableCatalogContainer';
+import TableCatalogContainer from '../../products/TableProductContainer';
 
 function CatalogContent(props) {
     let id;
@@ -52,12 +52,11 @@ function CatalogContent(props) {
                     to={`${match.url}/:id`}
                     children={
                         <Col flex={6}>
-                            <TableCatalogContainer id={idCatalog} />
+                            <TableCatalogContainer id={idCatalog} type={'Catalog'} />
                         </Col>
                         }
                 />
             </Switch>
-
         </Row>
     );
 }

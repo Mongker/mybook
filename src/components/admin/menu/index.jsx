@@ -12,7 +12,7 @@ import PropTypes from "prop-types";
 
 // styles
 import {Menu} from "antd";
-import "../styles/index.css";
+import '../styles/index.css';
 import {
     BarsOutlined,
     HomeOutlined,
@@ -21,6 +21,7 @@ import {
     ShoppingOutlined,
     PictureOutlined,
     FileDoneOutlined,
+    LogoutOutlined,
 } from "@ant-design/icons";
 import {Route, Link, useRouteMatch} from "react-router-dom";
 
@@ -42,7 +43,7 @@ function LogoAdmin() {
 }
 
 function MenuAmin(props) {
-    const {collapsed, setTitleHeader} = props;
+    const {collapsed, setTitleHeader, onShowDrawer} = props;
     const match = useRouteMatch();
 
     /**
@@ -67,11 +68,12 @@ function MenuAmin(props) {
                     <Link to={`${match.url}/home`}> Trang Chủ</Link>
                 </Menu.Item>
                 <Menu.Item key={KEY_MENU.CATALOG} icon={<BarsOutlined/>}>
-                    <Link to={`${match.url}/catalog`}> </Link>
-                    Danh mục (Thể loại)
+                    <Link to={`${match.url}/catalog`}>Danh mục (Thể loại)</Link>
                 </Menu.Item>
                 <Menu.Item key={KEY_MENU.PRODUCT} icon={<ShoppingOutlined/>}>
-                    Sản phẩm
+                    <Link to={`${match.url}/product`}>
+                        Sản phẩm
+                    </Link>
                 </Menu.Item>
                 <Menu.Item key={KEY_MENU.TRANSACTION} icon={<FileDoneOutlined/>}>
                     Đơn đặt hàng
@@ -88,15 +90,8 @@ function MenuAmin(props) {
                 <Menu.Item key={KEY_MENU.SLIDER} icon={<PictureOutlined/>}>
                     <Link to={`${match.url}/slider`}>Slider</Link>
                 </Menu.Item>
-                <SubMenu
-                    key={KEY_MENU.SETTING}
-                    icon={<SettingOutlined/>}
-                    title="Cài đặt"
-                >
-                    <Menu.Item key="3">Đăng Xuất</Menu.Item>
-                    <Menu.Item key="4">Cài đặt hiễn thị</Menu.Item>
-                    <Menu.Item key="5">Cấu hình góc nhìn</Menu.Item>
-                </SubMenu>
+                <Menu.Item icon={<SettingOutlined/>} key={KEY_MENU.SETTING_USER} onClick={() => onShowDrawer()}>Cài đặt tài khoản</Menu.Item>
+                <Menu.Item icon={<LogoutOutlined />} key={KEY_MENU.LOGOUT}>Đăng Xuất</Menu.Item>
             </Menu>
         </Route>
     );
@@ -105,6 +100,7 @@ function MenuAmin(props) {
 MenuAmin.propTypes = {
     collapsed: PropTypes.bool,
     setTitleHeader: PropTypes.func,
+    onShowDrawer: PropTypes.func,
 };
 
 MenuAmin.defaultProps = {

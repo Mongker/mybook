@@ -16,3 +16,5 @@ export const callDeleteAdminAction = (payload) => createActionNoAppID(ADMIN.CALL
 export const callPostAdminAction = (payload) => createActionNoAppID(ADMIN.CALL_POST_ADMIN, payload);
 export const callPutAdminAction = (payload) => createActionNoAppID(ADMIN.CALL_PUT, payload);
 export const deleteAdminAction = (payload) => createActionNoAppID(ADMIN.DELETE, payload);
+export const loginAdminAction = (payload) => createActionNoAppID(ADMIN.LOGIN, payload);
+export const getAdminIdAction = (payload) => createActionNoAppID(ADMIN.GET_ADMIN, payload);

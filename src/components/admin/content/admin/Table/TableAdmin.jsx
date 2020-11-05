@@ -97,7 +97,7 @@ function TableAdmin(props) {
         setVisibleAdd(false);
     };
     const handleSearch = (value) => {
-        const newList = listArray.filter((item) => (list[item].name.toLowerCase().indexOf(value.toLowerCase()) !== -1));
+        const newList = Object.keys(listObject).filter((item) => (list[item].name.toLowerCase().indexOf(value.toLowerCase()) !== -1));
         setListArray(newList);
     };
 
@@ -121,7 +121,7 @@ function TableAdmin(props) {
             }}>
                 <Col span={12} offset={10}>
                     <Search
-                        placeholder="Tìm kiếm"
+                        placeholder="Tìm kiếm theo tên"
                         style={{width: "97%"}}
                         enterButton
                         onSearch={(value) => handleSearch(value)}

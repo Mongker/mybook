@@ -8,7 +8,6 @@
  */
 
 export default function getBase64(file) {
-    debugger; // MongLV
     const img = new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);

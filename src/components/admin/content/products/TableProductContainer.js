@@ -11,15 +11,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 // components
-import TableCatalog from './TableCatalog.jsx';
+import TableCatalog from './TableProduct.jsx';
 
 // action
 import * as ProductAction from 'src/action/productAction';
+import {CATALOG} from "src/action/actionTypes";
 
 const mapStateToProps = (state) => {
   const listProduct = state.Product;
+  const listCatalog = state.Catalog;
   return {
-    listProduct
+    listProduct,
+    listCatalog
   };
 };
 
@@ -29,12 +32,14 @@ const mapDispatchToProps = dispatch => {
     getListIdCatalog: (id) => dispatch(ProductAction.getList_IdCatalog({id})),
     deleteProduct: (id) => dispatch(ProductAction.deleteProduct({id})),
     puProduct: (id, data) => dispatch(ProductAction.putProduct({id, data})),
+    getListProduct: () => dispatch(ProductAction.getList()),
+    getListCatalog: () => dispatch({type: CATALOG.CALL_GET_LIST}),
   };
 };
 
-const TableCatalogContainer = connect(
+const TableProductContainer = connect(
     mapStateToProps,
     mapDispatchToProps
 )(TableCatalog);
 
-export default React.memo(TableCatalogContainer);
+export default React.memo(TableProductContainer);

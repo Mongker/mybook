@@ -19,9 +19,6 @@ import {URL_API} from "../config";
 import {message} from "antd";
 
 export function putProduct(id, data) {
-    console.log(id);
-    console.log(data);
-    debugger; // MongLV
     try {
         return axios.put(`${URL_API.local}product/${id}`, data)
             .then(res => res.data).then((result) => {

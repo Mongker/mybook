@@ -15,7 +15,7 @@ const Product = (state = {}, action) => {
         case PRODUCT.GET_LIST_ID_CATALOG:
             return action.product;
         case PRODUCT.GET_LIST:
-            return state;
+            return action.product;
         default:
             return state;
     }

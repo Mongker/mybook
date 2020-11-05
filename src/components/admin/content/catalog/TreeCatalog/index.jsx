@@ -9,8 +9,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link, useRouteMatch } from 'react-router-dom';
-import { Menu, Tooltip, Popover, Row, Col, Popconfirm, Button, Modal, Form, Input } from 'antd';
+import {Link, useRouteMatch} from 'react-router-dom';
+import {Menu, Tooltip, Popover, Row, Col, Popconfirm, Button, Modal, Form, Input} from 'antd';
 import {
     PlusCircleOutlined,
     ReadOutlined,
@@ -25,6 +25,7 @@ import '../styles/index.css';
 
 // const
 const heightWindow = (window.innerHeight - window.innerHeight * 0.32).toString() + "px";
+const {Search} = Input;
 const layout = {
     labelCol: {
         span: 5,
@@ -43,21 +44,28 @@ const tailLayout = {
 
 function TreeCatalog(props) {
     let match = useRouteMatch();
-    const { list, deleteId, post, put } = props;
+    // constructor
+
+    const {list, deleteId, post, put} = props;
     const [form] = Form.useForm();
     const [formEdit] = Form.useForm();
+    const [listArray, setListArray] = React.useState(Object.keys(list));
     const [visible, setVisible] = React.useState(false);
     const [visibleEdit, setVisibleEdit] = React.useState(false);
     const [idPut, setIdPut] = React.useState('');
-    const deleteIdCatalog = (id) => {
-        deleteId(id);
-    };
-
     // Note MongLV: để xét giá trị cho form
     // form.setFieldsValue({
     //     name: '',
     //     description: ''
     // });
+    React.useMemo(() => {
+        setListArray(Object.keys(list));
+    }, [list]);
+
+    // func
+    const deleteIdCatalog = (id) => {
+        deleteId(id);
+    };
 
     const showModal = () => {
         setVisible(true);
@@ -89,19 +97,25 @@ function TreeCatalog(props) {
         put(idPut, values);
         onReset();
     };
+    const handleSearch = (value) => {
+        const newList = Object.keys(list).filter((item) => (list[item].name.toLowerCase().indexOf(value.toLowerCase()) !== -1));
+        setListArray(newList);
+    };
 
+    // JSX
     function TitleAdd() {
         return (
             <div className={'modalAdd'}>Thêm thể loại sách </div>
         );
     }
+
     function TitleEdit() {
         return (
             <div className={'modalAdd'}>Sửa thể loại sách </div>
         );
     }
 
-    const Content = ({ id }) => {
+    const Content = ({id}) => {
         return (
             <Row justify="space-between">
                 <Col flex={1}>
@@ -118,7 +132,7 @@ function TreeCatalog(props) {
                         okText="Phải"
                         cancelText="Không"
                         onConfirm={() => deleteIdCatalog(id)}
-                        icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
+                        icon={<QuestionCircleOutlined style={{color: 'red'}}/>}
                     >
                         <DeleteTwoTone
                             className={'deleteTwoTone'}
@@ -133,38 +147,38 @@ function TreeCatalog(props) {
     return (
         <div className={'container-catalog'}>
             <Menu
-                style={{ width: 256 }}
+                style={{width: 256}}
                 defaultSelectedKeys={['Title']}
                 defaultOpenKeys={['Title']}
                 mode="inline"
             >
-                <Menu.Item key="Title" style={{ backgroundColor: '#33c6d6' }}>
+                <Menu.Item key="Title" style={{backgroundColor: '#33c6d6'}}>
                     <span className={'menuTitle'}>
                         <span>Danh sách thể loại</span>
                     </span>
                 </Menu.Item>
             </Menu>
-            <div style={{ overflow: 'auto', height: heightWindow, width: 256 }}>
+            <div style={{overflow: 'auto', height: heightWindow, width: 256}}>
                 <Menu
                     // onClick={handleClick}
-                    style={{ width: 256 }}
+                    style={{width: 256}}
                     defaultSelectedKeys={['1']}
                     defaultOpenKeys={['sub1']}
                     mode="inline"
                 >
-                    {Object.keys(list).map((id) => (
-                        <Menu.Item key={id} >
-                            <Link to={`${match.url}/${id}`} >
+                    {listArray.map((id) => (
+                        <Menu.Item key={id}>
+                            <Link to={`${match.url}/${id}`}>
                                 <Row justify="space-between">
                                     <Col span={4}>
                                         <Tooltip placement="right" title={list[id].description}>
-                                            <ReadOutlined />
+                                            <ReadOutlined/>
                                         </Tooltip>
                                     </Col>
                                     <Col span={16}><span>{list[id].name}</span></Col>
                                     <Col>
-                                        <Popover content={<Content id={id} />} placement="right" trigger="click">
-                                            <SettingOutlined />
+                                        <Popover content={<Content id={id}/>} placement="right" trigger="click">
+                                            <SettingOutlined/>
                                         </Popover>
                                     </Col>
                                 </Row>
@@ -172,35 +186,55 @@ function TreeCatalog(props) {
                         </Menu.Item>
                     ))}
                     {
-                        Object.keys(list).length < 9 &&
+                        listArray.length < 9 &&
                         (
-                            <Button
-                                className={'addCatalog'}
-                                type="primary"
-                                icon={<PlusCircleOutlined />}
-                                onClick={showModal}
-                            >
-                                Thêm
-                            </Button>
+                            <Row justify={'start'}>
+                                <Col span={17}>
+                                    <Search
+                                        placeholder="Tìm kiếm"
+                                        style={{width: "100%"}}
+                                        enterButton
+                                        onSearch={(value) => handleSearch(value)}
+                                    />
+                                </Col>
+                                <Col span={1} style={{marginLeft: '5px'}}>
+                                    <Button
+                                        type="primary"
+                                        onClick={showModal}
+                                    >
+                                        Thêm
+                                    </Button>
+                                </Col>
+                            </Row>
                         )
                     }
                 </Menu>
             </div>
             {
-                Object.keys(list).length >= 9 &&
+                listArray.length >= 9 &&
                 (
-                    <Button
-                        className={'addCatalog'}
-                        type="primary"
-                        icon={<PlusCircleOutlined />}
-                        onClick={showModal}
-                    >
-                        Thêm
-                    </Button>
+                    <Row>
+                        <Col span={15}>
+                            <Search
+                                placeholder="Tìm kiếm"
+                                style={{width: "100%"}}
+                                enterButton
+                                onSearch={(value) => handleSearch(value)}
+                            />
+                        </Col>
+                        <Col span={2}>
+                            <Button
+                                type="primary"
+                                onClick={showModal}
+                            >
+                                Thêm
+                            </Button>
+                        </Col>
+                    </Row>
                 )
             }
             <Modal
-                title={<TitleAdd />}
+                title={<TitleAdd/>}
                 visible={visible}
                 footer={null}
                 closeIcon={true}
@@ -216,24 +250,24 @@ function TreeCatalog(props) {
                             },
                         ]}
                     >
-                        <Input />
+                        <Input/>
                     </Form.Item>
                     <Form.Item
                         name={'description'}
                         label="Miêu tả"
                     >
-                        <Input.TextArea />
+                        <Input.TextArea/>
                     </Form.Item>
                     <Form.Item {...tailLayout}>
                         <Row style={{
                             alignItems: 'center',
                         }}>
-                            <Col style={{ paddingRight: '20px' }}>
+                            <Col style={{paddingRight: '20px'}}>
                                 <Button type="primary" htmlType="submit">
                                     Thêm
                                 </Button>
                             </Col>
-                            <Col style={{ paddingLeft: '20px' }}>
+                            <Col style={{paddingLeft: '20px'}}>
                                 <Button onClick={onReset}>
                                     Đóng
                                 </Button>
@@ -243,7 +277,7 @@ function TreeCatalog(props) {
                 </Form>
             </Modal>
             <Modal
-                title={<TitleEdit />}
+                title={<TitleEdit/>}
                 visible={visibleEdit}
                 footer={null}
                 closeIcon={true}
@@ -259,24 +293,24 @@ function TreeCatalog(props) {
                             },
                         ]}
                     >
-                        <Input />
+                        <Input/>
                     </Form.Item>
                     <Form.Item
                         name={'description'}
                         label="Miêu tả"
                     >
-                        <Input.TextArea />
+                        <Input.TextArea/>
                     </Form.Item>
                     <Form.Item {...tailLayout}>
                         <Row style={{
                             alignItems: 'center',
                         }}>
-                            <Col style={{ paddingRight: '20px' }}>
+                            <Col style={{paddingRight: '20px'}}>
                                 <Button type="primary" htmlType="submit">
                                     Lưu
                                 </Button>
                             </Col>
-                            <Col style={{ paddingLeft: '20px' }}>
+                            <Col style={{paddingLeft: '20px'}}>
                                 <Button onClick={onReset}>
                                     Đóng
                                 </Button>

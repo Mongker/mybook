@@ -9,13 +9,14 @@
 
 import {call, put, take} from 'redux-saga/effects';
 // action types
-import {CATALOG, PRODUCT} from 'src/action/actionTypes';
+import {PRODUCT} from 'src/action/actionTypes';
 
 // api
 import {getListProduct_IDCatalog} from 'src/api/product/getListIdCatalog';
 import {postProduct} from 'src/api/product/post';
 import {deleteProduct} from 'src/api/product/delete';
 import {putProduct} from 'src/api/product/put';
+import {getListProduct_API} from 'src/api/product/getList';
 
 // -------------------------------------- watcher Action --------------------------------------/
 export function* watcherCallListIDCatalog() {
@@ -43,7 +44,6 @@ export function* watcherCallPostProduct() {
     while (true) {
         const takeAction = yield take(PRODUCT.POST);
         const {payload} = takeAction;
-        debugger; // MongLV
         yield postProduct(payload.data);
         yield put({type: 'RUN_ListIDCatalog'})
     }
@@ -51,7 +51,6 @@ export function* watcherCallPostProduct() {
 export function * watcherCallDeleteProduct() {
     while (true) {
         const takeAction = yield take(PRODUCT.DELETE);
-        debugger; // MongLV
         const {payload} = takeAction;
         yield deleteProduct(payload.id);
         yield put({type: 'RUN_ListIDCatalog'})
@@ -63,10 +62,21 @@ export function* watcherPutProduct() {
         const takeAction = yield take(PRODUCT.PUT);
         const {payload} = takeAction;
         const {id, data} = payload;
-        debugger; // MongLV
         yield putProduct(id, data);
         yield put({type: 'RUN_ListIDCatalog'});
     }
 }
 
+export function* watcherGetListProduct() {
+    while (true) {
+        yield take(PRODUCT.CALL_GET_LIST);
+        yield call(doCallListProduct);
+    }
+}
+
 // -------------------------------------- do Saga ---------------------------------------/
+
+export function* doCallListProduct() {
+    const product = yield getListProduct_API();
+    yield put({type: PRODUCT.GET_LIST, product});
+}

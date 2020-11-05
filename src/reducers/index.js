@@ -10,12 +10,14 @@
 import { combineReducers } from "redux";
 import Slider from "./admin/slider/sliderReducer";
 import Admin from "./admin/admin/adminReducer";
+import UseAdmin from "./admin/admin/useAdminReducer";
 import Catalog from "./admin/catalog/catalogReducer";
-import Product from "./admin/product/productReducer";
+import Product from './admin/product/productReducer';
 const allReducers = combineReducers({
     Slider,
     Admin,
     Catalog,
     Product,
+    UseAdmin,
 });
 export default allReducers;

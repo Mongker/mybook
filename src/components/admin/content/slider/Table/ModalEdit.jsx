@@ -45,9 +45,17 @@ function ModalEdit(props) {
     } = props;
     const {putIndex} = useSelectIndex();
     const [form] = Form.useForm();
-    const [linkFile, setLinkFile] = useState('');
-    const [percent, setPercent] = useState(0);
+
     const [tmp, setTmp] = useState(0);
+
+    const name = data.name ? data.name : '';
+    const img = data.image_link ? data.image_link : '';
+    const index = data.index ? data.index : tmp;
+    // state
+    const [linkFile, setLinkFile] = useState(img);
+    const [percent, setPercent] = useState(0);
+
+    // vòng đời
     useEffect(() => {
         if(percent === 100) {
             const time = setTimeout(() => {
@@ -57,6 +65,18 @@ function ModalEdit(props) {
         }
     });
 
+    form.setFieldsValue({
+        'name': name,
+        'image_link': img,
+        'index': index
+    });
+
+    const formValue = form.getFieldsValue();
+    const linkFileView = linkFile && URL_API.local+'file/'+linkFile;
+    const viewIndex = formValue.index || 0;
+
+
+    // func
     const UpFile = {
         name: 'file',
         action: `${URL_API.local}file/upload`,
@@ -77,20 +97,6 @@ function ModalEdit(props) {
             }
         },
     };
-
-    const name = data.name ? data.name : '';
-    const img = data.image_link ? data.image_link : '';
-    const index = data.index ? data.index : tmp;
-
-    form.setFieldsValue({
-        'name': name,
-        'image_link': img,
-        'index': index
-    });
-    const formValue = form.getFieldsValue();
-    const linkFileView = linkFile && URL_API.local+'file/'+linkFile;
-    const viewIndex = formValue.index || 0;
-
     const onFinish = (values) => {
         values.image_link = formValue.image_link || linkFile;
         handleText(values);

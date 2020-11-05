@@ -8,12 +8,16 @@
  */
 
 import React from 'react';
-import {Button} from 'antd';
+import Header from './header.jsx'
+import Content from './content.jsx';
+import Footer from './footer.jsx';
 
 function User() {
     return(
-        <div style={{color: 'red'}}>
-             <Button type="dashed">Dashed Button</Button>
+        <div className="App">
+            <Header />
+            <Content />
+            <Footer />
         </div>
     );
 }

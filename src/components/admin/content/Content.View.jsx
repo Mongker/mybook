@@ -14,12 +14,13 @@ import PropTypes from "prop-types";
 // components
 // import EditableTable from "./table/Table.View.jsx";
 import AdminContainer from "./admin/AdminContainer";
-import TableSliderContainer from "./slider/Table/TableSliderContainer";
-import TabAdminContainer from "./admin/Tab/TabAdminContainer";
-import CatalogContentContainer from "./catalog/Content/CatalogContentContainer";
+import TableSliderContainer from './slider/Table/TableSliderContainer';
+import TabAdminContainer from './admin/Tab/TabAdminContainer';
+import CatalogContentContainer from './catalog/Content/CatalogContentContainer';
+import TableProductContainer from 'src/components/admin/content/products/TableProductContainer';
 
 // util
-import {KEY_MENU} from "src/components/util/keyMenu";
+import {KEY_MENU} from 'src/components/util/keyMenu';
 
 // const
 let CheckRender;
@@ -39,8 +40,11 @@ function ContentAdmin(props) {
     case KEY_MENU.CATALOG:
       CheckRender = <CatalogContentContainer />;
       break;
+    case KEY_MENU.PRODUCT:
+      CheckRender = <TableProductContainer />;
+      break;
     default:
-      CheckRender = <div>Đang phát triển</div>;
+      CheckRender = <div></div>;
       break;
   }
 
