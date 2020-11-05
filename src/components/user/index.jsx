@@ -11,35 +11,38 @@ import React from 'react';
 import Header from './header.jsx'
 import Content from './content.jsx';
 import Footer from './footer.jsx';
-import {Switch, Route, useRouteMatch} from 'react-router-dom';
+import PropTypes from 'prop-types';
+import AddAdmin from "src/components/admin/content/admin/Modal/AddAdmin";
+import DetailProduct from './detailproduct.jsx';
 
-import SliderContainer from "src/components/admin/content/slider/SliderContainer";
-import TodoApp from 'src/components/demo/todo/todoApp';
-import DetailProduct from "src/components/user/detailproduct";
-
-function User() {
-    let match = useRouteMatch();
-    console.log(match.url);
-    debugger; // MongLV
+function User(props) {
+    const {getListCatalog, getListProduct, listProduct, listCatalog} = props;
+    React.useEffect(() => {
+        getListCatalog();
+        getListProduct();
+    }, []);
     return(
         <div className="App">
-            <Header />
-            <DetailProduct />
-            {/*<Switch>*/}
-            {/*    <Route*/}
-            {/*        path={`${match.url}`}*/}
-            {/*        component={Content}*/}
-            {/*    />*/}
-            {/*    <Route*/}
-            {/*        path={`${match.url}product-detail `}*/}
-            {/*        component={TodoApp}*/}
-            {/*    />*/}
-            {/*</Switch>*/}
+            <Header listCatalog={listCatalog} />
+            <Content listProduct={listProduct} />
+            {/*<DetailProduct />*/}
             <Footer />
         </div>
     );
 }
 
-User.propTypes = {};
+User.propTypes = {
+    getListCatalog: PropTypes.func,
+    getListProduct: PropTypes.func,
+    listProduct: PropTypes.object,
+    listCatalog: PropTypes.object,
+};
+
+User.defaultProps = {
+    getListCatalog: () => null,
+    getListProduct: () => null,
+    listProduct: {},
+    listCatalog: {},
+};
 
 export default User;

@@ -24,7 +24,7 @@ import {
 import '../styles/index.css';
 
 // const
-const heightWindow = (window.innerHeight - window.innerHeight * 0.32).toString() + "px";
+const heightWindow = (window.innerHeight - window.innerHeight * 0.5).toString() + "px";
 const {Search} = Input;
 const layout = {
     labelCol: {
@@ -213,8 +213,8 @@ function TreeCatalog(props) {
             {
                 listArray.length >= 9 &&
                 (
-                    <Row>
-                        <Col span={15}>
+                    <Row justify={'start'}>
+                        <Col span={14}>
                             <Search
                                 placeholder="Tìm kiếm"
                                 style={{width: "100%"}}
@@ -222,10 +222,11 @@ function TreeCatalog(props) {
                                 onSearch={(value) => handleSearch(value)}
                             />
                         </Col>
-                        <Col span={2}>
+                        <Col span={1}>
                             <Button
                                 type="primary"
                                 onClick={showModal}
+                                // style={{width: }}
                             >
                                 Thêm
                             </Button>

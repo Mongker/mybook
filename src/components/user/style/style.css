@@ -355,6 +355,7 @@ ul {
     padding: 10px 20px;
 }
 .new-release{
+    padding-top: 20px;
     margin: auto;
     width: 80%;
 }
@@ -415,6 +416,7 @@ ul {
     display: flex;
     flex-direction: column;
     width: 75%;
+    padding-left: 10px;
 }
 .release-1{
     display: flex;
@@ -540,6 +542,11 @@ ul {
     display: flex;
     justify-content:space-between;
     align-items: center;
+}
+.ant-card-body {
+    padding: 24px;
+    width: 198px;
+    height: 204px;
 }
 /*detail-product*/
 .detail {

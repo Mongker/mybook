@@ -13,7 +13,7 @@ import { useHistory } from "react-router-dom";
 import { Spin } from 'antd';
 
 function Reload(props) {
-    const {getUseAdmin} = props
+    const {getUseAdmin} = props;
     let history = useHistory();
 
     const handleJoin = () => {

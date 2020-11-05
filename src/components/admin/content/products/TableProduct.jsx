@@ -265,11 +265,10 @@ function TableProduct(props) {
             </Row>)
     };
     const CatalogText = ({id}) => {
-        const textCatalog = Object.keys(listCatalog).length > 0 && listCatalog[id].name;
+        debugger; // MongLV
+        const textCatalog = Object.keys(listCatalog).length > 0 && listCatalog[id] && listCatalog[id].name || '';
         return (<>{textCatalog}</>)
     };
-
-    console.log(listArray);
 
     return (
         <div>

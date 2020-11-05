@@ -8,11 +8,11 @@
  */
 
 import React from "react";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 // components
 import TodoApp from './components/demo/todo/todoApp.jsx';
-import User from './components/user';
+import UserContainer from './components/user/UserContainer';
 import AdminContainer from './components/admin/AdminContainer';
 
 // util
@@ -24,22 +24,17 @@ import ReloadContainer from "src/components/admin/content/login/ReloadContainer"
 // const { Header, Footer, Content } = Layout;
 
 function App() {
-    return (
-        <BrowserRouter>
-            <Switch>
-                <Route path={'/demo'} component={TodoApp}/>
-                <Route path={'/admin'} component={AdminContainer}/>
-                <Route path={'/admin-login'} component={LoginAdminContainer}/>
-                <Route path={'/reload'} component={ReloadContainer}/>
-                {/*<Route*/}
-                {/*    path={`/product-detail `}*/}
-                {/*    component={TodoApp}*/}
-                {/*/>*/}
-                <Route path={'/'} component={User}/>
-
-            </Switch>
-        </BrowserRouter>
-    );
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route path={'/demo'} component={TodoApp} />
+        <Route path={'/admin'} component={AdminContainer} />
+        <Route path={'/admin-login'} component={LoginAdminContainer}/>
+        <Route path={'/reload'} component={ReloadContainer}/>
+        <Route path={'/'} component={UserContainer} />
+      </Switch>
+    </BrowserRouter>
+  );
 }
 
 export default React.memo(App);

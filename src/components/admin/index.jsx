@@ -28,6 +28,7 @@ import {KEY_MENU} from "src/components/util/keyMenu";
 import './styles/index.css';
 import {URL_API} from "src/api/config";
 import getIdRandom from "src/components/util/getIdRandom";
+import AddAdmin from "src/components/admin/content/admin/Modal/AddAdmin";
 
 // const
 const {Sider} = Layout;

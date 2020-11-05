@@ -33,6 +33,7 @@ const heightWindow = window.innerHeight + 50 + "px";
 
 function LoginAdmin(props) {
     const {login} = props;
+
     const [form] = Form.useForm();
     let history = useHistory();
     const _email = localStorage.getItem('email') || null;

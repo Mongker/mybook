@@ -23,6 +23,7 @@ import {getAdminID} from 'src/api/admin/getAdminID';
 export function* watcherCallListAdmin() {
     while (true) {
         yield take(ADMIN.CALL_GET_LIST);
+        debugger; // MongLV
         yield call(doCallListAdmin);
     }
 }
@@ -57,7 +58,10 @@ export function* watcherLoginAdmin() {
     while (true) {
         const takeAction = yield take(ADMIN.LOGIN);
         const {payload} = takeAction;
+        // const payload = takeAction.payload,
+        // payload.data = { email : '?', passwold: '?'}
         const dataLogin = yield getLoginAdmin(payload.data);
+        // dataLogin = {...} => Object.keys(dataLogin) biến thành 1 mảng để đồ dài của mảng
         debugger; // MongLV
         if(dataLogin && Object.keys(dataLogin).length > 1) {
             localStorage.setItem('token_admin', dataLogin.password);

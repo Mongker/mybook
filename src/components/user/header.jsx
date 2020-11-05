@@ -1,18 +1,20 @@
-import {render} from '@testing-library/react';
-import React, {Component} from 'react';
+import React from 'react';
 import './style/style.css';
-import {Menu, Dropdown} from 'antd';
+import {Menu, Dropdown, Col, Card, Image} from 'antd';
 import {DownOutlined} from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import {Input} from 'antd';
 import {AudioOutlined} from '@ant-design/icons';
 import {Carousel} from 'antd';
+import PropTypes from 'prop-types';
+import {URL_API} from "src/api/config";
+
 //styles
 const adcbook = require('./img/book.PNG');
 //const backgroundpink = require('../img/background-pink.jpg');
 const ferbuarybook = require('./img/ferbuary-book.png');
 const shoppingcart = require('./img/shopping-cart.png');
-const phonecall = require('./img/phone-call.png');
+
 //search
 const {Search} = Input;
 const onSearch = value => console.log(value);
@@ -153,7 +155,8 @@ const contentStyle = {
     background: '#364d79',
 };
 
-function Header() {
+function Header(props) {
+    const {listCatalog} = props;
     return (
         <div className={'header'}>
             <div className={'class-list-menu'}>
@@ -175,57 +178,33 @@ function Header() {
                     <span className={'number-shopping'}>0</span>
                 </a>
             </div>
-
-            <div className={'list-menu-item'}>
-
-                <ul className={'menu'}>
-                    <li>
-                        <Dropdown overlay={home}>
-                            <a className={"home-menu"} onClick={e => e.preventDefault()}>
-                                Home <DownOutlined/>
-                            </a>
-                        </Dropdown>
-                    </li>
-                    <li><a href="#" className={'categories-menu'}>Categories</a></li>
-                    <li>
-                        <Dropdown overlay={shop}>
-                            <a className={"shop-menu"} onClick={e => e.preventDefault()}>
-                                Shop <DownOutlined/>
-                            </a>
-                        </Dropdown>
-                    </li>
-                    <li>
-                        <Dropdown overlay={page}>
-                            <a className="pages-menu" onClick={e => e.preventDefault()}>
-                                Pages <DownOutlined/>
-                            </a>
-                        </Dropdown>
-                    </li>
-                    <li>
-                        <Dropdown overlay={blog}>
-                            <a className={"blog-menu"} onClick={e => e.preventDefault()}>
-                                Blog <DownOutlined/>
-                            </a>
-                        </Dropdown>
-                    </li>
-                    <li>
-                        <Dropdown overlay={others}>
-                            <a className={"others-menu"} onClick={e => e.preventDefault()}>
-                                Others <DownOutlined/>
-                            </a>
-                        </Dropdown>
-                    </li>
-                </ul>
-
-            </div>
-
-
-
+            <Menu
+                // onClick={this.handleClick}
+                // selectedKeys={[current]}
+                theme={'dark'}
+                mode="horizontal"
+            >
+                <Menu.Item key="home" >
+                    Trang chủ
+                </Menu.Item>
+                {
+                    Object.keys(listCatalog).length > 0 && Object.keys(listCatalog).map((item, index) => (
+                        <Menu.Item key={listCatalog[item].name} >
+                            {listCatalog[item].name}
+                        </Menu.Item>
+                    ))
+                }
+            </Menu>
         </div>
 
     );
 
 }
 
-Header.propsType = {}
+Header.propsType = {
+    listCatalog: PropTypes.object,
+};
+Header.defaultProps = {
+    listCatalog: {}
+};
 export default Header;

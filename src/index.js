@@ -24,7 +24,8 @@ import App from './App.jsx';
 
 // Router
 import { BrowserRouter} from "react-router-dom";
-// Middleware
+
+// Middleware Saga
 const sagaMiddleware = createSagaMiddleware();
 let store = createStore(allReducers, composeWithDevTools(applyMiddleware(sagaMiddleware)));
 // let store = createStore(allReducers, compose(applyMiddleware(sagaMiddleware), composeWithDevTools()));
