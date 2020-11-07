@@ -58,31 +58,35 @@ function Admin(props) {
     // state
     const [collapsed, setCollapsed] = useState(false);
     const [titleHeader, setTitleHeader] = useState("ADCBook");
-    const [visibleDrawer, setVisibleDrawer]  = useState(false);
-    const [fileList, setFileList]  = useState([]);
-    const [arrayImg, setArrayImg]  = useState([]);
+    const [visibleDrawer, setVisibleDrawer] = useState(false);
+    const [fileList, setFileList] = useState([]);
+    const [arrayImg, setArrayImg] = useState([]);
     debugger; // MongLV
 
     // const or let
     let match = useRouteMatch();
     let history = useHistory();
     form.setFieldsValue({
-        name: useAdmin['name'] || '',
-        email: useAdmin['email'] || '',
-        phone: useAdmin['phone'] && useAdmin['phone'].slice(3) || '',
+        name: useAdmin && useAdmin['name'] || '',
+        email: useAdmin && useAdmin['email'] || '',
+        phone: useAdmin && useAdmin['phone'] && useAdmin['phone'].slice(3) || '',
     });
     const onShowDrawer = () => {
         setVisibleDrawer(true)
     };
-    const onCloseDrawer = () => {setVisibleDrawer(false)};
+    const onCloseDrawer = () => {
+        setVisibleDrawer(false)
+    };
 
     // func
     function handleLogin() {
         history.push('/admin-login');
     }
+
     function onCollapse(collapsed) {
         setCollapsed(collapsed);
     }
+
     function onReset() {
         form.setFieldsValue({
             name: useAdmin['name'] || '',
@@ -91,14 +95,15 @@ function Admin(props) {
         });
         imageUpload();
     }
+
     function onFinish(values) {
         const data = {};
         debugger; // MongLV
-        if((values.passwordOld && md5(values.passwordOld)) === localStorage.getItem('token_admin')) {
+        if ((values.passwordOld && md5(values.passwordOld)) === localStorage.getItem('token_admin')) {
             data['password'] = md5(values.password);
         }
         arrayImg && arrayImg[0] && (data['avatar'] = arrayImg[0]);
-        data['phone'] = values.code_phone+values.phone;
+        data['phone'] = values.code_phone + values.phone;
         data['email'] = values.email;
         data['name'] = values.name;
         data['_id'] = useAdmin['_id'];
@@ -106,7 +111,8 @@ function Admin(props) {
         putAdmin(data);
         setVisibleDrawer(false);
     }
-    function handleChange({fileList}){
+
+    function handleChange({fileList}) {
         debugger; // MongLV
         let arrayImg = [];
         if (fileList.length > 0) {
@@ -118,6 +124,7 @@ function Admin(props) {
         setArrayImg(arrayImg);
         setFileList(fileList);
     }
+
     function imageUpload() {
         const data = [];
         useAdmin && useAdmin['avatar'] && data.push({
@@ -133,15 +140,15 @@ function Admin(props) {
     React.useEffect(() => {
         imageUpload();
     }, [useAdmin]);
-    (Object.keys(useAdmin).length === 0) && getUseAdmin(localStorage.getItem('id_admin'));
-    if(titleHeader === KEY_MENU.LOGOUT) {
+    (useAdmin && Object.keys(useAdmin).length === 0) && getUseAdmin(localStorage.getItem('id_admin'));
+    if (titleHeader === KEY_MENU.LOGOUT) {
         localStorage.removeItem('token_admin');
         localStorage.removeItem('email_admin');
         localStorage.removeItem('id_admin');
         handleLogin();
     }
     // Nếu không có token thì sẽ chuyển qua kênh khác
-    if(!localStorage.getItem('token_admin')) {
+    if (!localStorage.getItem('token_admin')) {
         handleLogin()
     }
 
@@ -164,159 +171,160 @@ function Admin(props) {
             textAlign: 'center',
             alignItems: 'center',
         }}>
-            <h2><span>Chỉnh sửa tài khoản</span> <b>{useAdmin['name']}</b></h2>
+            <h2><span>Chỉnh sửa tài khoản</span> <b>{useAdmin && useAdmin['name']}</b></h2>
         </div>
     );
     return (
-            <Layout style={{minHeight: "100vh"}}>
-                <Drawer
-                    title={Title}
-                    width={"35%"}
-                    placement="right"
-                    closable={false}
-                    onClose={onCloseDrawer}
-                    visible={visibleDrawer}
-                >
-                    <Form
-                        {...layout}
-                        form={form}
-                        name="control-hooks"
-                        onFinish={onFinish}
-                        initialValues={{
-                            code_phone: '+84',
+        <Layout style={{minHeight: "100vh"}}>
+            <Drawer
+                title={Title}
+                width={"35%"}
+                placement="right"
+                closable={false}
+                onClose={onCloseDrawer}
+                visible={visibleDrawer}
+            >
+                <Form
+                    {...layout}
+                    form={form}
+                    name="control-hooks"
+                    onFinish={onFinish}
+                    initialValues={{
+                        code_phone: '+84',
+                    }}>
+                    <Form.Item
+                        name="avatar"
+                        label="Avatar"
+                    >
+                        <Upload
+                            action={`${URL_API.local}file/upload`}
+                            listType={'picture-card'}
+                            // onPreview={handlePreview}
+                            fileList={fileList}
+                            onChange={handleChange}
+                        >
+                            {fileList.length >= 1 ? null : (
+                                <div>
+                                    <PlusOutlined/>
+                                    <div style={{marginTop: 8}}>Upload</div>
+                                </div>
+                            )}
+                        </Upload>
+                    </Form.Item>
+                    <Form.Item
+                        name="name"
+                        label="Họ và tên"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Họ và tên phải được nhập ký tự'
+                            },
+                            {
+                                type: "string",
+                                message: "Đây phải là một string!"
+                            }
+                        ]}
+                    >
+                        <Input style={{width: '80%'}} allowClear/>
+                    </Form.Item>
+                    <Form.Item
+                        name="email"
+                        label="Email"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Không được để trống'
+                            },
+                            {
+                                type: "email",
+                                message: "Đây phải là một định dạng E-mail!"
+                            }
+                        ]}
+                    >
+                        <Input style={{width: '80%'}} allowClear/>
+                    </Form.Item>
+                    <Form.Item
+                        name="phone"
+                        label="Phone"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your phone number!',
+                            },
+                        ]}
+                    >
+                        <Input
+                            addonBefore={prefixSelector}
+                            style={{
+                                width: '80%',
+                            }}
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        name="passwordOld"
+                        label="Mật khẩu cũ:"
+                    >
+                        <Input style={{width: '80%'}} allowClear/>
+                    </Form.Item>
+                    <Form.Item
+                        name="password"
+                        label="Mật khẩu mới:"
+                    >
+                        <Input style={{width: '80%'}} allowClear/>
+                    </Form.Item>
+                    <Form.Item {...tailLayout}>
+                        <Row style={{
+                            alignItems: 'center',
                         }}>
-                        <Form.Item
-                            name="avatar"
-                            label="Avatar"
-                        >
-                            <Upload
-                                action={`${URL_API.local}file/upload`}
-                                listType={'picture-card'}
-                                // onPreview={handlePreview}
-                                fileList={fileList}
-                                onChange={handleChange}
-                            >
-                                {fileList.length >= 1 ? null : (
-                                    <div>
-                                        <PlusOutlined/>
-                                        <div style={{marginTop: 8}}>Upload</div>
-                                    </div>
-                                )}
-                            </Upload>
-                        </Form.Item>
-                        <Form.Item
-                            name="name"
-                            label="Họ và tên"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Họ và tên phải được nhập ký tự'
-                                },
-                                {
-                                    type: "string",
-                                    message: "Đây phải là một string!"
-                                }
-                            ]}
-                        >
-                            <Input style={{width: '80%'}} allowClear/>
-                        </Form.Item>
-                        <Form.Item
-                            name="email"
-                            label="Email"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Không được để trống'
-                                },
-                                {
-                                    type: "email",
-                                    message: "Đây phải là một định dạng E-mail!"
-                                }
-                            ]}
-                        >
-                            <Input style={{width: '80%'}} allowClear/>
-                        </Form.Item>
-                        <Form.Item
-                            name="phone"
-                            label="Phone"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Please input your phone number!',
-                                },
-                            ]}
-                        >
-                            <Input
-                                addonBefore={prefixSelector}
-                                style={{
-                                    width: '80%',
-                                }}
-                            />
-                        </Form.Item>
-                        <Form.Item
-                            name="passwordOld"
-                            label="Mật khẩu cũ:"
-                        >
-                            <Input style={{width: '80%'}} allowClear />
-                        </Form.Item>
-                        <Form.Item
-                            name="password"
-                            label="Mật khẩu mới:"
-                        >
-                            <Input style={{width: '80%'}} allowClear />
-                        </Form.Item>
-                        <Form.Item {...tailLayout}>
-                            <Row style={{
-                                alignItems: 'center',
-                            }}>
-                                <Col style={{paddingRight: '20px'}}>
-                                    <Button type="primary" htmlType="submit">
-                                        Thêm
-                                    </Button>
-                                </Col>
-                                <Col style={{paddingLeft: '20px'}}>
-                                    <Button
-                                        onClick={onReset}
-                                    >
-                                        Reset
-                                    </Button>
-                                </Col>
-                            </Row>
-                        </Form.Item>
-                    </Form>
-                </Drawer>
-                <Helmet title={`Quản trị: ${titleHeader}`}/>
-                <div style={{borderRight: '14px solid #bbbbbb',  background: '#001529'}}>
-                    <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
-                        <MenuAmin collapsed={collapsed} setTitleHeader={setTitleHeader} onShowDrawer={onShowDrawer} />
-                    </Sider>
-                </div>
-                <Switch>
-                    <Route
-                        path={`${match.url}/home`}
-                        render={() => <HomeAdmin titleHeader={titleHeader}/>}
-                    />
-                    <Route
-                        path={`${match.url}/slider`}
-                        render={() => <SliderContainer titleHeader={titleHeader}/>}
-                    />
-                    <Route
-                        exact
-                        path={`${match.url}/admin`}
-                        render={() => <AdminContainer titleHeader={titleHeader}/>}
-                    />
-                    <Route
-                        path={`${match.url}/catalog`}
-                        render={() => <CatalogView titleHeader={titleHeader}/>}
-                    />
-                    <Route
-                        path={`${match.url}/product`}
-                        render={() => <CatalogView titleHeader={titleHeader}/>}
-                    />
-                </Switch>
-            </Layout>
+                            <Col style={{paddingRight: '20px'}}>
+                                <Button type="primary" htmlType="submit">
+                                    Thêm
+                                </Button>
+                            </Col>
+                            <Col style={{paddingLeft: '20px'}}>
+                                <Button
+                                    onClick={onReset}
+                                >
+                                    Reset
+                                </Button>
+                            </Col>
+                        </Row>
+                    </Form.Item>
+                </Form>
+            </Drawer>
+            <Helmet title={`Quản trị: ${titleHeader}`}/>
+            <div style={{borderRight: '14px solid #bbbbbb', background: '#001529'}}>
+                <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
+                    <MenuAmin collapsed={collapsed} setTitleHeader={setTitleHeader} onShowDrawer={onShowDrawer}/>
+                </Sider>
+            </div>
+            <Switch>
+                <Route
+                    path={`${match.url}/home`}
+                    render={() => <HomeAdmin titleHeader={titleHeader}/>}
+                />
+                <Route
+                    path={`${match.url}/slider`}
+                    render={() => <SliderContainer titleHeader={titleHeader}/>}
+                />
+                <Route
+                    exact
+                    path={`${match.url}/admin`}
+                    render={() => <AdminContainer titleHeader={titleHeader}/>}
+                />
+                <Route
+                    path={`${match.url}/catalog`}
+                    render={() => <CatalogView titleHeader={titleHeader}/>}
+                />
+                <Route
+                    path={`${match.url}/product`}
+                    render={() => <CatalogView titleHeader={titleHeader}/>}
+                />
+            </Switch>
+        </Layout>
     );
 }
+
 Admin.propTypes = {
     useAdmin: PropTypes.object,
     getUseAdmin: PropTypes.func,

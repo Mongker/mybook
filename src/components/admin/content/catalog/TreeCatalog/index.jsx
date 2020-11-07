@@ -53,6 +53,7 @@ function TreeCatalog(props) {
     const [visible, setVisible] = React.useState(false);
     const [visibleEdit, setVisibleEdit] = React.useState(false);
     const [idPut, setIdPut] = React.useState('');
+    debugger; // MongLV
     // Note MongLV: để xét giá trị cho form
     // form.setFieldsValue({
     //     name: '',
@@ -171,11 +172,11 @@ function TreeCatalog(props) {
                             <Link to={`${match.url}/${id}`}>
                                 <Row justify="space-between">
                                     <Col span={4}>
-                                        <Tooltip placement="right" title={list[id].description}>
+                                        <Tooltip placement="right" title={list && list[id] && list[id].description || ''}>
                                             <ReadOutlined/>
                                         </Tooltip>
                                     </Col>
-                                    <Col span={16}><span>{list[id].name}</span></Col>
+                                    <Col span={16}><span>{list && list[id] && list[id].name}</span></Col>
                                     <Col>
                                         <Popover content={<Content id={id}/>} placement="right" trigger="click">
                                             <SettingOutlined/>

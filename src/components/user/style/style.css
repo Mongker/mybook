@@ -4,32 +4,60 @@ body {
     /*background-color:#fff;*/
 }
 /* header */
-.list-menu-item {
-   display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #eae8e4!important;
-    background-color: #dd0917;
+.header {
+    padding-right: 5%;
+    padding-left: 5%;
 }
-
-.menu {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    list-style: none;
+/*.list-menu-item {*/
+/*   display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    border: 1px solid #eae8e4!important;*/
+/*    background-color: #dd0917;*/
+/*}*/
+/*.ant-menu-item-only-child{*/
+/*    color: black;*/
+/*    !* border-bottom: 2px solid #f0f4f7; *!*/
+/*}*/
+/*.ant-menu-item-selected{*/
+/*    color: #c0c0c0;*/
+/*    !*border-bottom: 2px solid #f0f4f7;*!*/
+/*}*/
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-active, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-active, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-open, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-open, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-selected {
+    color: #f0f4f9;
+    border-bottom: 0.5px solid #f0f4f9;
+}
+.ant-menu-submenu-title {
     font-size: 20px;
-    margin-bottom: 0px;
-    padding: 20px 0px;
-
 }
-.menu a {
-    color: #ffff;
-}
-.menu li {
-    margin: 0px 20px;
+/*.ant-menu-submenu-selected {*/
+/*    color: #c0c0c0;*/
+/*    !*border-bottom: 2px solid #f9f9f9;*!*/
+/*}*/
+/*.ant-menu-item {*/
+/*    color: #c0c0c0;*/
+/*}*/
+/*.menu {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    list-style: none;*/
+/*    font-size: 20px;*/
+/*    margin-bottom: 0px;*/
+/*    padding: 20px 0px;*/
 
+/*}*/
+/*.menu a {*/
+/*    color: #c0c0c0;*/
+/*}*/
+/*.menu li {*/
+/*    margin: 0px 20px;*/
+/*}*/
 
-}
+/*.ant-menu-horizontal > .ant-menu-submenu > .ant-menu-submenu-title {*/
+/*    color: white;*/
+/*    padding: 0;*/
+/*}*/
 li {
     padding-right: 30px;
     margin-right: 10px;
@@ -93,11 +121,42 @@ ul {
    border: 1px solid #eae8e4!important;
     background-color: #faf1ff;
     color: black;
-    padding: 10px 20px;
+    /*padding: 10px 10px;*/
     border-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 80px;
+    height: 60px;
+}
+.img-login {
+   border: 1px solid #eae8e4!important;
+    background-color: #faf1ff;
+    color: black;
+    /*padding: 10px 10px;*/
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 60px;
+}
+.img-user {
+    border: 1px solid #eae8e4!important;
+    background-color: #faf1ff;
+    color: black;
+    /*padding: 10px 10px;*/
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 155px;
+    height: 60px;
+}
+.img-login:hover {
+    font-size: 23px;
+    width: 100px;
+    height: 60px;
 }
 .number-shopping {
     border: 1px solid #eae8e4!important;
@@ -191,7 +250,10 @@ ul {
 }
 /* Content */
 .content-m {
-    border: 1px solid #eae8e4!important;
+    /*border: 1px solid #eae8e4!important;*/
+    padding-top: 5px;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 .feature-categories {
 
@@ -357,7 +419,7 @@ ul {
 .new-release{
     padding-top: 20px;
     margin: auto;
-    width: 80%;
+    width: 90%;
 }
 .content-release {
     display: flex;
@@ -669,4 +731,16 @@ ul {
 .categories-detail {
     display: flex;
     justify-content: space-between;
+}
+#components-form-demo-normal-login .login-form {
+    max-width: 300px;
+}
+#components-form-demo-normal-login .login-form-forgot {
+    float: right;
+}
+#components-form-demo-normal-login .ant-col-rtl .login-form-forgot {
+    float: left;
+}
+#components-form-demo-normal-login .login-form-button {
+    width: 100%;
 }

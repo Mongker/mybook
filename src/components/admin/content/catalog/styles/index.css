@@ -22,6 +22,12 @@
 .editTwoTone:hover {
     font-size: 15px;
 }
+.thanh-toan {
+
+}
+.thanh-toan:hover{
+    font-size: 40px;
+}
 
 .deleteTwoTone {
     font-size: 12px;

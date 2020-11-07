@@ -43,6 +43,7 @@ function EditAdmin(props) {
 
     const [visibleCopy, setVisibleCopy] = useState(false);
     const onFinish = (values) => {
+        debugger; // MongLV
         (values.status !== data.status) && (data['status'] = values.status);
         (values.position !== data.position) && (data['position'] = values.position);
         (values.password) && (data['password'] = values.password);
@@ -52,16 +53,18 @@ function EditAdmin(props) {
         values.preventDefault();
     };
 
-    form.setFieldsValue({
-        avatar: avatar,
-        email: email,
-        info: info,
-        name: name,
-        phone: phone,
-        position: position,
-        status: status,
-        _id: _id,
-    });
+    React.useEffect(()=>{
+        form.setFieldsValue({
+            avatar: avatar,
+            email: email,
+            info: info,
+            name: name,
+            phone: phone,
+            position: position,
+            status: status,
+            _id: _id,
+        });
+    }, []);
 
     const onReset = () => {
         form.resetFields();
@@ -77,6 +80,7 @@ function EditAdmin(props) {
         message.success('Đã Reset');
     };
     const handleSwitch = (checked) => {
+        debugger; // MongLV
         form.setFieldsValue({
             status: checked
         });

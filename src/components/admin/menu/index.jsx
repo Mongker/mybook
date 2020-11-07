@@ -75,15 +75,15 @@ function MenuAmin(props) {
                         Sản phẩm
                     </Link>
                 </Menu.Item>
-                <Menu.Item key={KEY_MENU.TRANSACTION} icon={<FileDoneOutlined/>}>
-                    Đơn đặt hàng
-                </Menu.Item>
-                <Menu.Item key={KEY_MENU.ODER} icon={<FileDoneOutlined/>}>
-                    Hóa đơn bán
-                </Menu.Item>
-                <Menu.Item key={KEY_MENU.USER} icon={<TeamOutlined/>}>
-                    Khách hàng
-                </Menu.Item>
+                {/*<Menu.Item key={KEY_MENU.TRANSACTION} icon={<FileDoneOutlined/>}>*/}
+                {/*    Đơn đặt hàng*/}
+                {/*</Menu.Item>*/}
+                {/*<Menu.Item key={KEY_MENU.ODER} icon={<FileDoneOutlined/>}>*/}
+                {/*    Hóa đơn bán*/}
+                {/*</Menu.Item>*/}
+                {/*<Menu.Item key={KEY_MENU.USER} icon={<TeamOutlined/>}>*/}
+                {/*    Khách hàng*/}
+                {/*</Menu.Item>*/}
                 <Menu.Item key={KEY_MENU.ADMIN} icon={<TeamOutlined/>}>
                     <Link to={`${match.url}/admin`}>Nhân viên</Link>
                 </Menu.Item>

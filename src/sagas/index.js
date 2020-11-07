@@ -8,10 +8,18 @@
  */
 
 import { all } from "redux-saga/effects";
-import {watcherCallListSlider, watcherCallPost, watcherCallDelete, watcherCallUpdate} from "./admin/sliderSaga";
-import {watcherCallListAdmin, watcherCallDeleteAdmin, watcherCallUpdateAdmin, watcherCallPostAdmin, watcherLoginAdmin, watcherGetAdminId} from "./admin/adminSaga";
-import {watcherCallListCatalog, watcherCallDeleteCatalog, watcherCallPostCatalog, watcherCallPutCatalog} from './admin/catalogSaga';
-import {watcherCallListIDCatalog, watcherGetListIDCatalog, watcherCallPostProduct, watcherCallDeleteProduct, watcherPutProduct, watcherGetListProduct} from "./admin/productSaga";
+import {watcherCallListSlider, watcherCallPost, watcherCallDelete, watcherCallUpdate} from "./sliderSaga";
+import {watcherCallPostUser, watcherLoginUser, watcherGetUserId} from "./userSaga";
+import {watcherCallListAdmin, watcherCallDeleteAdmin, watcherCallUpdateAdmin, watcherCallPostAdmin, watcherLoginAdmin, watcherGetAdminId} from "./adminSaga";
+import {watcherCallListCatalog, watcherCallDeleteCatalog, watcherCallPostCatalog, watcherCallPutCatalog} from './catalogSaga';
+import {watcherCallListIDCatalog, watcherGetListIDCatalog, watcherCallPostProduct, watcherCallDeleteProduct, watcherPutProduct, watcherGetListProduct} from "./productSaga";
+import {
+    watcherCallDeleteCart,
+    watcherCallUpdateCart,
+    watcherDatMua,
+    watcherPostCart,
+    watchListCartUser
+} from "src/sagas/cartSaga";
 // saga
 export default function* rootSaga() {
     yield all([
@@ -35,5 +43,13 @@ export default function* rootSaga() {
         watcherGetListProduct(),
         watcherLoginAdmin(),
         watcherGetAdminId(),
+        watcherCallPostUser(),
+        watcherLoginUser(),
+        watcherPostCart(),
+        watchListCartUser(),
+        watcherCallDeleteCart(),
+        watcherCallUpdateCart(),
+        watcherDatMua(),
+        watcherGetUserId(),
     ]);
 }
