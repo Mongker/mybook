@@ -53,7 +53,6 @@ function TreeCatalog(props) {
     const [visible, setVisible] = React.useState(false);
     const [visibleEdit, setVisibleEdit] = React.useState(false);
     const [idPut, setIdPut] = React.useState('');
-    debugger; // MongLV
     // Note MongLV: để xét giá trị cho form
     // form.setFieldsValue({
     //     name: '',

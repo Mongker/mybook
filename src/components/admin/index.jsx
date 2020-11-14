@@ -61,7 +61,6 @@ function Admin(props) {
     const [visibleDrawer, setVisibleDrawer] = useState(false);
     const [fileList, setFileList] = useState([]);
     const [arrayImg, setArrayImg] = useState([]);
-    debugger; // MongLV
 
     // const or let
     let match = useRouteMatch();
@@ -98,7 +97,6 @@ function Admin(props) {
 
     function onFinish(values) {
         const data = {};
-        debugger; // MongLV
         if ((values.passwordOld && md5(values.passwordOld)) === localStorage.getItem('token_admin')) {
             data['password'] = md5(values.password);
         }
@@ -113,7 +111,6 @@ function Admin(props) {
     }
 
     function handleChange({fileList}) {
-        debugger; // MongLV
         let arrayImg = [];
         if (fileList.length > 0) {
             fileList.map((item) => {

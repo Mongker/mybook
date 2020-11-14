@@ -11,6 +11,7 @@
 import {SLIDER} from 'src/action/actionTypes.js';
 
 const Slider = (state = {}, action) => {
+    debugger; // MongLV
     switch (action.type) {
         case SLIDER.GET_LIST:
             return action.sliders;

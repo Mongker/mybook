@@ -19,7 +19,6 @@ import {URL_API} from "../config";
 import {message} from "antd";
 
 export function putAdmin(id, data) {
-    debugger; // MongLV
     try {
         return axios.put(`${URL_API.local}admin/${id}`, data)
             .then(res => res.data).then((result) => {

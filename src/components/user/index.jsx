@@ -37,7 +37,6 @@ const tailLayout = {
 
 function User(props) {
     const {getListCatalog, getListProduct, listProduct, listCatalog, getListSlider, listSlider, postUser, loginUser, user, logOut, postCart, cartUsr, cart = {}, deleteCart, putCart, datMua, getUser} = props;
-    debugger; // MongLV
     const [visible, setVisible] = React.useState(false);
     const [switchBtn, setSwitchBtn] = React.useState(true);
     const [titleHeader, setTitleHeader] = React.useState('home');
@@ -86,25 +85,25 @@ function User(props) {
     }
 
     function onFinish(values) {
-        debugger; // MongLV
         values.password = md5(values.password);
         if (values.remember) {
             localStorage.setItem('password', values.password);
             localStorage.setItem('email', values.email);
         }
+        debugger; // MongLV
         values && loginUser(values, onClose);
         form.resetFields();
         form2.resetFields();
     }
 
     function onFinishSignUp(values) {
-        debugger; // MongLV
         if (values.password === values.passwordCheck) {
             values.password = md5(values.password);
+            debugger; // MongLV
             postUser(values);
         } else if (values.password !== values.passwordCheck) {
-            debugger; // MongLV
             message.error('Mật khẩu không khớp nhau');
+            debugger; // MongLV
         }
     }
 
@@ -114,14 +113,8 @@ function User(props) {
         getListProduct();
         getListSlider();
         cartUsr();
-        getUser()
+        getUser();
         setArrayProduct(Object.keys(listProduct));
-        // if(localStorage.getItem('email') && localStorage.getItem('password')){
-        //     loginUser({
-        //         email: localStorage.getItem('email'),
-        //         password: localStorage.getItem('40bcf17672af256346ad0d5e80b007a4'),
-        //     })
-        // }
     }, []);
 
     return (

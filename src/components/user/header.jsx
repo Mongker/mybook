@@ -128,7 +128,6 @@ function Header(props) {
     function handlePutCart(index, check) {
         const id = Object.keys(cart)[index];
         const data = {...newListCart[id]};
-        debugger; // MongLV
         data.status = !check;
         putCart(id, data);
         // handleOkDonHang(id, data);
@@ -136,13 +135,9 @@ function Header(props) {
 
     async function handleDatMua() {
         if(Object.keys(newListCart).length > 0 ){
-            debugger; // MongLV
             await Object.keys(newListCart).map((item, index)=> {
-                debugger; // MongLV
                 const dataObj = {...newListCart};
-                debugger; // MongLV
                 dataObj[item].status = true;
-                debugger; // MongLV
                 putCart(item, dataObj[item]);
             });
             // datMua(newListCart);
@@ -161,7 +156,6 @@ function Header(props) {
         setVisibleDonHang(true);
     }
     function onFinish(values) {
-        debugger; // MongLV
         console.log(values)
     }
 
@@ -178,7 +172,6 @@ function Header(props) {
         }
     };
     const handleMenu = e => {
-        debugger; // MongLV
         setTitleHeader(e.key);
     };
     // JSX

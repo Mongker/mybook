@@ -39,7 +39,9 @@ const mapDispatchToProps = dispatch => {
         getListCatalog: () => dispatch({type: CATALOG.CALL_GET_LIST}),
         getListProduct: () => dispatch(productAction.getList()),
         getListSlider: () => dispatch({type: SLIDER.CALL_GET_LIST}),
-        postUser: (data) => dispatch({type: USER.CALL_POST_ADMIN, payload: data}),
+        postUser: (data) => {
+            return dispatch({type: USER.CALL_POST_ADMIN, payload: data});
+        },
         getUser: () => dispatch({type: USER.GET_ADMIN}),
         loginUser: (data, funcBack) => dispatch({type: USER.CALL_LOGIN, payload: {data, funcBack}}),
         logOut: () => dispatch({type: 'LOG_OUT_USER'}),

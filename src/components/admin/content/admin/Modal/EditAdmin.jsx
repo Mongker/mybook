@@ -43,7 +43,6 @@ function EditAdmin(props) {
 
     const [visibleCopy, setVisibleCopy] = useState(false);
     const onFinish = (values) => {
-        debugger; // MongLV
         (values.status !== data.status) && (data['status'] = values.status);
         (values.position !== data.position) && (data['position'] = values.position);
         (values.password) && (data['password'] = values.password);
@@ -80,7 +79,6 @@ function EditAdmin(props) {
         message.success('Đã Reset');
     };
     const handleSwitch = (checked) => {
-        debugger; // MongLV
         form.setFieldsValue({
             status: checked
         });

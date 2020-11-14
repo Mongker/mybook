@@ -30,7 +30,6 @@ import {putCart} from "src/api/cart/put";
 export function* watchListCartUser() {
     while (true) {
         yield take('watchListCartUser');
-        debugger; // MongLV
         if(localStorage.getItem('id_user')) {
             const cart = yield getListUserIDCart(localStorage.getItem('id_user'));
             yield put({type: CART.GET_LIST, cart});
@@ -42,11 +41,8 @@ export function* watchListCartUser() {
 export function* watcherPostCart() {
     while (true) {
         const takeAction = yield take(CART.CALL_POST);
-        debugger; // MongLV
         const {payload} = takeAction;
-        debugger; // MongLV
         const {data} = payload;
-        debugger; // MongLV
         yield postCart(data);
         yield put({type: 'watchListCartUser'});
     }
@@ -55,7 +51,6 @@ export function* watcherPostCart() {
 export function* watcherCallDeleteCart() {
     while (true) {
         const takeAction = yield take(CART.CALL_DELETE);
-        debugger; // MongLV
         const {payload} = takeAction;
         yield deleteCart(payload.id);
         yield put({type: 'watchListCartUser'});
@@ -72,13 +67,10 @@ export function* watcherCallUpdateCart() {
     }
 }
 export function* watcherDatMua() {
-    debugger; // MongLV
     while (true) {
         const takeAction = yield take('DAT_MUA');
-        debugger; // MongLV
         const {payload} = takeAction;
         const {dataObj} = payload;
-        debugger; // MongLV
         const data = {...dataObj};
         // yield Object.keys(dataObj).map((item, index)=> {
         //     debugger; // MongLV

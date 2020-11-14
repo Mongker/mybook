@@ -15,11 +15,8 @@ function onChange(a, b, c) {
 
 function Content(props) {
     const {listProduct, listSlider, postCart, arrayProduct = []} = props;
-    debugger; // MongLV
     function onPostCart(id_product) {
-        debugger; // MongLV
         if(localStorage.getItem('id_user')) {
-            debugger; // MongLV
             const data = {
                 "catalog_id": listProduct[id_product].catalog_id,
                 "product_id": id_product,

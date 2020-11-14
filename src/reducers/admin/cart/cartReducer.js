@@ -12,7 +12,6 @@
 import {CART} from "src/action/actionTypes";
 
 const Cart = (state = {}, action) => {
-    debugger; // MongLV
     switch (action.type) {
         case CART.GET_LIST:
             return action.cart;

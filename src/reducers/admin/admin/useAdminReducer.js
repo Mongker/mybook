@@ -10,7 +10,6 @@
 import {ADMIN} from 'src/action/actionTypes.js';
 
 const UseAdmin = (state = {}, action) => {
-    debugger; // MongLV
     switch (action.type) {
         case ADMIN.GET_ADMIN_DATA:
             return action.use_admin;

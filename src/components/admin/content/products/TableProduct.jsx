@@ -265,7 +265,6 @@ function TableProduct(props) {
             </Row>)
     };
     const CatalogText = ({id}) => {
-        debugger; // MongLV
         const textCatalog = Object.keys(listCatalog).length > 0 && listCatalog[id] && listCatalog[id].name || '';
         return (<>{textCatalog}</>)
     };

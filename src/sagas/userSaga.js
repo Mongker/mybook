@@ -52,6 +52,7 @@ export function* watcherCallDeleteAdmin() {
 }
 export function* watcherCallPostUser() {
     while (true) {
+        debugger; // MongLV
         const takeAction = yield take(USER.CALL_POST_ADMIN);
         debugger; // MongLV
         const {payload} = takeAction;
