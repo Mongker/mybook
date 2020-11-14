@@ -21,7 +21,7 @@ class BasicAd extends React.Component {
                 data-ad-client="ca-pub-2616710485643965"
                 // data-ad-client="ca-pub-4591861188995436"
                 data-ad-slot="4640466102"
-                style={{ display: "inline-block", backgroundColor: 'red',height: 250, width: 300 }}
+                style={{ display: "inline-block", backgroundColor: 'blue',height: 250, width: 300 }}
             />
         );
     }
