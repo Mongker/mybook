@@ -21,7 +21,7 @@ function CatalogContent(props) {
     let match = useRouteMatch();
     let { location } = useHistory();
     const { pathname } = location;
-    if(match.url !== pathname) {
+    if (match.url !== pathname) {
         const lengthUrl = match.url.length;
         id = pathname.split('').filter((item, index) => index > lengthUrl).join('');
     }
@@ -34,7 +34,8 @@ function CatalogContent(props) {
         },
         []
     );
-    if(idCatalog !== id) {
+
+    if (idCatalog !== id) {
         setIdCatalog(id);
     }
     return (
@@ -54,7 +55,7 @@ function CatalogContent(props) {
                         <Col flex={6}>
                             <TableCatalogContainer id={idCatalog} type={'Catalog'} />
                         </Col>
-                        }
+                    }
                 />
             </Switch>
         </Row>
