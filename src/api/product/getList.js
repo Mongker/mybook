@@ -3,7 +3,7 @@
  * All rights reserved.
  * @author Mongker 20/09/2020
  * @email: levanmong.dola.99@gmail.com
- * @student-code: 68DCHT20091
+ * @student_code: 68DCHT20091
  * @university: UTT (Đại học Công Nghệ Giao Thông Vận Tải)
  */
 
